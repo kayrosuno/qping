@@ -37,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		A9CFAC492A143D0F00CF9A6E /* ServerConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnection.swift; sourceTree = "<group>"; };
+		A9CFAC4D2A1AB95C00CF9A6E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A9F9A53A2A12D25800A99391 /* QServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QServer.swift; sourceTree = "<group>"; };
 		A9F9A55E2A12E64100A99391 /* QClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QClient.swift; sourceTree = "<group>"; };
 		A9F9A5642A12E68600A99391 /* qserver */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = qserver; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +67,7 @@
 		A9F9A52E2A12D25800A99391 = {
 			isa = PBXGroup;
 			children = (
+				A9CFAC4D2A1AB95C00CF9A6E /* README.md */,
 				A9F9A5392A12D25800A99391 /* qs1 */,
 				A9F9A5652A12E68600A99391 /* qserver */,
 				A9F9A5702A12E6AF00A99391 /* qclient */,

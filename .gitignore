@@ -1,0 +1,4 @@
+#Ignorear el directorio Build
+Build/
+Build/*
+
