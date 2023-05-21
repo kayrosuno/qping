@@ -7,11 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A9F9A53B2A12D25800A99391 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F9A53A2A12D25800A99391 /* main.swift */; };
+		A9CFAC4A2A143D0F00CF9A6E /* ServerConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CFAC492A143D0F00CF9A6E /* ServerConnection.swift */; };
+		A9F9A5672A12E68600A99391 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F9A5662A12E68600A99391 /* main.swift */; };
+		A9F9A5722A12E6AF00A99391 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F9A5712A12E6AF00A99391 /* main.swift */; };
+		A9F9A5772A12E70C00A99391 /* QClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F9A55E2A12E64100A99391 /* QClient.swift */; };
+		A9F9A5782A12E71100A99391 /* QServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F9A53A2A12D25800A99391 /* QServer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A9F9A5352A12D25800A99391 /* CopyFiles */ = {
+		A9F9A5622A12E68600A99391 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		A9F9A56D2A12E6AF00A99391 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -23,12 +36,24 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A9F9A5372A12D25800A99391 /* qs1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = qs1; sourceTree = BUILT_PRODUCTS_DIR; };
-		A9F9A53A2A12D25800A99391 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		A9CFAC492A143D0F00CF9A6E /* ServerConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnection.swift; sourceTree = "<group>"; };
+		A9F9A53A2A12D25800A99391 /* QServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QServer.swift; sourceTree = "<group>"; };
+		A9F9A55E2A12E64100A99391 /* QClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QClient.swift; sourceTree = "<group>"; };
+		A9F9A5642A12E68600A99391 /* qserver */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = qserver; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9F9A5662A12E68600A99391 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		A9F9A56F2A12E6AF00A99391 /* qclient */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = qclient; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9F9A5712A12E6AF00A99391 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A9F9A5342A12D25800A99391 /* Frameworks */ = {
+		A9F9A5612A12E68600A99391 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9F9A56C2A12E6AF00A99391 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,6 +67,8 @@
 			isa = PBXGroup;
 			children = (
 				A9F9A5392A12D25800A99391 /* qs1 */,
+				A9F9A5652A12E68600A99391 /* qserver */,
+				A9F9A5702A12E6AF00A99391 /* qclient */,
 				A9F9A5382A12D25800A99391 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,7 +76,8 @@
 		A9F9A5382A12D25800A99391 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A9F9A5372A12D25800A99391 /* qs1 */,
+				A9F9A5642A12E68600A99391 /* qserver */,
+				A9F9A56F2A12E6AF00A99391 /* qclient */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -57,29 +85,64 @@
 		A9F9A5392A12D25800A99391 /* qs1 */ = {
 			isa = PBXGroup;
 			children = (
-				A9F9A53A2A12D25800A99391 /* main.swift */,
 			);
 			path = qs1;
+			sourceTree = "<group>";
+		};
+		A9F9A5652A12E68600A99391 /* qserver */ = {
+			isa = PBXGroup;
+			children = (
+				A9CFAC492A143D0F00CF9A6E /* ServerConnection.swift */,
+				A9F9A53A2A12D25800A99391 /* QServer.swift */,
+				A9F9A5662A12E68600A99391 /* main.swift */,
+			);
+			path = qserver;
+			sourceTree = "<group>";
+		};
+		A9F9A5702A12E6AF00A99391 /* qclient */ = {
+			isa = PBXGroup;
+			children = (
+				A9F9A55E2A12E64100A99391 /* QClient.swift */,
+				A9F9A5712A12E6AF00A99391 /* main.swift */,
+			);
+			path = qclient;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A9F9A5362A12D25800A99391 /* qs1 */ = {
+		A9F9A5632A12E68600A99391 /* qserver */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A9F9A53E2A12D25800A99391 /* Build configuration list for PBXNativeTarget "qs1" */;
+			buildConfigurationList = A9F9A5682A12E68600A99391 /* Build configuration list for PBXNativeTarget "qserver" */;
 			buildPhases = (
-				A9F9A5332A12D25800A99391 /* Sources */,
-				A9F9A5342A12D25800A99391 /* Frameworks */,
-				A9F9A5352A12D25800A99391 /* CopyFiles */,
+				A9F9A5602A12E68600A99391 /* Sources */,
+				A9F9A5612A12E68600A99391 /* Frameworks */,
+				A9F9A5622A12E68600A99391 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = qs1;
-			productName = qs1;
-			productReference = A9F9A5372A12D25800A99391 /* qs1 */;
+			name = qserver;
+			productName = qserver;
+			productReference = A9F9A5642A12E68600A99391 /* qserver */;
+			productType = "com.apple.product-type.tool";
+		};
+		A9F9A56E2A12E6AF00A99391 /* qclient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9F9A5732A12E6AF00A99391 /* Build configuration list for PBXNativeTarget "qclient" */;
+			buildPhases = (
+				A9F9A56B2A12E6AF00A99391 /* Sources */,
+				A9F9A56C2A12E6AF00A99391 /* Frameworks */,
+				A9F9A56D2A12E6AF00A99391 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = qclient;
+			productName = qclient;
+			productReference = A9F9A56F2A12E6AF00A99391 /* qclient */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -92,7 +155,10 @@
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
-					A9F9A5362A12D25800A99391 = {
+					A9F9A5632A12E68600A99391 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					A9F9A56E2A12E6AF00A99391 = {
 						CreatedOnToolsVersion = 14.2;
 					};
 				};
@@ -110,17 +176,29 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A9F9A5362A12D25800A99391 /* qs1 */,
+				A9F9A5632A12E68600A99391 /* qserver */,
+				A9F9A56E2A12E6AF00A99391 /* qclient */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A9F9A5332A12D25800A99391 /* Sources */ = {
+		A9F9A5602A12E68600A99391 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9F9A53B2A12D25800A99391 /* main.swift in Sources */,
+				A9CFAC4A2A143D0F00CF9A6E /* ServerConnection.swift in Sources */,
+				A9F9A5782A12E71100A99391 /* QServer.swift in Sources */,
+				A9F9A5672A12E68600A99391 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9F9A56B2A12E6AF00A99391 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9F9A5772A12E70C00A99391 /* QClient.swift in Sources */,
+				A9F9A5722A12E6AF00A99391 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,7 +318,7 @@
 			};
 			name = Release;
 		};
-		A9F9A53F2A12D25800A99391 /* Debug */ = {
+		A9F9A5692A12E68600A99391 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -251,7 +329,29 @@
 			};
 			name = Debug;
 		};
-		A9F9A5402A12D25800A99391 /* Release */ = {
+		A9F9A56A2A12E68600A99391 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AK37TK8X2Y;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A9F9A5742A12E6AF00A99391 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AK37TK8X2Y;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A9F9A5752A12E6AF00A99391 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -272,16 +372,25 @@
 				A9F9A53D2A12D25800A99391 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		A9F9A53E2A12D25800A99391 /* Build configuration list for PBXNativeTarget "qs1" */ = {
+		A9F9A5682A12E68600A99391 /* Build configuration list for PBXNativeTarget "qserver" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A9F9A53F2A12D25800A99391 /* Debug */,
-				A9F9A5402A12D25800A99391 /* Release */,
+				A9F9A5692A12E68600A99391 /* Debug */,
+				A9F9A56A2A12E68600A99391 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
+		};
+		A9F9A5732A12E6AF00A99391 /* Build configuration list for PBXNativeTarget "qclient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9F9A5742A12E6AF00A99391 /* Debug */,
+				A9F9A5752A12E6AF00A99391 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
