@@ -33,30 +33,39 @@ do
             let qserver = QServer(port: port)
             try qserver.start()
             
-          
-        
+            
+            
             while (true)
             {
-                //Thread.sleep(forTimeInterval: TimeInterval(1))
-                RunLoop.current.run(until: .now + 30) //segundos
-                
-                
-                //TODO: Chequear estado del listener
-                
-                // 1. Choose a date
-                let today = Date()
-                // 2. Pick the date components
-                let hours   = (Calendar.current.component(.hour, from: today))
-                let minutes = (Calendar.current.component(.minute, from: today))
-                let seconds = (Calendar.current.component(.second, from: today))
-                // 3. Show the time
-                //print("\u{1B}[1A\u{1B}[K\(hours):\(minutes):\(seconds) Server status: \(qserver.state)")
-                print("\(hours):\(minutes):\(seconds) Server status: \(qserver.state)")
-               // fflush(__stdoutp)
-                
+                switch(qserver.state)
+                {
+                case .ready:
+                    
+                    
+                    //Thread.sleep(forTimeInterval: TimeInterval(1))
+                    RunLoop.current.run(until: .now + 30) //segundos
+                    
+                    
+                    //TODO: Chequear estado del listener
+                    
+                    // 1. Choose a date
+                    let today = Date()
+                    // 2. Pick the date components
+                    let hours   = (Calendar.current.component(.hour, from: today))
+                    let minutes = (Calendar.current.component(.minute, from: today))
+                    let seconds = (Calendar.current.component(.second, from: today))
+                    // 3. Show the time
+                    //print("\u{1B}[1A\u{1B}[K\(hours):\(minutes):\(seconds) Server status: \(qserver.state)")
+                    print("\(hours):\(minutes):\(seconds) Server status: \(qserver.state)")
+                    // fflush(__stdoutp)
+                    
+                default:
+                    RunLoop.current.run(until: .now + 1) //segundos
+                    
+                }
             }
-            
-        } else {
+        }
+        else {
             print("Error invalid port")
         }
     }

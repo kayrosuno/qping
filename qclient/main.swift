@@ -33,7 +33,7 @@ do
             try qclient.start()
             
         
-           bRun = true
+            bRun = true
             //Read input text to send
             while(bRun)
             {

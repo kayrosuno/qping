@@ -99,6 +99,8 @@ class QClient {
             connectionFailed(error: error)
         case .ready:
             print("connection ready")
+            //Enviar info de cliente
+            send(data: "\(program) \(version)".data(using: .utf8)!)
         case .failed(let error):
             connectionFailed(error: error)
         default:
@@ -171,11 +173,13 @@ class QClient {
     private func connectionFailed(error: Error) {
         print("connection did fail, error: \(error)")
         //self.stopConnection()
+        exit(-1)
     }
 
     private func connectionEnded() {
         print("connection did end")
         //self.stopConnection()
+        exit(-1)
     }
 
     
