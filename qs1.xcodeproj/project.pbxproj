@@ -6,16 +6,6 @@
 	objectVersion = 56;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		A9CFAC4A2A143D0F00CF9A6E /* ServerConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CFAC492A143D0F00CF9A6E /* ServerConnection.swift */; };
-		A9E94B622A368A8D00C0A934 /* Utilidades.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E94B612A368A8D00C0A934 /* Utilidades.swift */; };
-		A9E94B632A368A8D00C0A934 /* Utilidades.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E94B612A368A8D00C0A934 /* Utilidades.swift */; };
-		A9F9A5672A12E68600A99391 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F9A5662A12E68600A99391 /* main.swift */; };
-		A9F9A5722A12E6AF00A99391 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F9A5712A12E6AF00A99391 /* main.swift */; };
-		A9F9A5772A12E70C00A99391 /* QClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F9A55E2A12E64100A99391 /* QClient.swift */; };
-		A9F9A5782A12E71100A99391 /* QServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F9A53A2A12D25800A99391 /* QServer.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		A9F9A5622A12E68600A99391 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -39,15 +29,13 @@
 
 /* Begin PBXFileReference section */
 		A992F8432ADA9FC000AFA218 /* qgoserver */ = {isa = PBXFileReference; lastKnownFileType = folder; path = qgoserver; sourceTree = "<group>"; };
-		A9CFAC492A143D0F00CF9A6E /* ServerConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnection.swift; sourceTree = "<group>"; };
+		A992F8532ADDEDC600AFA218 /* qgoclient */ = {isa = PBXFileReference; lastKnownFileType = folder; path = qgoclient; sourceTree = "<group>"; };
+		A992F8542ADDEDE700AFA218 /* qswiftclient */ = {isa = PBXFileReference; lastKnownFileType = folder; path = qswiftclient; sourceTree = "<group>"; };
+		A992F8552ADDEE1100AFA218 /* shared */ = {isa = PBXFileReference; lastKnownFileType = folder; path = shared; sourceTree = "<group>"; };
+		A992F8562ADDEE1F00AFA218 /* qswiftserver */ = {isa = PBXFileReference; lastKnownFileType = folder; path = qswiftserver; sourceTree = "<group>"; };
 		A9CFAC4D2A1AB95C00CF9A6E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		A9E94B612A368A8D00C0A934 /* Utilidades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilidades.swift; sourceTree = "<group>"; };
-		A9F9A53A2A12D25800A99391 /* QServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QServer.swift; sourceTree = "<group>"; };
-		A9F9A55E2A12E64100A99391 /* QClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QClient.swift; sourceTree = "<group>"; };
 		A9F9A5642A12E68600A99391 /* qswiftserver */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = qswiftserver; sourceTree = BUILT_PRODUCTS_DIR; };
-		A9F9A5662A12E68600A99391 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A9F9A56F2A12E6AF00A99391 /* qswiftclient */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = qswiftclient; sourceTree = BUILT_PRODUCTS_DIR; };
-		A9F9A5712A12E6AF00A99391 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,21 +56,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A9E94B602A368A7E00C0A934 /* shared */ = {
-			isa = PBXGroup;
-			children = (
-				A9E94B612A368A8D00C0A934 /* Utilidades.swift */,
-			);
-			path = shared;
-			sourceTree = "<group>";
-		};
 		A9F9A52E2A12D25800A99391 = {
 			isa = PBXGroup;
 			children = (
 				A9CFAC4D2A1AB95C00CF9A6E /* README.md */,
-				A9E94B602A368A7E00C0A934 /* shared */,
-				A9F9A5652A12E68600A99391 /* qserver */,
-				A9F9A5702A12E6AF00A99391 /* qclient */,
+				A992F8552ADDEE1100AFA218 /* shared */,
+				A992F8562ADDEE1F00AFA218 /* qswiftserver */,
+				A992F8542ADDEDE700AFA218 /* qswiftclient */,
+				A992F8532ADDEDC600AFA218 /* qgoclient */,
 				A992F8432ADA9FC000AFA218 /* qgoserver */,
 				A9F9A5382A12D25800A99391 /* Products */,
 			);
@@ -95,25 +76,6 @@
 				A9F9A56F2A12E6AF00A99391 /* qswiftclient */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		A9F9A5652A12E68600A99391 /* qserver */ = {
-			isa = PBXGroup;
-			children = (
-				A9CFAC492A143D0F00CF9A6E /* ServerConnection.swift */,
-				A9F9A53A2A12D25800A99391 /* QServer.swift */,
-				A9F9A5662A12E68600A99391 /* main.swift */,
-			);
-			path = qserver;
-			sourceTree = "<group>";
-		};
-		A9F9A5702A12E6AF00A99391 /* qclient */ = {
-			isa = PBXGroup;
-			children = (
-				A9F9A55E2A12E64100A99391 /* QClient.swift */,
-				A9F9A5712A12E6AF00A99391 /* main.swift */,
-			);
-			path = qclient;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,10 +157,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9CFAC4A2A143D0F00CF9A6E /* ServerConnection.swift in Sources */,
-				A9F9A5782A12E71100A99391 /* QServer.swift in Sources */,
-				A9F9A5672A12E68600A99391 /* main.swift in Sources */,
-				A9E94B622A368A8D00C0A934 /* Utilidades.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,9 +164,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9F9A5772A12E70C00A99391 /* QClient.swift in Sources */,
-				A9F9A5722A12E6AF00A99391 /* main.swift in Sources */,
-				A9E94B632A368A8D00C0A934 /* Utilidades.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

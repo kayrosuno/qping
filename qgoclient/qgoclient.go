@@ -9,7 +9,7 @@ import (
     "encoding/pem"
     "fmt"
     "io"
-    "log"
+ //   "log"
     "math/big"
     "sync"
 
@@ -18,78 +18,15 @@ import (
 
 const addr = "localhost:25450"
 
-const message = "foobar"
+const message = "Hola, cliente enviando mensaje QUIC"
 
 // We start a server echoing data on the first stream the client opens,
 // then connect with a client, send the message, and wait for its receipt.
 
 var wg sync.WaitGroup
 
-var program = "qgoserver"
+var program = "qgoclient"
 var version = "0.1"
-
-func main() {
-
-    fmt.Println(program, version)
-
-    wg.Add(1)
-    go func() { log.Fatal(echoServer()) }()
-
-    // Wait for all go routines to complete.
-    wg.Wait()
-
-    //Sin cliente
-    /*err := clientMain()
-    if err != nil {
-        panic(err)
-    }
-    */
-}
-
-// Start a server that echos all data for each stream opened by the client
-func echoServer() error {
-    defer wg.Done()
-
-    listener, err := quic.ListenAddr(addr, generateTLSConfig(), nil)
-    if err != nil {
-        return err
-    }
-
-    for {
-        conn, err := listener.Accept(context.Background())
-        if err != nil {
-            return err
-        }
-
-        go newConnection(conn)
-    }
-
-    return err
-}
-
-// Nueva conexión aceptada
-func newConnection(conn quic.Connection) {
-
-    stream, err := conn.AcceptStream(context.Background())
-    if err != nil {
-        panic(err)
-    }
-    // Echo through the loggingWriter
-    for {
-        //Leer
-        _, err = io.Copy(loggingWriter{stream}, stream)
-
-        //Escribir
-        //TODO: responder a todos los clientes
-        buf := make([]byte, len(message))
-        _, err = io.ReadFull(stream, buf)
-        if err != nil {
-            panic(err) //TODO: quitar
-        }
-        fmt.Printf("<<<: Got '%s'\n", buf)
-    }
-
-}
 
 // A wrapper for io.Writer that also logs the message.
 type loggingWriter struct{ io.Writer }
@@ -99,7 +36,10 @@ func (w loggingWriter) Write(b []byte) (int, error) {
     return w.Writer.Write(b)
 }
 
-func clientMain() error {
+func main()  {
+
+    fmt.Println(program, version)
+
     tlsConf := &tls.Config{
         InsecureSkipVerify: true,
         NextProtos:         []string{"kayros"},
@@ -107,28 +47,33 @@ func clientMain() error {
     conn, err := quic.DialAddr(context.Background(), addr, tlsConf, nil)
     //conn, err := quic.DialAddr(addr, tlsConf, nil)
     if err != nil {
-        return err
+        //return err
+        //Log error
+            fmt.Printf("Error '%s'\n", err)
     }
 
     stream, err := conn.OpenStreamSync(context.Background())
     if err != nil {
-        return err
+               //Log error
+            fmt.Printf("Error '%s'\n", err)
     }
 
     fmt.Printf("Client: Sending '%s'\n", message)
     _, err = stream.Write([]byte(message))
     if err != nil {
-        return err
+               //Log error
+            fmt.Printf("Error '%s'\n", err)
     }
 
     buf := make([]byte, len(message))
     _, err = io.ReadFull(stream, buf)
     if err != nil {
-        return err
+                //Log error
+            fmt.Printf("Error '%s'\n", err)
     }
     fmt.Printf("Client: Got '%s'\n", buf)
 
-    return nil
+
 }
 
 // Setup a bare-bones TLS config for the server
@@ -154,3 +99,4 @@ func generateTLSConfig() *tls.Config {
         NextProtos:   []string{"kayros"},
     }
 }
+
