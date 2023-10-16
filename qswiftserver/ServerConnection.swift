@@ -47,15 +47,19 @@ class ServerConnection {
         nwConnection.start(queue: .main)
     }
 
+    //TODO: sanity check de conexiones, no se eliminan de la tupla de conexiones
+    
     ///Cambio estado conexion
     private func connectionStateChanged(to state: NWConnection.State) {
         switch state {
         case .waiting(let error):
             connectionFailed(error: error)
+//            qServer.connectionsByID.removeValue(forKey: id)
         case .ready:
-            print("connection \(id) ready")
+            println("connection \(id) ready")
         case .failed(let error):
             connectionFailed(error: error)
+//            qServer.connectionsByID.removeValue(forKey: id)
         default:
             break
         }
@@ -70,7 +74,7 @@ class ServerConnection {
         //Procesar datos recibidos de la conexión
         if let data = content, !data.isEmpty {
             let message = String(data: data, encoding: .utf8)
-            print("<<< connection \(self.id) [\(self.nwConnection.endpoint)] string: \(message ?? "-")")
+            println("<<< connection \(self.id) [\(self.nwConnection.endpoint)] string: \(message ?? "-")")
             //self.send(data: data)
             
             
@@ -81,7 +85,7 @@ class ServerConnection {
         //Conexión completada/finalizada
         if let complete = isComplete, complete==true {
             //self.connectionEnded()
-            print("connection \(self.id) completed")
+            println("connection \(self.id) completed")
             return;
         }
         
@@ -114,18 +118,18 @@ class ServerConnection {
 
     ///Stop connection
     func stopConnection() {
-        print("connection \(id) will stop")
+        println("connection \(id) will stop")
     }
 
     ///Callback conexion fallida
     private func connectionFailed(error: Error) {
-        print("connection \(id) did fail, error: \(error)")
+        println("connection \(id) did fail, error: \(error)")
         stopConnection(error: error)
     }
 
     ///Callback conexion finalizada
     private func connectionEnded() {
-        print("connection \(id) did end")
+        println("connection \(id) did end")
         stopConnection(error: nil)
     }
     

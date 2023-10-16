@@ -32,6 +32,18 @@ class QServer{
     ///Tupla de seguimiento de conexiones activas
     private var connectionsByID: [Int: ServerConnection] = [:]
     
+    
+    /// Time out de la conexion
+    let CONNECTION_TIMEOUT = 1000 * 60 * 10  //10 min
+    
+    
+    ///Number of  connection
+    func NumConnection() -> Int
+    {
+        
+        return connectionsByID.count
+    }
+    
     ///Contador de conexiones
     private var nextID: Int = 0
     
@@ -51,7 +63,7 @@ class QServer{
         //Parámetros de QUIC
         let quicOptions = NWProtocolQUIC.Options(alpn: ["kayros"])
         quicOptions.direction = .bidirectional
-        quicOptions.idleTimeout = 1000 * 60 * 10  //10 min
+        quicOptions.idleTimeout = CONNECTION_TIMEOUT
         let securityProtocolOptions: sec_protocol_options_t = quicOptions.securityProtocolOptions
         sec_protocol_options_set_verify_block(securityProtocolOptions,
                                               { (_: sec_protocol_metadata_t,
@@ -110,24 +122,24 @@ class QServer{
            switch newState {
            case .ready:
                
-               //print("Server ready on \(self.listener.debugDescription).")
+                            
                if let port = self.listener.port {
-                   print("Server ready on port \(port.debugDescription).")
+                   println(TimeNow()+" Server ready on port \(port.debugDescription).")
                }
                else
                {
-                   print("Server ready")
+                   println(TimeNow()+" Server ready on port unknow")
                }
                
            case .failed(let error):
-               print("Server failure, error: \(error.localizedDescription)")
+               println("Server failure, error: \(error.localizedDescription)")
                exit(EXIT_FAILURE)
            case .setup:
-               print("Server setting...")
+               println("Server setting...")
            case .cancelled:
-               print("Server cancelled")
+               println("Server cancelled")
            case .waiting(let error):
-               print("Server waiting, error: \(error.localizedDescription)")
+               println("Server waiting, error: \(error.localizedDescription)")
                
            default:
                break

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A9CFAC4A2A143D0F00CF9A6E /* ServerConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CFAC492A143D0F00CF9A6E /* ServerConnection.swift */; };
+		A9E94B622A368A8D00C0A934 /* Utilidades.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E94B612A368A8D00C0A934 /* Utilidades.swift */; };
+		A9E94B632A368A8D00C0A934 /* Utilidades.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E94B612A368A8D00C0A934 /* Utilidades.swift */; };
 		A9F9A5672A12E68600A99391 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F9A5662A12E68600A99391 /* main.swift */; };
 		A9F9A5722A12E6AF00A99391 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F9A5712A12E6AF00A99391 /* main.swift */; };
 		A9F9A5772A12E70C00A99391 /* QClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F9A55E2A12E64100A99391 /* QClient.swift */; };
@@ -36,13 +38,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A992F8432ADA9FC000AFA218 /* qgoserver */ = {isa = PBXFileReference; lastKnownFileType = folder; path = qgoserver; sourceTree = "<group>"; };
 		A9CFAC492A143D0F00CF9A6E /* ServerConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnection.swift; sourceTree = "<group>"; };
 		A9CFAC4D2A1AB95C00CF9A6E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A9E94B612A368A8D00C0A934 /* Utilidades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilidades.swift; sourceTree = "<group>"; };
 		A9F9A53A2A12D25800A99391 /* QServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QServer.swift; sourceTree = "<group>"; };
 		A9F9A55E2A12E64100A99391 /* QClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QClient.swift; sourceTree = "<group>"; };
-		A9F9A5642A12E68600A99391 /* qserver */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = qserver; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9F9A5642A12E68600A99391 /* qswiftserver */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = qswiftserver; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9F9A5662A12E68600A99391 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		A9F9A56F2A12E6AF00A99391 /* qclient */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = qclient; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9F9A56F2A12E6AF00A99391 /* qswiftclient */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = qswiftclient; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9F9A5712A12E6AF00A99391 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,13 +68,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A9E94B602A368A7E00C0A934 /* shared */ = {
+			isa = PBXGroup;
+			children = (
+				A9E94B612A368A8D00C0A934 /* Utilidades.swift */,
+			);
+			path = shared;
+			sourceTree = "<group>";
+		};
 		A9F9A52E2A12D25800A99391 = {
 			isa = PBXGroup;
 			children = (
 				A9CFAC4D2A1AB95C00CF9A6E /* README.md */,
-				A9F9A5392A12D25800A99391 /* qs1 */,
+				A9E94B602A368A7E00C0A934 /* shared */,
 				A9F9A5652A12E68600A99391 /* qserver */,
 				A9F9A5702A12E6AF00A99391 /* qclient */,
+				A992F8432ADA9FC000AFA218 /* qgoserver */,
 				A9F9A5382A12D25800A99391 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -78,17 +91,10 @@
 		A9F9A5382A12D25800A99391 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A9F9A5642A12E68600A99391 /* qserver */,
-				A9F9A56F2A12E6AF00A99391 /* qclient */,
+				A9F9A5642A12E68600A99391 /* qswiftserver */,
+				A9F9A56F2A12E6AF00A99391 /* qswiftclient */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		A9F9A5392A12D25800A99391 /* qs1 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = qs1;
 			sourceTree = "<group>";
 		};
 		A9F9A5652A12E68600A99391 /* qserver */ = {
@@ -113,9 +119,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A9F9A5632A12E68600A99391 /* qserver */ = {
+		A9F9A5632A12E68600A99391 /* qswiftserver */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A9F9A5682A12E68600A99391 /* Build configuration list for PBXNativeTarget "qserver" */;
+			buildConfigurationList = A9F9A5682A12E68600A99391 /* Build configuration list for PBXNativeTarget "qswiftserver" */;
 			buildPhases = (
 				A9F9A5602A12E68600A99391 /* Sources */,
 				A9F9A5612A12E68600A99391 /* Frameworks */,
@@ -125,14 +131,14 @@
 			);
 			dependencies = (
 			);
-			name = qserver;
+			name = qswiftserver;
 			productName = qserver;
-			productReference = A9F9A5642A12E68600A99391 /* qserver */;
+			productReference = A9F9A5642A12E68600A99391 /* qswiftserver */;
 			productType = "com.apple.product-type.tool";
 		};
-		A9F9A56E2A12E6AF00A99391 /* qclient */ = {
+		A9F9A56E2A12E6AF00A99391 /* qswiftclient */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A9F9A5732A12E6AF00A99391 /* Build configuration list for PBXNativeTarget "qclient" */;
+			buildConfigurationList = A9F9A5732A12E6AF00A99391 /* Build configuration list for PBXNativeTarget "qswiftclient" */;
 			buildPhases = (
 				A9F9A56B2A12E6AF00A99391 /* Sources */,
 				A9F9A56C2A12E6AF00A99391 /* Frameworks */,
@@ -142,9 +148,9 @@
 			);
 			dependencies = (
 			);
-			name = qclient;
+			name = qswiftclient;
 			productName = qclient;
-			productReference = A9F9A56F2A12E6AF00A99391 /* qclient */;
+			productReference = A9F9A56F2A12E6AF00A99391 /* qswiftclient */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -178,8 +184,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A9F9A5632A12E68600A99391 /* qserver */,
-				A9F9A56E2A12E6AF00A99391 /* qclient */,
+				A9F9A5632A12E68600A99391 /* qswiftserver */,
+				A9F9A56E2A12E6AF00A99391 /* qswiftclient */,
 			);
 		};
 /* End PBXProject section */
@@ -192,6 +198,7 @@
 				A9CFAC4A2A143D0F00CF9A6E /* ServerConnection.swift in Sources */,
 				A9F9A5782A12E71100A99391 /* QServer.swift in Sources */,
 				A9F9A5672A12E68600A99391 /* main.swift in Sources */,
+				A9E94B622A368A8D00C0A934 /* Utilidades.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +208,7 @@
 			files = (
 				A9F9A5772A12E70C00A99391 /* QClient.swift in Sources */,
 				A9F9A5722A12E6AF00A99391 /* main.swift in Sources */,
+				A9E94B632A368A8D00C0A934 /* Utilidades.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +265,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -311,7 +319,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -376,7 +384,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		A9F9A5682A12E68600A99391 /* Build configuration list for PBXNativeTarget "qserver" */ = {
+		A9F9A5682A12E68600A99391 /* Build configuration list for PBXNativeTarget "qswiftserver" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A9F9A5692A12E68600A99391 /* Debug */,
@@ -385,7 +393,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		A9F9A5732A12E6AF00A99391 /* Build configuration list for PBXNativeTarget "qclient" */ = {
+		A9F9A5732A12E6AF00A99391 /* Build configuration list for PBXNativeTarget "qswiftclient" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A9F9A5742A12E6AF00A99391 /* Debug */,
