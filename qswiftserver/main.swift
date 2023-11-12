@@ -72,5 +72,5 @@ catch
 // Uso
 func uso()
 {
-    print("Use: qserver -l <port number>")
+    print("Use: qswiftserver -l <port number>")
 }

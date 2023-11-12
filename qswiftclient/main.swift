@@ -118,7 +118,7 @@ catch
     
 func uso()
 {
-    println("Use: qclient <host> <port number>")
+    println("Use: qswiftclient <host> <port number>")
 }
     
    

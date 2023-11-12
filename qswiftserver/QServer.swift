@@ -11,7 +11,7 @@ import Network
 
 ///Clase QServer. Escucha por conexiones QUIC.
 class QServer{
-    let program = "QServer"
+    let program = "QServer class"
     let version = "0.1"
     
     ///port de escucha
