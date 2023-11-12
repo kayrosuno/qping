@@ -1,21 +1,20 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 */
-package cmd
+package main
 
 import (
 	"net"
 	"os"
 
 	"github.com/spf13/cobra"
-	"kayros.uno/qgo/client"
 )
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "qgo <ipaddres:port>",
-	Short: "Start qgo in server mode to listen for clients request, the port must by greater than 1024",
-	Long: `qgo is a test program written in go to verify the functionality of the QUIC Protocol:
+	Use:   "qping <ipaddres:port>",
+	Short: "Start qping in server mode to listen for clients request, the port must by greater than 1024",
+	Long: `qping is a test program written in go to verify the functionality of the QUIC Protocol:
 qgoserver act a ping server listening ping from querys from the clients answerring
 with a time mark to measure on the client the RTT `,
 	Args: func(cmd *cobra.Command, args []string) error {
@@ -40,7 +39,7 @@ with a time mark to measure on the client the RTT `,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
-		client.RTTClient(args)
+		RTTClient(args)
 	},
 }
 

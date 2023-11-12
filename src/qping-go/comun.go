@@ -1,7 +1,7 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 */
-package share
+package main
 
 import (
 	"crypto/rand"
@@ -12,17 +12,23 @@ import (
 	"math/big"
 )
 
+const portDefault = "25450" //Puerto por defecto de escucha
+// const message = "Mensaje de prueba" //Mensaje de prueba por defecto
+// var wg sync.WaitGroup               //grupo de sincronización de threads
+var Program = "qping"   //Nombre del programa
+var Version = "0.1"     //Version actual
+const maxMessage = 2024 //Longitud en bytes maximo del mensaje
+
 // Struct for RTT QUIC
 type RTTQUIC struct {
-	Magic         uint16 // magic to identify this packet
-	Id            uint32 // id del mensaje
-	Time_client   uint64 // local time at client
-	Time_server   uint64 // local time at server
-	LenData       uint16 // len payload data
-	Data          []byte // data of payload
-	LenDataReaded uint16 // len data readed on server side (for MTU discovery?)
+	//Magic         uint16 // magic to identify this packet
+	Id               uint32 // id del mensaje
+	Time_client      int64  // local time at client
+	Time_server      int64  `json:"Time_Server,omitempty"` // local time at server
+	LenPayload       int    // len payload data
+	LenPayloadReaded int    `json:"LenDataReaded,omitempty"` // len data readed on server side for payload (for MTU discovery?)
+	Data             []byte // data of payload
 }
-
 
 // Setup a bare-bones TLS config for the server
 func GenerateTLSConfig() *tls.Config {

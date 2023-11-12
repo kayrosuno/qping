@@ -1,39 +1,29 @@
-package client
+package main
 
 import (
 	"context"
 	"crypto/tls"
+	"encoding/json"
 	"fmt"
 	"net"
 	"os"
 	"time"
 
-	//	"crypto/tls"
-
-	//   "log"
-
+	"github.com/quic-go/quic-go"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
-
-	"github.com/quic-go/quic-go"
 )
 
 // We start a server echoing data on the first stream the client opens,
 // then connect with a client, send the message, and wait for its receipt.
-
-// var wg sync.WaitGroup
-var Program = "qgoclient" //Nombre del programa cliente
-var Version = "0.1"       //Version actual cliente
-//var addr = "localhost:25450"
-
-const message = "QUIC echo test message from go client"
+const message = "qclient rtt message"
 
 // Main echo client
 // llamada -> qgo ipaddress:port
-func EchoClient(args []string) {
+func RTTClient(args []string) {
 
 	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
-	log.Info().Str(Program, Version).Msg("qgo client mode")
+	log.Info().Str(Program, Version).Msg("qping client mode")
 
 	// Chech UPD addreess for QUIC
 	udpAdr, err := net.ResolveUDPAddr("udp", args[0])
@@ -64,34 +54,86 @@ func EchoClient(args []string) {
 		return
 	}
 
-	//Bucle de envío continuo
-	for {
-		log.Info().Msg(fmt.Sprintf("-> '%s' mesg: '%s'", args[0], message))
+	//Cerrar diferido
+	defer stream.Close()
 
-		//Enviar echo
-		_, err = stream.Write([]byte(message))
+	//Bucle de envío continuo
+	for i := 0; true; i++ {
+
+		//Crear el mensaje
+		var rttMensaje RTTQUIC
+		rttMensaje.Id = uint32(i)
+		rttMensaje.Data = []byte(message)
+		rttMensaje.LenPayload = len(message)
+
+		var time_init = time.Now().UnixMicro()
+		rttMensaje.Time_client = time_init
+
+		data, err := json.Marshal(rttMensaje)
+		//var time_marshall = time.Now().UnixMicro() - time_init
+
+		if err != nil {
+			//Log error
+			log.Error().Msg(fmt.Sprintf("Json marshall failed '%s'", err.Error()))
+			return
+		}
+		//
+		//Enviar data json
+		//----------------------------
+		//
+		var time_send = time.Now().UnixMicro() - time_init
+		_, err = stream.Write(data)
+		if err != nil {
+			//Log error
+			log.Error().Msg(fmt.Sprintf("Error '%s'", err.Error()))
+			return
+		}
+		//var time_sended = time.Now().UnixMicro() - time_init
+		//log.Info().Int64("t_marshall", time_marshall).Int64("t_send", time_send).Msg(fmt.Sprintf("-> '%s' mesg: '%s'", args[0], data))
+
+		//
+		//Leer echo desde el server
+		//
+		// TODO
+		err = stream.SetReadDeadline(time.Now().Add(time.Second)) // 1seg
 		if err != nil {
 			//Log error
 			log.Error().Msg(fmt.Sprintf("Error '%s'", err.Error()))
 			return
 		}
 
-		//Leer echo desde el server
-		// TODO
+		//var bytes_leidos = 0
+		buf := make([]byte, maxMessage) //Buffer
+		bytesReaded, err := stream.Read(buf)
+		if err != nil {
+			//Log error
+			log.Error().Msg(fmt.Sprintf("Error '%s'", err.Error()))
+			return
+		}
+
+		//Time RTT
+		var time_rtt = time.Now().UnixMicro() - time_init
+
+		//Unmarshall answer from server
+		var rttServer RTTQUIC
+
+		if err := json.Unmarshal(buf[:bytesReaded], &rttServer); err != nil { //El unmarshal se lee de un slice con los datos leidos, no mas para evitar datos erroneos
+			log.Error().Msg(fmt.Sprintf("Error unmarshalling json data: %s", err.Error()))
+			break
+		}
+
+		//log.Info().Msg(fmt.Sprintf("<-  mesg: '%s'", datos_leidos))
+		log.Info().
+			//Int64("t_marshall", time_marshall).
+			Uint32("ID", rttServer.Id).
+			Int64("RTT", time_rtt).
+			Int64("t_server", rttServer.Time_server-rttMensaje.Time_client).
+			Int64("t_send", time_send).
+			Msg("useg") //fmt.Sprintf("<- '%s' mesg: '%s'", args[0], data))
 
 		//Esperar 1 seg TODO: eliminar
 		time.Sleep(1 * time.Second)
 
 	}
-
-	// buf := make([]byte, len(message))
-	// _, err = io.ReadFull(stream, buf)
-	// if err != nil {
-	// 	//Log error
-	// 	log.Error().Msg(fmt.Sprintf("Error '%s'\n", err.Error()))
-	// 	return
-	// }
-
-	//log.Error().Msg(fmt.Sprintf("Error '%s'\n", string(buf)))
 
 }

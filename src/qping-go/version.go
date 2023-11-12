@@ -1,7 +1,7 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 */
-package cmd
+package main
 
 import (
 	"os"
@@ -9,8 +9,6 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
-	"kayros.uno/qgo/client"
-	"kayros.uno/qgo/server"
 )
 
 // versionCmd represents the version command
@@ -22,8 +20,7 @@ var versionCmd = &cobra.Command{
 		//fmt.Println("version called")
 
 		log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
-		log.Info().Str(server.Program, server.Version).Msg("")
-		log.Info().Str(client.Program, client.Version).Msg("")
+		log.Info().Str(Program, Version).Msg("")
 
 	},
 }

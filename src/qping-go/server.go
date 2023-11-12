@@ -1,18 +1,17 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 */
-package cmd
+package main
 
 import (
 	"github.com/spf13/cobra"
-	"kayros.uno/qgo/server"
 )
 
 // serverCmd represents the server command
 var serverCmd = &cobra.Command{
 	Use:   "server <port>",
-	Short: "Start qgo in server mode to listen for QUIC connections",
-	Long: `Start qgo in server mode to listen for QUIC connections using 
+	Short: "Start qping in server mode to listen for QUIC connections",
+	Long: `Start qping in server mode to listen for QUIC connections using 
 	the default port to listen for clients`,
 	Args: func(cmd *cobra.Command, args []string) error {
 
@@ -31,7 +30,7 @@ var serverCmd = &cobra.Command{
 
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		server.RTTServer(args)
+		QPingServer(args)
 	},
 }
 
