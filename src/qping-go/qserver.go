@@ -105,7 +105,7 @@ func newPingConnection(conn quic.Connection) {
 		rtt.Time_server = time.Now().UnixMicro()
 		rtt.LenPayloadReaded = len(rtt.Data)
 
-		log.Info().Msg(fmt.Sprintf("<<<: %s Got '%s'", conn.RemoteAddr().String(), string(buf)))
+		//log.Info().Msg(fmt.Sprintf("<<<: %s Got '%s'", conn.RemoteAddr().String(), string(buf)))
 
 		//
 		//Escribir respuesta al cliente
@@ -132,5 +132,8 @@ func newPingConnection(conn quic.Connection) {
 		//log.Info().Int64("t_marshall", time_marshall).Int64("t_send", time_send).Msg(fmt.Sprintf("-> '%s' mesg: '%s'", args[0], data))
 
 	}
+
+	//Log error
+	log.Info().Msg(fmt.Sprintf("Close connection client %s ", conn.RemoteAddr().String()))
 
 }
