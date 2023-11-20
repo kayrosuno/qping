@@ -39,7 +39,7 @@ func QPingServer(args []string) error {
 	} else {
 		addr += portDefault
 	}
-	log.Info().Msg(fmt.Sprintf("Iniciando servidor QUIC echo en puerto: %s", port))
+	log.Info().Msg(fmt.Sprintf("Starting ping QUIC server on port: %s", port))
 
 	//Crea el listener
 	listener, err := quic.ListenAddr(addr, GenerateTLSConfig(), nil)
@@ -58,8 +58,6 @@ func QPingServer(args []string) error {
 
 		go newPingConnection(conn) //Nueva conexión de cliente
 	}
-
-	//return err
 }
 
 // Nueva conexión aceptada

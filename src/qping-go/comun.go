@@ -21,7 +21,6 @@ const maxMessage = 2024 //Longitud en bytes maximo del mensaje
 
 // Struct for RTT QUIC
 type RTTQUIC struct {
-	//Magic         uint16 // magic to identify this packet
 	Id               uint32 // id del mensaje
 	Time_client      int64  // local time at client
 	Time_server      int64  `json:"Time_Server,omitempty"` // local time at server
