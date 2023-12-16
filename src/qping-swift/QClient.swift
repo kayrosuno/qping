@@ -6,9 +6,6 @@
 //
 
 import Foundation
-
-
-import Foundation
 import Network
 
 @available(macOS 10.14, *)
@@ -33,6 +30,8 @@ class QClient {
     ///The TCP maximum package size is 64K 65536
     let MTU = 65536
     
+    /// Time out de la conexion
+    let CONNECTION_TIMEOUT = 1000 * 60 * 10  //10 min
     
     ///Inittializing
     init(host: String, port: UInt16) {
@@ -54,6 +53,7 @@ class QClient {
         //Parámetros de QUIC
         let quicOptions = NWProtocolQUIC.Options(alpn: ["kayros"])
         quicOptions.direction = .bidirectional
+        quicOptions.idleTimeout = CONNECTION_TIMEOUT
         let securityProtocolOptions: sec_protocol_options_t = quicOptions.securityProtocolOptions
         sec_protocol_options_set_verify_block(securityProtocolOptions,
                                               { (_: sec_protocol_metadata_t,
@@ -64,8 +64,6 @@ class QClient {
         let quicParameter = NWParameters(quic: quicOptions)
   
        
-        
-        
         //Network connection
         nwConnection = NWConnection(host: self.host, port: self.port, using: quicParameter)
         
@@ -81,16 +79,21 @@ class QClient {
     }
 
     ///Iniciar conexion
-    func start() {
-        print("Client started \(host) \(port)")
+    func connect() async {
+        print("[QClient] Connecting to \(host) \(port)")
         nwConnection.start(queue: networkQueue)
        
     }
 
-    ///Parar conexion
-    func stop() {
-        nwConnection.cancel()
+    ///Return state connection
+    func getState() -> NWConnection.State
+    {
+        return nwConnection.state
     }
+    ///Parar conexion
+//    func stop() {
+//        nwConnection.cancel()
+//    }
 
     ///Cambio estado conexion
     private func connectionStateChanged(to state: NWConnection.State) {
@@ -98,7 +101,7 @@ class QClient {
         case .waiting(let error):
             connectionFailed(error: error)
         case .ready:
-            print("connection ready")
+            println("[QClient] connection ready")
             //Enviar info de cliente
             send(data: "\(program) \(version)".data(using: .utf8)!)
         case .failed(let error):
@@ -116,7 +119,9 @@ class QClient {
         //Procesar datos recibidos de la conexión
         if let data = content, !data.isEmpty {
             let message = String(data: data, encoding: .utf8)
-            print("<<< \(message ?? "-")")  /*data: \(data as NSData)*/
+            println("[QClient] <<< \(message ?? "-")")  /*data: \(data as NSData)*/
+            Swift.print("#",terminator: "")
+            fflush(__stdoutp)
             //self.send(data: data)
         }
         
@@ -165,33 +170,35 @@ class QClient {
     
     //Parar la conexion
     func stopConnection() {
-        print("connection will stop")
+        println("[QClient] Ending connection")
         self.nwConnection.stateUpdateHandler = nil
         self.nwConnection.cancel()
     }
 
     private func connectionFailed(error: Error) {
-        print("connection did fail, error: \(error)")
+        println("[QClient] connection did fail, error: \(error)")
         //self.stopConnection()
         exit(-1)
     }
 
     private func connectionEnded() {
-        print("connection did end")
+        println("[QClient] connection did end")
         //self.stopConnection()
         exit(-1)
     }
 
     
+    
+    
     //Wrapped de print
-    func print(_ cadena: String)
-    {
-        Swift.print("\n\u{1B}[1A\u{1B}[K"+cadena)
-        fflush(__stdoutp)
-        //Swift.print("\n"+cadena)
-        Swift.print("#",terminator: "")
-        fflush(__stdoutp)
-    }
+//    func print(_ cadena: String)
+//    {
+//        //Swift.print("\n\u{1B}[1A\u{1B}[K"+cadena)
+//        fflush(__stdoutp)
+//        Swift.print("\n"+cadena)
+//        Swift.print("#",terminator: "")
+//        fflush(__stdoutp)
+//    }
     
 
 }
