@@ -59,7 +59,7 @@ var rootCmd = &cobra.Command{
 	Use:   "qping <ipaddres:port>",
 	Short: "Start qping in server mode to listen for clients request, the port must by greater than 1024",
 	Long: `qping is a test program written in go to verify the functionality of the QUIC Protocol:
-qgoserver act a ping server listening ping from querys from the clients answerring
+qping act as ac lient or as ping server listening ping from querys from the clients answering
 with a time mark to measure on the client the RTT `,
 	Args: func(cmd *cobra.Command, args []string) error {
 
@@ -83,7 +83,7 @@ with a time mark to measure on the client the RTT `,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
-		RTTClient(args)
+		QClient(args)
 	},
 }
 

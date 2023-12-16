@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"net"
 	"os"
 	"strconv"
 	"time"
@@ -19,7 +20,7 @@ import (
 // Start a server that echos all data for each stream opened by the client
 func QPingServer(args []string) error {
 
-	var port = portDefault
+	var port = sPortDefault
 	var addr = "localhost:"
 	//var rtt RTTQUIC
 
@@ -32,17 +33,41 @@ func QPingServer(args []string) error {
 		_, err := strconv.Atoi(args[0])
 		if err != nil {
 			log.Error().Msg("incorrect argument port " + err.Error())
-			port = portDefault
+			port = sPortDefault
 		}
 		addr += args[0]
 		port = args[0]
 	} else {
-		addr += portDefault
+		addr += sPortDefault
 	}
 	log.Info().Msg(fmt.Sprintf("Starting ping QUIC server on port: %s", port))
 
 	//Crea el listener
-	listener, err := quic.ListenAddr(addr, GenerateTLSConfig(), nil)
+	// listener, err := quic.ListenAddr(addr, GenerateTLSConfig(), nil)
+	// if err != nil {
+	// 	log.Error().Msg(fmt.Sprintf("Error %s", err.Error()))
+	// 	return err
+	// }
+
+	var iPort, err = strconv.Atoi(port)
+	if err != nil {
+		log.Error().Msg("incorrect argument port " + err.Error())
+		iPort = iPortDefault
+	}
+
+	udpConn, err := net.ListenUDP("udp4", &net.UDPAddr{Port: iPort})
+	if err != nil {
+		log.Error().Msg(fmt.Sprintf("Error %s", err.Error()))
+		return err
+	}
+
+	tr := quic.Transport{
+		Conn: udpConn,
+	}
+
+	quicConf := quic.Config{}
+
+	listener, err := tr.Listen(GenerateTLSConfig(), &quicConf)
 	if err != nil {
 		log.Error().Msg(fmt.Sprintf("Error %s", err.Error()))
 		return err
@@ -115,7 +140,7 @@ func newPingConnection(conn quic.Connection) {
 		if err != nil {
 			//Log error
 			log.Error().Msg(fmt.Sprintf("Json marshall failed '%s'", err.Error()))
-			break
+			continue
 		}
 		//
 		//Enviar data json
@@ -124,10 +149,11 @@ func newPingConnection(conn quic.Connection) {
 		if err != nil {
 			//Log error
 			log.Error().Msg(fmt.Sprintf("Error '%s'", err.Error()))
-			break
+			continue
 		}
 
-		//log.Info().Int64("t_marshall", time_marshall).Int64("t_send", time_send).Msg(fmt.Sprintf("-> '%s' mesg: '%s'", args[0], data))
+		//Int64("t_marshall", time_marshall).Int64("t_send", time_send).
+		//log.Info().Msg(fmt.Sprintf("-> '%s' mesg: '%s'", conn.RemoteAddr().String(), data))
 
 	}
 

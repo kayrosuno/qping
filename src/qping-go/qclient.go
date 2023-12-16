@@ -20,12 +20,12 @@ const message = "qclient rtt message"
 
 // Main echo client
 // llamada -> qgo ipaddress:port
-func RTTClient(args []string) {
+func QClient(args []string) {
 
 	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 	log.Info().Str(Program, Version).Msg("qping client mode")
 
-	// Chech UPD addreess for QUIC
+	// Check UPD addreess for QUIC
 	udpAdr, err := net.ResolveUDPAddr("udp", args[0])
 	if err != nil {
 		log.Panic().Msg(err.Error())
@@ -62,7 +62,7 @@ func RTTClient(args []string) {
 
 		//Crear el mensaje
 		var rttMensaje RTTQUIC
-		rttMensaje.Id = uint32(i)
+		rttMensaje.Id = int(i)
 		rttMensaje.Data = []byte(message)
 		rttMensaje.LenPayload = len(message)
 
@@ -81,7 +81,7 @@ func RTTClient(args []string) {
 		//Enviar data json
 		//----------------------------
 		//
-		var time_send = time.Now().UnixMicro() - time_init
+		//var time_send = time.Now().UnixMicro() - time_init
 		_, err = stream.Write(data)
 		if err != nil {
 			//Log error
@@ -119,17 +119,20 @@ func RTTClient(args []string) {
 
 		if err := json.Unmarshal(buf[:bytesReaded], &rttServer); err != nil { //El unmarshal se lee de un slice con los datos leidos, no mas para evitar datos erroneos
 			log.Error().Msg(fmt.Sprintf("Error unmarshalling json data: %s", err.Error()))
-			break
+			continue
 		}
 
 		//log.Info().Msg(fmt.Sprintf("<-  mesg: '%s'", datos_leidos))
 		log.Info().
 			//Int64("t_marshall", time_marshall).
-			Uint32("ID", rttServer.Id).
-			Int64("RTT", time_rtt).
-			Int64("t_server", rttServer.Time_server-rttMensaje.Time_client).
-			Int64("t_send", time_send).
-			Msg("useg") //fmt.Sprintf("<- '%s' mesg: '%s'", args[0], data))
+
+			Int("id", rttServer.Id).
+			Int64("rtt", time_rtt).
+			//Int64("t_server", rttServer.Time_server-rttMensaje.Time_client).
+			//cInt64("t_send", time_send).
+			//Msg(fmt.Sprintf(" RT='%d'usec", time_rtt))
+
+			Msg("qping complete in usec") //fmt.Sprintf("<- '%s' mesg: '%s'", args[0], data))
 
 		//Esperar 1 seg TODO: eliminar
 		time.Sleep(1 * time.Second)
