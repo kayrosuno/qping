@@ -1,3 +1,6 @@
+/*
+Copyright © 2023 Alejandro Garcia <iacobus75@gmail.com>  <alejandro@kayros.uno>
+*/
 package main
 
 import (
