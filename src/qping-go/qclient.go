@@ -25,11 +25,12 @@ const message = "qclient rtt message"
 // llamada -> qgo ipaddress:port
 func QClient(args []string) {
 
-	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
+	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr, TimeFormat: time.RFC3339})
 	log.Info().Str(Program, Version).Msg("qping client mode")
 
 	// Check UPD addreess for QUIC
 	udpAdr, err := net.ResolveUDPAddr("udp", args[0])
+	log.Info().Str("arg0", args[0]).Msg("<< arg[0]")
 	if err != nil {
 		log.Panic().Msg(err.Error())
 		panic(err.Error())

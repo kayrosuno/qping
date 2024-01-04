@@ -1,5 +1,7 @@
 # syntax=docker/dockerfile:1
 
+
+
 # Build the application from source
 FROM golang:1.21.5 AS build-stage
 
@@ -18,6 +20,12 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /app/qping
 
 # Deploy the application binary into a clean image
 FROM ubuntu:latest AS build-release-stage
+
+#Instalar net-tools
+#RUN apt-get update && apt-get -qq -y install curl
+#RUN apt-get update && apt-get install -y apt-utils
+RUN apt-get update && apt-get install -y net-tools
+
 ARG USERNAME=iacobus
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -40,6 +48,14 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 # [Optional] Set the default user. Omit if you want to keep the default as root.
 USER $USERNAME
+
+
+# Label docker image
+LABEL version="1.1"
+LABEL maintaner="Alejandro Garcia"
+LABEL release-date="01-01-2024"
+#LABEL promoted="true"
+
 
 
 WORKDIR /app

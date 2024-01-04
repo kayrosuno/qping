@@ -6,12 +6,14 @@
     "configurations": [
 
 
+
+
         {
             "name": "Launch Package",
             "type": "go",
             "request": "launch",
             //"args": "localhost:25450",
-            "args": "server",
+            "args": "server 25459",
             "mode": "debug",
             "program": "${workspaceFolder}",
             "console": "integratedTerminal",

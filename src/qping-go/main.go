@@ -16,6 +16,7 @@ import (
 func main() {
 	Execute() //Ejecución de comandos con cobra
 
+	//
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -56,7 +57,7 @@ var serverCmd = &cobra.Command{
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "qping <ipaddres:port>",
+	Use:   "qping <ipv4:port>  or  qping \"[ipv6]:port>\" ",
 	Short: "Start qping in server mode to listen for clients request, the port must by greater than 1024",
 	Long: `qping is a test program written in go to verify the functionality of the QUIC Protocol:
 qping act as ac lient or as ping server listening ping from querys from the clients answering
@@ -68,7 +69,7 @@ with a time mark to measure on the client the RTT `,
 			return err
 		}
 
-		// Chech UPD addreess for QUIC
+		// Chech UDP addreess for QUIC
 		_, err := net.ResolveUDPAddr("udp", args[0])
 		if err != nil {
 			return err

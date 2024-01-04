@@ -1,5 +1,5 @@
 /*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
+Copyright © 2023 Alejandro Garcia (iacobus75@gmail.com)
 */
 package main
 
@@ -18,7 +18,7 @@ const iPortDefault int = 25450 //Puerto por defecto de escucha
 // const message = "Mensaje de prueba" //Mensaje de prueba por defecto
 // var wg sync.WaitGroup               //grupo de sincronización de threads
 var Program = "qping"   //Nombre del programa
-var Version = "0.1"     //Version actual
+var Version = "0.2"     //Version actual
 const maxMessage = 2024 //Longitud en bytes maximo del mensaje
 
 // Struct for RTT QUIC
