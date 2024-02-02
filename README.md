@@ -3,9 +3,10 @@
 qping is a ping utility for the QUIC protocol
 available in go and Swift. 
 
-qping support UDP and TLS transports.
+qping support RFC 9000
+QUIC: A UDP-Based Multiplexed and Secure Transport
 
-Available implementation in go and swift help to test 5G networks low latency using QUIC protocols, measure rtt and MTU. go implementations are suitable for use in machines running Linux or macOS while swift implementation is helpfull to do the test over iOS devices with 5G connectivity as well as macOS
+Available implementation in go and swift help to test 5G networks low latency using QUIC protocols, measure RTT, MTU and Bandwith. go implementations are suitable for use in machines running Linux or macOS while swift implementation is helpfull to do the test over iOS devices with 5G connectivity as well as macOS
 
 
 ## qping server mode
