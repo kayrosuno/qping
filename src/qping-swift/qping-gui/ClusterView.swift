@@ -15,23 +15,23 @@ struct ClusterView: View {
         if let cluster = cluster {
             Text("Name: \(cluster.name)")
             TabView {
-                       View1()
-                            .badge(2)
-                            .tabItem {
-                                Label("Received", systemImage: "tray.and.arrow.down.fill")
-                            }
-                        View2()
-                            .tabItem {
-                                Label("Sent", systemImage: "tray.and.arrow.up.fill")
-                            }
+                View1()
+                    .badge(2)
+                    .tabItem {
+                        Label("Received", systemImage: "tray.and.arrow.down.fill")
                     }
+                View2()
+                    .tabItem {
+                        Label("Sent", systemImage: "tray.and.arrow.up.fill")
+                    }
+            }
             
-                }
+        }
         else{
             Text("create or select a cluster/node")
         }
-            }
-        }
+    }
+}
 
 #Preview {
     ClusterView()

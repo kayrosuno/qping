@@ -10,7 +10,7 @@
 		A92FC0912B66EE3F006AD2C5 /* LatencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FC0902B66EE3F006AD2C5 /* LatencyView.swift */; };
 		A92FC0932B67044A006AD2C5 /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FC0922B67044A006AD2C5 /* SideBarView.swift */; };
 		A92FC0952B670466006AD2C5 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FC0942B670466006AD2C5 /* DetailView.swift */; };
-		A92FC0972B670485006AD2C5 /* ClusterViewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FC0962B670485006AD2C5 /* ClusterViewDetail.swift */; };
+		A92FC0972B670485006AD2C5 /* ClusterEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FC0962B670485006AD2C5 /* ClusterEditorView.swift */; };
 		A92FC0992B670493006AD2C5 /* View2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FC0982B670493006AD2C5 /* View2.swift */; };
 		A9BFA1ED2B02C0F900EC501D /* comun.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BFA1EC2B02C0F900EC501D /* comun.swift */; };
 		A9C81CC82B66D67000452687 /* qping_guiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C81CC72B66D67000452687 /* qping_guiApp.swift */; };
@@ -46,7 +46,7 @@
 		A92FC0902B66EE3F006AD2C5 /* LatencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatencyView.swift; sourceTree = "<group>"; };
 		A92FC0922B67044A006AD2C5 /* SideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
 		A92FC0942B670466006AD2C5 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
-		A92FC0962B670485006AD2C5 /* ClusterViewDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterViewDetail.swift; sourceTree = "<group>"; };
+		A92FC0962B670485006AD2C5 /* ClusterEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterEditorView.swift; sourceTree = "<group>"; };
 		A92FC0982B670493006AD2C5 /* View2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View2.swift; sourceTree = "<group>"; };
 		A9BFA1EC2B02C0F900EC501D /* comun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = comun.swift; sourceTree = "<group>"; };
 		A9C81CC52B66D67000452687 /* qping-gui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "qping-gui.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,7 +126,7 @@
 				A92FC0902B66EE3F006AD2C5 /* LatencyView.swift */,
 				A92FC0922B67044A006AD2C5 /* SideBarView.swift */,
 				A92FC0942B670466006AD2C5 /* DetailView.swift */,
-				A92FC0962B670485006AD2C5 /* ClusterViewDetail.swift */,
+				A92FC0962B670485006AD2C5 /* ClusterEditorView.swift */,
 				A9FA7D382B69BDA40094925D /* ClusterView.swift */,
 				A9FA7D362B69BA770094925D /* View1.swift */,
 				A92FC0982B670493006AD2C5 /* View2.swift */,
@@ -262,7 +262,7 @@
 				A92FC0952B670466006AD2C5 /* DetailView.swift in Sources */,
 				A92FC0932B67044A006AD2C5 /* SideBarView.swift in Sources */,
 				A9C81CD92B66E39A00452687 /* RootView.swift in Sources */,
-				A92FC0972B670485006AD2C5 /* ClusterViewDetail.swift in Sources */,
+				A92FC0972B670485006AD2C5 /* ClusterEditorView.swift in Sources */,
 				A9C81CDD2B66E47800452687 /* ContentView2.swift in Sources */,
 				A92FC0912B66EE3F006AD2C5 /* LatencyView.swift in Sources */,
 				A9FA7D3B2B6AFE4C0094925D /* QpingView.swift in Sources */,

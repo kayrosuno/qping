@@ -1,4 +1,4 @@
-#Ignorear el directorio Build
+#Ignorar el directorio Build
 Build/
 Build/*
 DerivedData/*

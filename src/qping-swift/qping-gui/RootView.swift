@@ -9,9 +9,8 @@ import SwiftUI
 
 struct RootView: View {
     
-    //AppData para guardar estado de la aplicacion entre vistas
-    @StateObject private var appData = AppData(path: NavigationPath())
-   
+    @EnvironmentObject  var appData: AppData
+    
     
     var body: some View {
         
@@ -26,7 +25,7 @@ struct RootView: View {
             
         }
         //.environmentObject(appData)
-        .environment(appData)
+ 
         .sheet(isPresented: $appData.showAboutView){ AboutView() }
         .toolbar{
             ToolbarItem()  //Info

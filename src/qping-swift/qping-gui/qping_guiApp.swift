@@ -6,13 +6,24 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct qping_guiApp: App {
-   
+    //AppData para guardar estado de la aplicacion entre vistas
+    @StateObject private var appData = AppData(path: NavigationPath())
+    
     var body: some Scene {
         WindowGroup {
             RootView()
+                .modelContainer(for: [
+                    ClusterK8S.self
+//                    ,
+//                    Latency.self,
+//                    LatencyPoint.self
+                ])
+                .environment(appData)
+                
         }
         
         //Otro grupo de ventanas
@@ -38,7 +49,8 @@ class AppData: Identifiable, ObservableObject {
     var path: NavigationPath
     var vistaActiva = TipoVistaActiva.root
     var selectedCluster: ClusterK8S?
-    var clusters: [ClusterK8S] = [ClusterK8S(id:1,name:"cluster 1",nodes:["nodo_1"],state:1),ClusterK8S(id:2,name:"cluster 2",nodes:["nodo_2"],state:1)]
+    var editCluster: ClusterK8S?
+    var clusters: [ClusterK8S] = [] // [ClusterK8S(id:1,name:"cluster 1",nodes:["nodo_1"],state:1),ClusterK8S(id:2,name:"cluster 2",nodes:["nodo_2"],state:1)]
     //var selectedCluster: Binding<cluster>
     init(path: NavigationPath){
         self.path = path
@@ -47,12 +59,21 @@ class AppData: Identifiable, ObservableObject {
 
 
 //Clusters/nodes
-struct ClusterK8S: Identifiable, Hashable{
-    var id: Int
+@Model
+class ClusterK8S: Identifiable, Hashable{
+    @Attribute(.unique) var id: UUID
     var name: String
+    var nodeIP: String
     var nodes: [String]
     var state: Int   //0 Desactivo | 1 Activo
    
+    init(id: UUID, name: String, nodeIP: String, nodes: [String], state: Int) {
+        self.id = id
+        self.name = name
+        self.nodeIP = nodeIP
+        self.nodes = nodes
+        self.state = state
+    }
 }
 
 
@@ -65,4 +86,36 @@ enum TipoVistaActiva
     case bandwith   //Vista BW
     case mtu        //Vista MTU
     
+}
+
+
+//Latencia
+
+class Latency
+{
+  
+    
+    @Attribute(.unique) var id: UUID
+    var node: String
+    var data: Array<LatencyPoint>  //Tiempo envio, delay
+  
+    init(id: UUID, node: String, data: Array<LatencyPoint>) {
+        self.id = id
+        self.node = node
+        self.data = data
+    }
+}
+
+
+class LatencyPoint
+{
+    var timeSend: Double = 0.0
+    var timeReceived: Double = 0.0
+    var delay: Double = 0.0
+    
+    init(timeSend: Double, timeReceived: Double, delay: Double) {
+        self.timeSend = timeSend
+        self.timeReceived = timeReceived
+        self.delay = delay
+    }
 }
