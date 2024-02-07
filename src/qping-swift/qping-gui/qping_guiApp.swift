@@ -52,6 +52,12 @@ class AppData: Identifiable, ObservableObject {
     var editCluster: ClusterK8S?
     var clusters: [ClusterK8S] = [] // [ClusterK8S(id:1,name:"cluster 1",nodes:["nodo_1"],state:1),ClusterK8S(id:2,name:"cluster 2",nodes:["nodo_2"],state:1)]
     //var selectedCluster: Binding<cluster>
+    
+    var runPing = false  //Ejecutar el QpingClient
+    var qpingTask: Task<Sendable,Error>?
+    var sendInterval = 1000.0 //ms, default 1000ms=1seg
+    var qpingDataNode1 = ""
+    
     init(path: NavigationPath){
         self.path = path
     }
@@ -63,16 +69,20 @@ class AppData: Identifiable, ObservableObject {
 class ClusterK8S: Identifiable, Hashable{
     @Attribute(.unique) var id: UUID
     var name: String
-    var nodeIP: String
-    var nodes: [String]
-    var state: Int   //0 Desactivo | 1 Activo
+    var node1IP: String
+    var node2IP: String
+    var node3IP: String
+    //var nodes: [String]
+    //var state: Int   //0 Desactivo | 1 Activo
    
-    init(id: UUID, name: String, nodeIP: String, nodes: [String], state: Int) {
+    init(id: UUID, name: String, node1IP: String, node2IP: String, node3IP: String) {
         self.id = id
         self.name = name
-        self.nodeIP = nodeIP
-        self.nodes = nodes
-        self.state = state
+        self.node1IP = node1IP
+        self.node2IP = node2IP
+        self.node3IP = node3IP
+//        self.nodes = nodes
+//        self.state = state
     }
 }
 

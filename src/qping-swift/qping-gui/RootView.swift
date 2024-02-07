@@ -11,21 +11,34 @@ struct RootView: View {
     
     @EnvironmentObject  var appData: AppData
     
-    
     var body: some View {
         
         NavigationSplitView {
-          SideBarView()
+            SideBarView()
         } detail: {
             NavigationStack(path: $appData.path) {
                 ClusterView(cluster: appData.selectedCluster)
+//                Text("***")
+              
             }
-           
-           
-            
+//            .navigationDestination(for: UUID.self) { selection in
+//                //ClusterView(cluster: appData.selectedCluster)
+//                Text("AQUI DETALLE CLUSTERVIEW \(selection)")
+//            }
+                        .navigationDestination(for: String.self) { selection in
+                            VStack(alignment: .center, spacing: 20){
+                                Text("\(selection) deleted")
+                                Text("")
+                                Button("OK"){ appData.selectedCluster = nil}
+                            }
+                            .navigationBarBackButtonHidden()
+                        }
+            //            .navigationDestination(for: Int.self) { selection in
+            //                        Text("AQUI DETALLE CLUSTERVIEW ID \(selection)")
+            //            }
         }
         //.environmentObject(appData)
- 
+        
         .sheet(isPresented: $appData.showAboutView){ AboutView() }
         .toolbar{
             ToolbarItem()  //Info
@@ -36,7 +49,7 @@ struct RootView: View {
             }
         }
         .navigationTitle("QPing")
-       
+        
         //        NavigationStack (path: $appData.path) {
         //            //  Lo que se ponga abajo solo se muestra en MAC y en iPAD.  en Iphone NO! , en iOS aparece el sidebar
         //            Text("select cluster/node")
@@ -67,6 +80,6 @@ struct RootView: View {
 }
 
 //#Preview {
-//    
+//
 //    RootView()
 //}

@@ -48,7 +48,15 @@ struct SideBarView: View {
                 else {
                     ForEach(clusters, id: \.self) { cluster in
                         NavigationLink(cluster.name, value: cluster.id)
-                        //.onTapGesture { appData.selectedCluster = cluster }
+//                            .onTapGesture {
+//                                appData.selectedCluster = cluster
+//                                //Reset path
+//                                if(!appData.path.isEmpty){
+//                                    appData.path.removeLast()
+//                                }
+//                                appData.path.append(appData.selectedCluster.id)
+//                            }
+                          
                             .contextMenu {
                                 Button("Edit "+"\(cluster.name)") {
                                     appData.editCluster = cluster
@@ -63,9 +71,12 @@ struct SideBarView: View {
                     }
                     .onDelete(perform: removeCluster)
                     .headerProminence(.increased)
+                 
                 }
             }
-        }.listStyle(.sidebar)
+        }
+    
+        .listStyle(.sidebar)
         //            .navigationDestination(for: UUID.self) { uuid in
         //                Text("Detail with \(uuid)")}
         
@@ -87,8 +98,7 @@ struct SideBarView: View {
                         if(!appData.path.isEmpty){
                             appData.path.removeLast()
                         }
-                        appData.path.append(Text("deleted..."))
-                        
+                        appData.path.append(appData.selectedCluster!.name) //Se pasa el String para que lo muestre el NavigationStack utilizando el .navigationDestination de tipo String
                         
                     }
                }
@@ -99,6 +109,7 @@ struct SideBarView: View {
             }  message: {
                 Text("Are you sure to delete this cluster/node?")
             }
+            
     }
 }
 

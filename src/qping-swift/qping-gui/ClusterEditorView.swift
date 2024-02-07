@@ -13,34 +13,32 @@ import SwiftUI
 //
 struct ClusterEditorView: View {
     @EnvironmentObject  var appData: AppData
-    @State private var cluster_name = "cluster"
-    @State private var node_ip = "1.1.1.1"
+    @State private var cluster_name = ""
+    @State private var node1_ip = ""
+    @State private var node2_ip = ""
+    @State private var node3_ip = ""
     
-    //@State private var selectedCategory: AnimalCategory?
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-
+    
     private var editorTitle: String {
         appData.editCluster == nil ? "Add Cluster" : "Edit Cluster"
     }
     
     var body: some View {
-        //Text("Cluster view detail")
         NavigationStack {
             Form {
-                VStack{
-                    TextField("Cluster Name:", text: $cluster_name)
-                    TextField("Node IP:", text: $node_ip)
-                    
-                }.padding(EdgeInsets(top: 15.0,leading: 15.0,bottom: 15.0,trailing: 15.0))
-            }
-            .onAppear {
-                
-                //Check si editamos o dejamos los valores por defecto
-                if let cluster = appData.editCluster {
-                    // Edit the incoming cluster
-                    cluster_name = cluster.name
-                    node_ip = cluster.nodeIP
+                Section("Cluster settings:") {
+                    VStack{
+                        TextField("Cluster Name:", text: $cluster_name)
+                        TextField("Node1 IP:", text: $node1_ip)
+                        TextField("Node2 IP:", text: $node2_ip)
+                        TextField("Node3 IP:", text: $node3_ip)
+                        
+                    }
+#if os(macOS)
+                    .padding(EdgeInsets(top: 15.0,leading: 15.0,bottom: 15.0,trailing: 15.0))
+#endif
                 }
             }
             .toolbar {
@@ -61,25 +59,40 @@ struct ClusterEditorView: View {
                     }
                 }
             }
-        }//NavigationStack
+            .onAppear {
+                //Check si editamos o dejamos los valores por defecto
+                if let cluster = appData.editCluster {
+                    // Edit the incoming cluster
+                    cluster_name = cluster.name
+                    node1_ip = cluster.node1IP
+                    node2_ip = cluster.node2IP
+                    node3_ip = cluster.node3IP
+                }
+            }
+        }
+#if os(macOS)
+        .frame(width: 400,height: 200,alignment: .leading)
+#endif
     }//body
     
     func save() {
         if let cluster = appData.editCluster {
             // Edit the animal.
             cluster.name = cluster_name
-            cluster.nodeIP = node_ip
-       
+            cluster.node1IP = node1_ip
+            cluster.node2IP = node2_ip
+            cluster.node3IP = node3_ip
+            
             //update!!
             
         } else {
             //Add a new cluster
-            let newCluster = ClusterK8S(id: UUID(), name: cluster_name, nodeIP: node_ip, nodes: ["Test"], state: 1)
+            let newCluster = ClusterK8S(id: UUID(), name: cluster_name, node1IP: node1_ip, node2IP: node2_ip, node3IP: node3_ip)
             modelContext.insert(newCluster)
         }
     }
 }//struct
 
 //#Preview {
-//    ClusterEditor(cluster: nil)
+//    ClusterEditorView()
 //}
