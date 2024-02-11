@@ -80,6 +80,17 @@ struct SideBarView: View {
         //            .navigationDestination(for: UUID.self) { uuid in
         //                Text("Detail with \(uuid)")}
         
+        
+        //3D
+        #if canImport(UIKit)
+        MetalViewIOS(tipoRender: .Mesh_1)
+        #endif
+        
+        #if canImport(AppKit)
+        MetalViewMac(tipoRender: .Mesh_1)
+        #endif
+            
+        
         Button(action: {
             appData.editCluster = nil
             showSheetClusterEditor = true

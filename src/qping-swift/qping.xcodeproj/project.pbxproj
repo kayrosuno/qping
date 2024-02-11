@@ -9,6 +9,22 @@
 /* Begin PBXBuildFile section */
 		A92FC0932B67044A006AD2C5 /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FC0922B67044A006AD2C5 /* SideBarView.swift */; };
 		A92FC0972B670485006AD2C5 /* ClusterEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FC0962B670485006AD2C5 /* ClusterEditorView.swift */; };
+		A94D541E2B7593CE003ADA94 /* definitions.metal in Sources */ = {isa = PBXBuildFile; fileRef = A94D54182B7593CE003ADA94 /* definitions.metal */; };
+		A94D541F2B7593CE003ADA94 /* shadersCubo.metal in Sources */ = {isa = PBXBuildFile; fileRef = A94D54192B7593CE003ADA94 /* shadersCubo.metal */; };
+		A94D54202B7593CE003ADA94 /* shadersMesh.metal in Sources */ = {isa = PBXBuildFile; fileRef = A94D541A2B7593CE003ADA94 /* shadersMesh.metal */; };
+		A94D54212B7593CE003ADA94 /* shadersTriangle.metal in Sources */ = {isa = PBXBuildFile; fileRef = A94D541B2B7593CE003ADA94 /* shadersTriangle.metal */; };
+		A94D54222B7593CE003ADA94 /* test.metal in Sources */ = {isa = PBXBuildFile; fileRef = A94D541C2B7593CE003ADA94 /* test.metal */; };
+		A94D542D2B7594E0003ADA94 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D54232B7594E0003ADA94 /* Keyboard.swift */; };
+		A94D542E2B7594E0003ADA94 /* KeyCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D54242B7594E0003ADA94 /* KeyCodes.swift */; };
+		A94D542F2B7594E0003ADA94 /* MatrixFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D54252B7594E0003ADA94 /* MatrixFunctions.swift */; };
+		A94D54302B7594E0003ADA94 /* MetalViewIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D54262B7594E0003ADA94 /* MetalViewIOS.swift */; };
+		A94D54312B7594E0003ADA94 /* MetalViewMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D54272B7594E0003ADA94 /* MetalViewMac.swift */; };
+		A94D54322B7594E0003ADA94 /* Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D54282B7594E0003ADA94 /* Mouse.swift */; };
+		A94D54332B7594E0003ADA94 /* MTKViewCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D54292B7594E0003ADA94 /* MTKViewCustom.swift */; };
+		A94D54342B7594E0003ADA94 /* RendererMesh1.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D542A2B7594E0003ADA94 /* RendererMesh1.swift */; };
+		A94D54352B7594E0003ADA94 /* UtilidadesMetal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D542B2B7594E0003ADA94 /* UtilidadesMetal.swift */; };
+		A94D54372B7596A0003ADA94 /* RendererTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D54362B7596A0003ADA94 /* RendererTriangle.swift */; };
+		A94D54392B759E02003ADA94 /* Touch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D54382B759E02003ADA94 /* Touch.swift */; };
 		A970A2352B70619A00A8D954 /* StylesDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A970A2342B70619A00A8D954 /* StylesDetails.swift */; };
 		A970A2372B7061BF00A8D954 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A970A2362B7061BF00A8D954 /* Data.swift */; };
 		A970A2392B7061C800A8D954 /* SalesDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A970A2382B7061C800A8D954 /* SalesDetails.swift */; };
@@ -53,6 +69,22 @@
 /* Begin PBXFileReference section */
 		A92FC0922B67044A006AD2C5 /* SideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
 		A92FC0962B670485006AD2C5 /* ClusterEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterEditorView.swift; sourceTree = "<group>"; };
+		A94D54182B7593CE003ADA94 /* definitions.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = definitions.metal; sourceTree = "<group>"; };
+		A94D54192B7593CE003ADA94 /* shadersCubo.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = shadersCubo.metal; sourceTree = "<group>"; };
+		A94D541A2B7593CE003ADA94 /* shadersMesh.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = shadersMesh.metal; sourceTree = "<group>"; };
+		A94D541B2B7593CE003ADA94 /* shadersTriangle.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = shadersTriangle.metal; sourceTree = "<group>"; };
+		A94D541C2B7593CE003ADA94 /* test.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = test.metal; sourceTree = "<group>"; };
+		A94D54232B7594E0003ADA94 /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+		A94D54242B7594E0003ADA94 /* KeyCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCodes.swift; sourceTree = "<group>"; };
+		A94D54252B7594E0003ADA94 /* MatrixFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatrixFunctions.swift; sourceTree = "<group>"; };
+		A94D54262B7594E0003ADA94 /* MetalViewIOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalViewIOS.swift; sourceTree = "<group>"; };
+		A94D54272B7594E0003ADA94 /* MetalViewMac.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalViewMac.swift; sourceTree = "<group>"; };
+		A94D54282B7594E0003ADA94 /* Mouse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mouse.swift; sourceTree = "<group>"; };
+		A94D54292B7594E0003ADA94 /* MTKViewCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTKViewCustom.swift; sourceTree = "<group>"; };
+		A94D542A2B7594E0003ADA94 /* RendererMesh1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RendererMesh1.swift; sourceTree = "<group>"; };
+		A94D542B2B7594E0003ADA94 /* UtilidadesMetal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilidadesMetal.swift; sourceTree = "<group>"; };
+		A94D54362B7596A0003ADA94 /* RendererTriangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RendererTriangle.swift; sourceTree = "<group>"; };
+		A94D54382B759E02003ADA94 /* Touch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Touch.swift; sourceTree = "<group>"; };
 		A970A2342B70619A00A8D954 /* StylesDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylesDetails.swift; sourceTree = "<group>"; };
 		A970A2362B7061BF00A8D954 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		A970A2382B7061C800A8D954 /* SalesDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalesDetails.swift; sourceTree = "<group>"; };
@@ -99,9 +131,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A94D541D2B7593CE003ADA94 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				A94D54182B7593CE003ADA94 /* definitions.metal */,
+				A94D54192B7593CE003ADA94 /* shadersCubo.metal */,
+				A94D541A2B7593CE003ADA94 /* shadersMesh.metal */,
+				A94D541B2B7593CE003ADA94 /* shadersTriangle.metal */,
+				A94D541C2B7593CE003ADA94 /* test.metal */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
+		A94D542C2B7594E0003ADA94 /* Metal */ = {
+			isa = PBXGroup;
+			children = (
+				A94D54362B7596A0003ADA94 /* RendererTriangle.swift */,
+				A94D54232B7594E0003ADA94 /* Keyboard.swift */,
+				A94D54242B7594E0003ADA94 /* KeyCodes.swift */,
+				A94D54252B7594E0003ADA94 /* MatrixFunctions.swift */,
+				A94D54262B7594E0003ADA94 /* MetalViewIOS.swift */,
+				A94D54272B7594E0003ADA94 /* MetalViewMac.swift */,
+				A94D54282B7594E0003ADA94 /* Mouse.swift */,
+				A94D54382B759E02003ADA94 /* Touch.swift */,
+				A94D54292B7594E0003ADA94 /* MTKViewCustom.swift */,
+				A94D542A2B7594E0003ADA94 /* RendererMesh1.swift */,
+				A94D542B2B7594E0003ADA94 /* UtilidadesMetal.swift */,
+			);
+			path = Metal;
+			sourceTree = "<group>";
+		};
 		A9C81CC62B66D67000452687 /* qping-gui */ = {
 			isa = PBXGroup;
 			children = (
+				A94D542C2B7594E0003ADA94 /* Metal */,
+				A94D541D2B7593CE003ADA94 /* Shaders */,
 				A9C81CD52B66E2D000452687 /* Views */,
 				A9C81CD42B66E2CA00452687 /* App */,
 				A9C81CCB2B66D67100452687 /* Assets.xcassets */,
@@ -272,25 +336,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A94D542E2B7594E0003ADA94 /* KeyCodes.swift in Sources */,
 				A970A2352B70619A00A8D954 /* StylesDetails.swift in Sources */,
+				A94D54302B7594E0003ADA94 /* MetalViewIOS.swift in Sources */,
 				A9FA7D372B69BA780094925D /* ChartNodeView.swift in Sources */,
 				A9C81CDB2B66E3AF00452687 /* SettingsView.swift in Sources */,
 				A970A2432B71AB3A00A8D954 /* QPingClient.swift in Sources */,
 				A970A23D2B7061E400A8D954 /* Utils.swift in Sources */,
 				A970A2402B719FB500A8D954 /* QPingView.swift in Sources */,
+				A94D541E2B7593CE003ADA94 /* definitions.metal in Sources */,
+				A94D54202B7593CE003ADA94 /* shadersMesh.metal in Sources */,
 				A92FC0932B67044A006AD2C5 /* SideBarView.swift in Sources */,
+				A94D54212B7593CE003ADA94 /* shadersTriangle.metal in Sources */,
 				A970A2372B7061BF00A8D954 /* Data.swift in Sources */,
+				A94D54312B7594E0003ADA94 /* MetalViewMac.swift in Sources */,
 				A9C81CD92B66E39A00452687 /* RootView.swift in Sources */,
 				A92FC0972B670485006AD2C5 /* ClusterEditorView.swift in Sources */,
+				A94D54322B7594E0003ADA94 /* Mouse.swift in Sources */,
+				A94D54352B7594E0003ADA94 /* UtilidadesMetal.swift in Sources */,
 				A970A2442B71AB7700A8D954 /* QClient.swift in Sources */,
 				A9C81CDD2B66E47800452687 /* ContentView2.swift in Sources */,
+				A94D542F2B7594E0003ADA94 /* MatrixFunctions.swift in Sources */,
+				A94D541F2B7593CE003ADA94 /* shadersCubo.metal in Sources */,
 				A970A23B2B7061CF00A8D954 /* SalesOverview.swift in Sources */,
 				A970A24A2B71B4F700A8D954 /* comun.swift in Sources */,
+				A94D54222B7593CE003ADA94 /* test.metal in Sources */,
+				A94D54342B7594E0003ADA94 /* RendererMesh1.swift in Sources */,
+				A94D542D2B7594E0003ADA94 /* Keyboard.swift in Sources */,
 				A9FA7D392B69BDA40094925D /* ClusterView.swift in Sources */,
+				A94D54392B759E02003ADA94 /* Touch.swift in Sources */,
 				A9C81CD72B66E38A00452687 /* AboutView.swift in Sources */,
 				A9C81CC82B66D67000452687 /* qping_guiApp.swift in Sources */,
 				A970A2392B7061C800A8D954 /* SalesDetails.swift in Sources */,
 				A970A23E2B719BB900A8D954 /* Utilidades.swift in Sources */,
+				A94D54372B7596A0003ADA94 /* RendererTriangle.swift in Sources */,
+				A94D54332B7594E0003ADA94 /* MTKViewCustom.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +398,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "qping-gui/qping_gui.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -344,6 +425,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "uno.kayros.qping-gui";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -358,7 +440,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "qping-gui/qping_gui.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
@@ -384,6 +466,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "uno.kayros.qping-gui";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;

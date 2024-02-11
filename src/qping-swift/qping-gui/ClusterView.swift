@@ -39,6 +39,7 @@ struct ClusterView: View {
                     else{ return }
                     
                     task.cancel()
+                    appData.qpingTask = nil
                     
                 }  , label: {Image(systemName: "stop.fill")}).padding(EdgeInsets(top: 0.0,leading: 20.0,bottom: 0.0,trailing: 20.0))
                 Button(action: {
@@ -84,8 +85,9 @@ struct ClusterView: View {
     {
         
         var qping: QPingClient?
+        var run = true
         
-        while(true)
+        while(run)
         {
             if(!appData.runPing)
             {
@@ -96,6 +98,7 @@ struct ClusterView: View {
                 catch
                 {
                     appData.qpingDataNode1.append("Unexpected error: \(error).\n")
+                    break
                 }
             }
             else { //OK, lanzar ping
@@ -113,6 +116,7 @@ struct ClusterView: View {
                 catch
                 {
                     appData.qpingDataNode1.append("Unexpected error: \(error).\n")
+                    break
                 }
                 
             }

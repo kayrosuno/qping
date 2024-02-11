@@ -13,7 +13,10 @@ struct QPingView: View {
     
     var body: some View {
         ScrollView{
-            Text(appData.qpingDataNode1)
+            HStack{
+                Text(appData.qpingDataNode1).multilineTextAlignment(.leading).padding(EdgeInsets(top: 5.0,leading: 5.0,bottom: 5.0,trailing: 50.0))
+                Spacer()
+            }.frame(maxWidth: .infinity)
         }
     }
 }
