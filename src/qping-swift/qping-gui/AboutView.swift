@@ -14,7 +14,7 @@ struct AboutView: View {
         Text("")
         Text("About View")
         Text("Alejandro Garcia 2024. GPLv3")
-        Text("github/iacobus75")
+        Text("github/kayrosuno")
         Text("")
         Text("""
                  qping is a ping utility for the QUIC protocol available in go and Swift.
