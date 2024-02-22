@@ -23,7 +23,7 @@ class MTKViewCustom: MTKView
     var deltaY = 0.0
     var lastX = 0.0
     var lastY = 0.0
-    
+   
 }
 
 
@@ -32,14 +32,18 @@ class MTKViewCustom: MTKView
 extension MTKViewCustom { // <<<< -----------------Replace GameView with the view name you want keyboard input on
     override var acceptsFirstResponder: Bool { return true }
     
+    
     override func keyDown(with event: NSEvent) {
         Keyboard.SetKeyPressed(event.keyCode, isOn: true)
        // print("Keydown")
+        
+        self.setNeedsDisplay(self.bounds)
     }
     
     override func keyUp(with event: NSEvent) {
         Keyboard.SetKeyPressed(event.keyCode, isOn: false)
        // print("Keyup")
+        self.setNeedsDisplay(self.bounds)
     }
 }
 
@@ -50,6 +54,7 @@ extension MTKViewCustom {  // <<<< -----------------Replace GameView with the vi
     override func mouseDown(with event: NSEvent) {
         Mouse.SetMouseButtonPressed(button: event.buttonNumber, isOn: true)
         Mouse.ResetMouseDelta()
+        //self.setNeedsDisplay(self.bounds)
     }
     
     override func mouseUp(with event: NSEvent) {
@@ -84,10 +89,12 @@ extension MTKViewCustom {  // <<<< -----------------Replace GameView with the vi
     
     override func scrollWheel(with event: NSEvent) {
         Mouse.ScrollMouse(deltaY: Float(event.deltaY))
+        self.setNeedsDisplay(self.bounds)
     }
     
     override func mouseDragged(with event: NSEvent) {
         setMousePositionChanged(event: event)
+       
     }
     
     override func rightMouseDragged(with event: NSEvent) {
@@ -107,8 +114,9 @@ extension MTKViewCustom {  // <<<< -----------------Replace GameView with the vi
         Mouse.SetMousePositionChange(overallPosition: overallLocation,
                                      deltaPosition: deltaChange)
         
-        print("Mouse overall:\(overallLocation)")
-        print("Mouse overall:\(deltaChange)")
+        //print("Mouse overall:\(overallLocation)")
+        //print("Mouse overall:\(deltaChange)")
+        self.setNeedsDisplay(self.bounds)
     }
     
     override func updateTrackingAreas() {
@@ -136,7 +144,7 @@ extension MTKViewCustom { // <<<< -----------------Replace GameView with the vie
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {  //Coge solo la primera posicion de los touches para mover, sino se hace un lio
             let position = touch.location(in: self)
-            print("Began: \(position)")
+            //print("Began: \(position)")
             lastX = position.x
             lastY = position.y
         }
@@ -161,7 +169,7 @@ extension MTKViewCustom { // <<<< -----------------Replace GameView with the vie
     ) {
         if let touch = touches.first {
             let position = touch.location(in: self)
-            print("moved \(position)")
+            //print("moved \(position)")
             setMousePositionChanged(location: position)
             
             //Calcular Delta
@@ -182,7 +190,7 @@ extension MTKViewCustom { // <<<< -----------------Replace GameView with the vie
     ){
         if let touch = touches.first {
             let position = touch.location(in: self)
-            print("End \(position)")
+            //print("End \(position)")
             
         }
         
@@ -213,8 +221,8 @@ extension MTKViewCustom { // <<<< -----------------Replace GameView with the vie
         Mouse.SetMousePositionChange(overallPosition: overallLocation,
                                      deltaPosition: deltaChange)
         
-        print("Mouse overall:\(overallLocation)")
-        print("Mouse delta:\(deltaChange)")
+        //print("Mouse overall:\(overallLocation)")
+        //print("Mouse delta:\(deltaChange)")
     }
     
 }

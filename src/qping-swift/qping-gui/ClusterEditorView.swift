@@ -14,6 +14,7 @@ import SwiftUI
 struct ClusterEditorView: View {
     @EnvironmentObject  var appData: AppData
     @State private var cluster_name = ""
+    @State private var port_qping = ""
     @State private var node1_ip = ""
     @State private var node2_ip = ""
     @State private var node3_ip = ""
@@ -31,6 +32,7 @@ struct ClusterEditorView: View {
                 Section("Cluster settings:") {
                     VStack{
                         TextField("Cluster Name:", text: $cluster_name)
+                        TextField("Port qping server:", text: $port_qping)
                         TextField("Node1 IP:", text: $node1_ip)
                         TextField("Node2 IP:", text: $node2_ip)
                         TextField("Node3 IP:", text: $node3_ip)
@@ -64,6 +66,7 @@ struct ClusterEditorView: View {
                 if let cluster = appData.editCluster {
                     // Edit the incoming cluster
                     cluster_name = cluster.name
+                    port_qping = cluster.port
                     node1_ip = cluster.node1IP
                     node2_ip = cluster.node2IP
                     node3_ip = cluster.node3IP
@@ -79,6 +82,7 @@ struct ClusterEditorView: View {
         if let cluster = appData.editCluster {
             // Edit the animal.
             cluster.name = cluster_name
+            cluster.port = port_qping
             cluster.node1IP = node1_ip
             cluster.node2IP = node2_ip
             cluster.node3IP = node3_ip
@@ -87,7 +91,7 @@ struct ClusterEditorView: View {
             
         } else {
             //Add a new cluster
-            let newCluster = ClusterK8S(id: UUID(), name: cluster_name, node1IP: node1_ip, node2IP: node2_ip, node3IP: node3_ip)
+            let newCluster = ClusterK8SData(id: UUID(), name: cluster_name, port: port_qping, node1IP: node1_ip, node2IP: node2_ip, node3IP: node3_ip)
             modelContext.insert(newCluster)
         }
     }

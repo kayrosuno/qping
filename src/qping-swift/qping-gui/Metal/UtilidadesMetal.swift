@@ -65,6 +65,8 @@ struct ArgumentDataCuboRotacion
 //Argument Mesh
 struct ArgumentDataMesh
 {
+    var rotationAngleX: Float
+    var rotationAngleZ: Float
     var lightPosition = simd_float4 (5.0 , 5.0, 2.0, 1.0)
     var reflectivity = simd_float3(0.9, 0.5, 0.3)
     var intensity = simd_float3( 1.0, 1.0, 1.0)

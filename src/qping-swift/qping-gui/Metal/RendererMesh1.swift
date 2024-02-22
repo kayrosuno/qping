@@ -25,7 +25,9 @@ class RendererMesh1: NSObject, MTKViewDelegate
     var vertexBufferCubo: MTLBuffer?
     var tipoTest: TipoRenderGPU = TipoRenderGPU.Triangle_1
     var aspect:Float = 1.0  // Width / height
-    var cameraPos   = simd_float3(0.0, 0.0,  3.0)
+    
+    /// POsicion de la camara incial
+    var cameraPos   = simd_float3(0.35, 0.5,  1.0)    //BUenas var cameraPos   = simd_float3(0.5, 0.6,  1.4)
     var cameraFront = simd_float3(0.0, 0.0, -1.0)
     var cameraUp    = simd_float3(0.0, 1.0,  0.0)
     var yaw:Float   = -90.0
@@ -33,7 +35,8 @@ class RendererMesh1: NSObject, MTKViewDelegate
     var fov:Float = 45.0
     
    // var contador: Float = 0.0
-    var loopDuration: Float = 23.0 //en seg
+    var loopDurationX: Float = 120.0 //en seg
+    var loopDurationZ: Float = 80.0 //en seg
     var initialTime = uptime()
     var lastFrame = uptime()
     var pipelineDescriptor: MTLRenderPipelineDescriptor?
@@ -62,7 +65,7 @@ class RendererMesh1: NSObject, MTKViewDelegate
     
     //
     //Inicializacion conjunta del pipeline
-    func initPipeLine() {
+    func initPipeLine()  {
         do
         {
             //GPU Device
@@ -104,7 +107,7 @@ class RendererMesh1: NSObject, MTKViewDelegate
             
         }
         catch {
-            fatalError()
+            print(error)
         }
         
             
@@ -128,8 +131,6 @@ class RendererMesh1: NSObject, MTKViewDelegate
     }
     
   
-
-    
     //MARK: DRAW MESH
     func draw_mesh(in view: MTKView)
     {
@@ -160,27 +161,27 @@ class RendererMesh1: NSObject, MTKViewDelegate
           fatalError()
         }
         
-        
-        //let partes: Float = Float(Date.now.timeIntervalSince1970 - initialTime).truncatingRemainder(dividingBy: loopDuration)
-        let angulo: Float = Float((360/60 / loopDuration) * Float(Date.now.timeIntervalSince1970 - initialTime)).truncatingRemainder(dividingBy: 360)
-        //print("Angulo: \(angulo)")
+        //let angulo: Float = Float(Date.now.timeIntervalSince1970 - initialTime).truncatingRemainder(dividingBy: loopDuration)
+        let anguloX: Float = Float((360 / loopDurationX / 100) * Float(uptime() - initialTime)).truncatingRemainder(dividingBy: 360)
+        //print("AnguloX: \(anguloX)")
+      
+        let anguloZ: Float = Float((360 / loopDurationZ / 100) * Float(uptime() - initialTime)).truncatingRemainder(dividingBy: 360)
+       // print("AnguloZ: \(anguloZ)")
       
         //Matrix uniforms
-        let yAxis = simd_float4(0, -1, 0 , 0)
         let xAxis = simd_float4(1, 0, 0 , 0)
+        let yAxis = simd_float4(0, -1, 0 , 0)
         let zAxis = simd_float4(0, 0, -0.8 , 0)
         
-        //Check Mouse!
+        //Check Mouse, controles de navegacion con mouse o con touch
         check_mouse()
-        
-        
         
         //Matriz identidad
         let matrix_id = matrix_identity_float4x4
-        var matrix_model_rot = MatrixFunctions.rotationAboutAxis(zAxis, byAngle: angulo)
+        var matrix_model_rot = MatrixFunctions.rotationAboutAxis(zAxis, byAngle: anguloZ)
         let matrix_model_scale =  MatrixFunctions.makeScaleMatrix(xScale: 0.2, yScale: 0.2)
         matrix_model_rot =  matrix_model_rot * matrix_model_scale * matrix_id
-        let matrix_perspective = MatrixFunctions.perspectiveProjection(aspect, fieldOfViewY: self.fov, near: 0.1, far: 100.0)
+        let matrix_perspective = MatrixFunctions.perspectiveProjection(aspect, fieldOfViewY: self.fov, near: 0.01, far: 100.0)
         //makeScaleMatrix(xScale: 0.5, yScale: 0.5)
         
         // var Time = Date.now.timeIntervalSince1970  * 1000
@@ -225,7 +226,8 @@ class RendererMesh1: NSObject, MTKViewDelegate
         let view_w = simd_float4(view.m30,view.m31,view.m32,view.m33)
         let view_camera = simd_float4x4(view_x, view_y, view_z, view_w)
 
-        var argument = ArgumentDataMesh( projection: matrix_perspective, modelview: view_camera)//*matrix_model_rot)
+              
+        var argument = ArgumentDataMesh( rotationAngleX: anguloX,  rotationAngleZ: anguloZ, projection: matrix_perspective, modelview: view_camera)//*matrix_model_rot)
         
         renderEncoder.setVertexBytes(&argument, length: MemoryLayout<ArgumentDataMesh>.stride, index: 1)
         
@@ -264,7 +266,6 @@ class RendererMesh1: NSObject, MTKViewDelegate
         //Check button left and movement
         if ( Mouse.IsMouseButtonPressed(button: MouseCodes.left) )
         {
-            
             var xoffset = Mouse.GetDX()
             var yoffset = Mouse.GetDY()
             var sensitivity:Float = 0.1
@@ -288,7 +289,6 @@ class RendererMesh1: NSObject, MTKViewDelegate
             cameraFront = normalize(direction);
             
         }
-        
     }
 }
     

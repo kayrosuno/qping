@@ -16,10 +16,63 @@ using namespace metal;
     unsigned int vid [[vertex_id]])
 {
 
+    //VertexInput input = vertex_in[vid];
     VertexOutput output;
     
-    output.position =  argumentData.projection * argumentData.modelview * vertex_in.position;
+   
     
+    //Angulo de rotacion X
+    float fAnguloX;
+    fAnguloX = argumentData.rotationAngleX;
+    float fcosX = cos(fAnguloX);
+    float fsinX = sin(fAnguloX);
+    
+    //Angulo de rotacion Z
+    float fAnguloZ;
+    fAnguloZ = argumentData.rotationAngleZ;
+    float fcosZ = cos(fAnguloZ);
+    float fsinZ = sin(fAnguloZ);
+    
+    
+    //Rotacion
+    //Matriz de rotacion
+    float4x4 m_eje_z = float4x4 (
+                           float4(fcosZ, -fsinZ,  0, 0),
+                           float4(fsinZ,  fcosZ,  0, 0),
+                           float4(0,        0,  1, 0),
+                           float4(0,        0,  0, 1)
+                           );
+    
+    //Matriz de rotacion
+    float4x4 m_eje_x = float4x4 (
+                           float4(1, 0,    0, 0),
+                           float4(0, fcosX,  -fsinX, 0),
+                           float4(0, fsinX,  fcosX, 0),
+                           float4(0, 0,     0, 1)
+                           );
+    
+    //Matriz de rotacion
+    float4x4 m_eje_y = float4x4 (
+                           float4(fcosX, 0,    fsinX, 0),
+                           float4(0, 1,  0, 0),
+                           float4(-fsinX, 0,  fcosX, 0),
+                           float4(0, 0,     0, 1)
+                           );
+    
+    float4 vertice = vertex_in.position;
+    //float4 nuevoVertice =  m_eje_z*vertice;
+    float4 nuevoVertice =  m_eje_x*m_eje_z*vertice;
+     
+    //output.position = nuevoVertice;
+    //output.position =  argumentData.projection * argumentData.modelview * vertex_in.position;
+    output.position =  argumentData.projection * argumentData.modelview * nuevoVertice;
+    
+    
+//    output.position = vertex_in.position;
+    //output.color = vertex_in.color;
+      
+    
+    //Color
     float fcolor = vid / 10000.0;
     float4 f4_color = float4(1-fcolor, 0, 0+fcolor, 1);
     

@@ -17,6 +17,7 @@ struct MetalViewMac: NSViewRepresentable  {
     var tipoRender: TipoRenderGPU = TipoRenderGPU.Triangle_1
    
     let mtkView = MTKViewCustom()
+    
    // var renderer: Renderer?
     
 //    //Constructor
@@ -47,6 +48,7 @@ struct MetalViewMac: NSViewRepresentable  {
             mtkView.device = metalDevice
         }
         mtkView.delegate = context.coordinator
+        mtkView.layer?.isOpaque = false
         
         switch(tipoRender)
         {
@@ -69,16 +71,24 @@ struct MetalViewMac: NSViewRepresentable  {
             mtkView.clearDepth = 0.0;
             
         case TipoRenderGPU.Mesh_1:
-            mtkView.preferredFramesPerSecond = 60
+            //mtkView.preferredFramesPerSecond = 60
+            
+            //Drawing Behavior mode: Draw notifications
+//            mtkView.enableSetNeedsDisplay = true
+//            mtkView.isPaused = true
+            
+            //Drawing Behavior mode: Timed updates
             mtkView.enableSetNeedsDisplay = false
             mtkView.isPaused = false
+            
             mtkView.framebufferOnly = false
             mtkView.drawableSize = mtkView.frame.size
             //  mtkView.depthStencilPixelFormat = MTLPixelFormat(rawValue: 1)
             mtkView.clearDepth = 0.0
+            mtkView.alphaValue = 1
+            mtkView.clearColor = MTLClearColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0)
+           
             
-            mtkView.clearColor = MTLClearColor(red: 0, green: 0, blue: 0, alpha: 0.1)
-           // mtkView.backgroundColor = NSColor.clear
            // mtkView.bac
         case TipoRenderGPU.Mesh_2:
             mtkView.preferredFramesPerSecond = 60

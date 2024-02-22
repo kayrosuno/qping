@@ -45,6 +45,8 @@ struct ArgumentDataCuboRotacion
 //Rotacion Cubo
 struct ArgumentDataMesh
 {
+    float rotationAngleX;
+    float rotationAngleZ;
     simd_float4 lightPosicion;
     simd_float3 reflectivity;
     simd_float3 intensity;

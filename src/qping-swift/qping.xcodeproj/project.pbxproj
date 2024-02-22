@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A92B3A3C2B822A1F00590B4E /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B3A3B2B822A1F00590B4E /* AppData.swift */; };
+		A92B3A3E2B822A8C00590B4E /* ClusterK8S.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B3A3D2B822A8C00590B4E /* ClusterK8S.swift */; };
+		A92B3A402B822AC500590B4E /* QPingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B3A3F2B822AC500590B4E /* QPingTask.swift */; };
 		A92FC0932B67044A006AD2C5 /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FC0922B67044A006AD2C5 /* SideBarView.swift */; };
 		A92FC0972B670485006AD2C5 /* ClusterEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FC0962B670485006AD2C5 /* ClusterEditorView.swift */; };
 		A94D541E2B7593CE003ADA94 /* definitions.metal in Sources */ = {isa = PBXBuildFile; fileRef = A94D54182B7593CE003ADA94 /* definitions.metal */; };
@@ -36,8 +39,8 @@
 		A970A2432B71AB3A00A8D954 /* QPingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A970A2412B71AB3A00A8D954 /* QPingClient.swift */; };
 		A970A2442B71AB7700A8D954 /* QClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D1DB162B0198A300EA545C /* QClient.swift */; };
 		A970A2472B71ABAC00A8D954 /* QPingServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A970A2462B71ABAC00A8D954 /* QPingServer.swift */; };
-		A970A24A2B71B4F700A8D954 /* comun.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BFA1EC2B02C0F900EC501D /* comun.swift */; };
-		A9BFA1ED2B02C0F900EC501D /* comun.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BFA1EC2B02C0F900EC501D /* comun.swift */; };
+		A970A24A2B71B4F700A8D954 /* QPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BFA1EC2B02C0F900EC501D /* QPing.swift */; };
+		A9BFA1ED2B02C0F900EC501D /* QPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BFA1EC2B02C0F900EC501D /* QPing.swift */; };
 		A9C81CC82B66D67000452687 /* qping_guiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C81CC72B66D67000452687 /* qping_guiApp.swift */; };
 		A9C81CCC2B66D67100452687 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9C81CCB2B66D67100452687 /* Assets.xcassets */; };
 		A9C81CD02B66D67100452687 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9C81CCF2B66D67100452687 /* Preview Assets.xcassets */; };
@@ -52,6 +55,7 @@
 		A9D1DB1F2B0198A300EA545C /* QServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D1DB1A2B0198A300EA545C /* QServer.swift */; };
 		A9FA7D372B69BA780094925D /* ChartNodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FA7D362B69BA770094925D /* ChartNodeView.swift */; };
 		A9FA7D392B69BDA40094925D /* ClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FA7D382B69BDA40094925D /* ClusterView.swift */; };
+		B9DCD9A62B8541470089CF6D /* ClusterK8SData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DCD9A52B8541470089CF6D /* ClusterK8SData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -67,6 +71,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A92B3A3B2B822A1F00590B4E /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
+		A92B3A3D2B822A8C00590B4E /* ClusterK8S.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterK8S.swift; sourceTree = "<group>"; };
+		A92B3A3F2B822AC500590B4E /* QPingTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPingTask.swift; sourceTree = "<group>"; };
 		A92FC0922B67044A006AD2C5 /* SideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
 		A92FC0962B670485006AD2C5 /* ClusterEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterEditorView.swift; sourceTree = "<group>"; };
 		A94D54182B7593CE003ADA94 /* definitions.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = definitions.metal; sourceTree = "<group>"; };
@@ -93,8 +100,8 @@
 		A970A23F2B719FB500A8D954 /* QPingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPingView.swift; sourceTree = "<group>"; };
 		A970A2412B71AB3A00A8D954 /* QPingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPingClient.swift; sourceTree = "<group>"; };
 		A970A2462B71ABAC00A8D954 /* QPingServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPingServer.swift; sourceTree = "<group>"; };
-		A9BFA1EC2B02C0F900EC501D /* comun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = comun.swift; sourceTree = "<group>"; };
-		A9C81CC52B66D67000452687 /* qping-gui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "qping-gui.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9BFA1EC2B02C0F900EC501D /* QPing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPing.swift; sourceTree = "<group>"; };
+		A9C81CC52B66D67000452687 /* qping-5g.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "qping-5g.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9C81CC72B66D67000452687 /* qping_guiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qping_guiApp.swift; sourceTree = "<group>"; };
 		A9C81CCB2B66D67100452687 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9C81CCD2B66D67100452687 /* qping_gui.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = qping_gui.entitlements; sourceTree = "<group>"; };
@@ -111,6 +118,7 @@
 		A9D1DB1A2B0198A300EA545C /* QServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QServer.swift; sourceTree = "<group>"; };
 		A9FA7D362B69BA770094925D /* ChartNodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartNodeView.swift; sourceTree = "<group>"; };
 		A9FA7D382B69BDA40094925D /* ClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterView.swift; sourceTree = "<group>"; };
+		B9DCD9A52B8541470089CF6D /* ClusterK8SData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClusterK8SData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,7 +194,11 @@
 		A9C81CD42B66E2CA00452687 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				B9DCD9A52B8541470089CF6D /* ClusterK8SData.swift */,
 				A9C81CC72B66D67000452687 /* qping_guiApp.swift */,
+				A92B3A3B2B822A1F00590B4E /* AppData.swift */,
+				A92B3A3D2B822A8C00590B4E /* ClusterK8S.swift */,
+				A92B3A3F2B822AC500590B4E /* QPingTask.swift */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -225,7 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				A9D1DB0C2B0197EC00EA545C /* qping */,
-				A9C81CC52B66D67000452687 /* qping-gui.app */,
+				A9C81CC52B66D67000452687 /* qping-5g.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -240,7 +252,7 @@
 				A9D1DB182B0198A300EA545C /* ServerConnection.swift */,
 				A9D1DB192B0198A300EA545C /* Utilidades.swift */,
 				A9D1DB0F2B0197EC00EA545C /* main.swift */,
-				A9BFA1EC2B02C0F900EC501D /* comun.swift */,
+				A9BFA1EC2B02C0F900EC501D /* QPing.swift */,
 			);
 			path = qping;
 			sourceTree = "<group>";
@@ -248,9 +260,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A9C81CC42B66D67000452687 /* qping-gui */ = {
+		A9C81CC42B66D67000452687 /* qping-5g */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A9C81CD32B66D67100452687 /* Build configuration list for PBXNativeTarget "qping-gui" */;
+			buildConfigurationList = A9C81CD32B66D67100452687 /* Build configuration list for PBXNativeTarget "qping-5g" */;
 			buildPhases = (
 				A9C81CC12B66D67000452687 /* Sources */,
 				A9C81CC22B66D67000452687 /* Frameworks */,
@@ -260,9 +272,9 @@
 			);
 			dependencies = (
 			);
-			name = "qping-gui";
+			name = "qping-5g";
 			productName = "qping-gui";
-			productReference = A9C81CC52B66D67000452687 /* qping-gui.app */;
+			productReference = A9C81CC52B66D67000452687 /* qping-5g.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A9D1DB0B2B0197EC00EA545C /* qping */ = {
@@ -314,7 +326,7 @@
 			projectRoot = "";
 			targets = (
 				A9D1DB0B2B0197EC00EA545C /* qping */,
-				A9C81CC42B66D67000452687 /* qping-gui */,
+				A9C81CC42B66D67000452687 /* qping-5g */,
 			);
 		};
 /* End PBXProject section */
@@ -352,6 +364,8 @@
 				A94D54312B7594E0003ADA94 /* MetalViewMac.swift in Sources */,
 				A9C81CD92B66E39A00452687 /* RootView.swift in Sources */,
 				A92FC0972B670485006AD2C5 /* ClusterEditorView.swift in Sources */,
+				A92B3A402B822AC500590B4E /* QPingTask.swift in Sources */,
+				B9DCD9A62B8541470089CF6D /* ClusterK8SData.swift in Sources */,
 				A94D54322B7594E0003ADA94 /* Mouse.swift in Sources */,
 				A94D54352B7594E0003ADA94 /* UtilidadesMetal.swift in Sources */,
 				A970A2442B71AB7700A8D954 /* QClient.swift in Sources */,
@@ -359,7 +373,7 @@
 				A94D542F2B7594E0003ADA94 /* MatrixFunctions.swift in Sources */,
 				A94D541F2B7593CE003ADA94 /* shadersCubo.metal in Sources */,
 				A970A23B2B7061CF00A8D954 /* SalesOverview.swift in Sources */,
-				A970A24A2B71B4F700A8D954 /* comun.swift in Sources */,
+				A970A24A2B71B4F700A8D954 /* QPing.swift in Sources */,
 				A94D54222B7593CE003ADA94 /* test.metal in Sources */,
 				A94D54342B7594E0003ADA94 /* RendererMesh1.swift in Sources */,
 				A94D542D2B7594E0003ADA94 /* Keyboard.swift in Sources */,
@@ -369,6 +383,8 @@
 				A9C81CC82B66D67000452687 /* qping_guiApp.swift in Sources */,
 				A970A2392B7061C800A8D954 /* SalesDetails.swift in Sources */,
 				A970A23E2B719BB900A8D954 /* Utilidades.swift in Sources */,
+				A92B3A3C2B822A1F00590B4E /* AppData.swift in Sources */,
+				A92B3A3E2B822A8C00590B4E /* ClusterK8S.swift in Sources */,
 				A94D54372B7596A0003ADA94 /* RendererTriangle.swift in Sources */,
 				A94D54332B7594E0003ADA94 /* MTKViewCustom.swift in Sources */,
 			);
@@ -378,7 +394,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9BFA1ED2B02C0F900EC501D /* comun.swift in Sources */,
+				A9BFA1ED2B02C0F900EC501D /* QPing.swift in Sources */,
 				A970A2422B71AB3A00A8D954 /* QPingClient.swift in Sources */,
 				A970A2472B71ABAC00A8D954 /* QPingServer.swift in Sources */,
 				A9D1DB1D2B0198A300EA545C /* ServerConnection.swift in Sources */,
@@ -408,6 +424,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -422,8 +439,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "uno.kayros.qping-gui";
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "uno.kayros.qping-5g";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
@@ -449,6 +466,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -463,8 +481,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "uno.kayros.qping-gui";
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "uno.kayros.qping-5g";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
@@ -528,9 +546,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -587,9 +605,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -605,6 +623,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = AK37TK8X2Y;
 				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "uno.kayros.qping-5g";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -618,6 +637,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = AK37TK8X2Y;
 				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "uno.kayros.qping-5g";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -626,7 +646,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A9C81CD32B66D67100452687 /* Build configuration list for PBXNativeTarget "qping-gui" */ = {
+		A9C81CD32B66D67100452687 /* Build configuration list for PBXNativeTarget "qping-5g" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A9C81CD12B66D67100452687 /* Debug */,

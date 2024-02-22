@@ -14,8 +14,9 @@ import UIKit
 struct MetalViewIOS: UIViewRepresentable  {
     typealias UIViewType = UIView
     //@EnvironmentObject  var appData: ApplicationData
-    var tipoRender:TipoRenderGPU = .Triangle_1
+    var tipoRender:TipoRenderGPU = TipoRenderGPU.Triangle_1
     
+    /// Custom UIView
     let mtkView = MTKViewCustom()
     
     //Constructor
@@ -38,6 +39,10 @@ struct MetalViewIOS: UIViewRepresentable  {
         }
     }
     
+    
+    ///
+    ///Devuelve un UIView sobre el que se realizará el render de Metal
+    ///
     func makeUIView(context: UIViewRepresentableContext <MetalViewIOS>) ->  UIView {
         
         
@@ -94,13 +99,13 @@ struct MetalViewIOS: UIViewRepresentable  {
             mtkView.framebufferOnly = false
             mtkView.drawableSize = mtkView.frame.size
         }
-        
-        
-        
+          
         return mtkView
     }
     
-    //Se llama para actualizar la vista
+    ///
+    /// Se llama para actualizar la vista
+    ///
     func updateUIView(_ nsView: UIViewType, context: Context) {
         
         //NSViewRepresentableContext<MetalViewMac>.self
