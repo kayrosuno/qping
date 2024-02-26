@@ -17,8 +17,10 @@ Example: ./qping server 25450
 
 Start a quic server to listen into the specified port, default port is 25450
 
+Example: ./qping server
+
 ###  macOS - Swift
-Developed version with Swift language using Apple library Network, using NWProtocolQUIC. This version run over macOS 12.0+   
+Developed version with Swift language using Apple library Network and NWProtocolQUIC. This version run over macOS 12.0+   
  
 ###  Linux - Go
 Developed version with go language. This version use quicgo library. This version run over Linux servers.
@@ -29,14 +31,14 @@ qping is a client written in go and swift to connect to a server using QUIC.
 The client send requests to the server and receive from the server answers to measure rtt.
 You need a qping acting as server to reply to client requests.
 
-Use: qping <ip_server:port_server>
-Example: ./qping 192.168.2.70 30000
+Use: qping <ip_server>:<port>
+Example: ./qping 192.168.2.70:30000
 
 ### macOS - Swift 
-Developed version with Swift language using Apple library Network, using NWProtocolQUIC. This version run over macOS 12.0+   
+Developed version with Swift language using Apple library Network and NWProtocolQUIC. This version run over macOS 12.0+   
 
 ### iOS - Swift 
-Developed version with Swift language using Apple library Network, using NWProtocolQUIC. This version run over iOS 15+  
+Developed version with Swift language using Apple library Network and NWProtocolQUIC. This version run over iOS 15+  
  
  
 ###  Linux - Go

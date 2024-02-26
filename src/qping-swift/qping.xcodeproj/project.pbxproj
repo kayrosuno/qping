@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		A92B3A3C2B822A1F00590B4E /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B3A3B2B822A1F00590B4E /* AppData.swift */; };
 		A92B3A3E2B822A8C00590B4E /* ClusterK8S.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B3A3D2B822A8C00590B4E /* ClusterK8S.swift */; };
-		A92B3A402B822AC500590B4E /* QPingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B3A3F2B822AC500590B4E /* QPingTask.swift */; };
+		A92B3A402B822AC500590B4E /* QPingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B3A3F2B822AC500590B4E /* QPingData.swift */; };
 		A92FC0932B67044A006AD2C5 /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FC0922B67044A006AD2C5 /* SideBarView.swift */; };
 		A92FC0972B670485006AD2C5 /* ClusterEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FC0962B670485006AD2C5 /* ClusterEditorView.swift */; };
 		A94D541E2B7593CE003ADA94 /* definitions.metal in Sources */ = {isa = PBXBuildFile; fileRef = A94D54182B7593CE003ADA94 /* definitions.metal */; };
@@ -73,7 +73,7 @@
 /* Begin PBXFileReference section */
 		A92B3A3B2B822A1F00590B4E /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		A92B3A3D2B822A8C00590B4E /* ClusterK8S.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterK8S.swift; sourceTree = "<group>"; };
-		A92B3A3F2B822AC500590B4E /* QPingTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPingTask.swift; sourceTree = "<group>"; };
+		A92B3A3F2B822AC500590B4E /* QPingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPingData.swift; sourceTree = "<group>"; };
 		A92FC0922B67044A006AD2C5 /* SideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
 		A92FC0962B670485006AD2C5 /* ClusterEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterEditorView.swift; sourceTree = "<group>"; };
 		A94D54182B7593CE003ADA94 /* definitions.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = definitions.metal; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 				A9C81CC72B66D67000452687 /* qping_guiApp.swift */,
 				A92B3A3B2B822A1F00590B4E /* AppData.swift */,
 				A92B3A3D2B822A8C00590B4E /* ClusterK8S.swift */,
-				A92B3A3F2B822AC500590B4E /* QPingTask.swift */,
+				A92B3A3F2B822AC500590B4E /* QPingData.swift */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -364,7 +364,7 @@
 				A94D54312B7594E0003ADA94 /* MetalViewMac.swift in Sources */,
 				A9C81CD92B66E39A00452687 /* RootView.swift in Sources */,
 				A92FC0972B670485006AD2C5 /* ClusterEditorView.swift in Sources */,
-				A92B3A402B822AC500590B4E /* QPingTask.swift in Sources */,
+				A92B3A402B822AC500590B4E /* QPingData.swift in Sources */,
 				B9DCD9A62B8541470089CF6D /* ClusterK8SData.swift in Sources */,
 				A94D54322B7594E0003ADA94 /* Mouse.swift in Sources */,
 				A94D54352B7594E0003ADA94 /* UtilidadesMetal.swift in Sources */,

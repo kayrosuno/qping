@@ -38,8 +38,10 @@ struct RootView: View {
             //            }
         }
         //.environmentObject(appData)
-        
+        #if os(macOS)
         .sheet(isPresented: $appData.showAboutView){ AboutView() }
+        #endif
+        
         .toolbar{
             ToolbarItem()  //Info
             {

@@ -15,24 +15,24 @@ import SwiftData
 class AppData: Identifiable, ObservableObject {
    
     var showAboutView = false
-    var showProgressQPing = false
+    //var showProgressQPing = false
     var runPing = false  //Ejecutar el QpingClient
     var path: NavigationPath
     var vistaActiva = TipoVistaActiva.root
     var selectedCluster: ClusterK8SData?
     var editCluster: ClusterK8SData?
-    var clusterDictionary = Dictionary<UUID, ClusterK8S>()
+    var clusterRunning: ClusterK8S?
     //var estadoCluster = "Stop"
-    var qpingDataNode = ""
+    //var qpingOutputNode = ""
     var sendInterval = 1000.0 //ms, default 1000ms=1seg
     var sidebarbackground: (any View)?
     
     //Para visualizar, datos en clusterk8s
     var actualRTT = 0.0  //Min RTT del cluster
-    var minRTT = 0.0  //Min RTT del cluster
-    var medRTT = 0.0
-    var maxRTT = 100.0  //Max RTT del cluster
-    //var muestras = 100.0  //Max RTT del cluster
+//    var minRTT = 0.0  //Min RTT del cluster
+//    var medRTT = 0.0
+//    var maxRTT = 100.0  //Max RTT del cluster
+//    //var muestras = 100.0  //Max RTT del cluster
     
     init(path: NavigationPath){
         self.path = path

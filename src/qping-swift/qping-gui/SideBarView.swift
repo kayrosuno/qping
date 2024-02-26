@@ -13,25 +13,25 @@ struct SideBarView: View {
     @Environment(\.modelContext) private var modelContext
     @State var showSheetClusterEditor = false
     @State var showingAlertDelete = false
+    @State var indexSetToDelete = IndexSet()
     @Query var clusters: [ClusterK8SData]
     
+    /// Warning de eliminacion de cluster.
     private func removeCluster(at indexSet: IndexSet) {
-        for index in indexSet {
-            let clusterToDelete = clusters[index]
-            if appData.selectedCluster?.persistentModelID == clusterToDelete.persistentModelID {
-                appData.selectedCluster = nil
-            }
-            modelContext.delete(clusterToDelete)
-        }
+        
+        showingAlertDelete = true
+        indexSetToDelete = indexSet
+        
     }
     
-    private func removeCluster(index: Int) {
-        let clusterToDelete = clusters[index]
-        if appData.selectedCluster?.persistentModelID == clusterToDelete.persistentModelID {
-            appData.selectedCluster = nil
-        }
-        modelContext.delete(clusterToDelete)
-    }
+//    
+//        private func removeCluster(index: Int) {
+//        let clusterToDelete = clusters[index]
+//        if appData.selectedCluster?.persistentModelID == clusterToDelete.persistentModelID {
+//            appData.selectedCluster = nil
+//        }
+//        modelContext.delete(clusterToDelete)
+//    }
     
     
     var body: some View {
@@ -107,17 +107,19 @@ struct SideBarView: View {
                     }
             }
                 
+            HStack{
                 Button(action: {
                     appData.editCluster = nil
                     showSheetClusterEditor = true
                 }) {
                     Label("Add cluster", systemImage: "plus.circle")
-                }.buttonStyle(.plain).padding(5)
-                
+                }.buttonStyle(.plain)
+                    .padding(EdgeInsets(top: 0.0,leading: 25.0,bottom: 0.0,trailing: 0.0))
                     .sheet(isPresented:  $showSheetClusterEditor){ ClusterEditorView()}
                     .alert("WARNING", isPresented: $showingAlertDelete) {
                         Button("Delete", role: .destructive) {
-                            // Handle the deletion.
+                            
+                            // Handle the deletion if the user push delete button doing a long click or right click
                             if appData.selectedCluster != nil {
                                 modelContext.delete(appData.selectedCluster!)
                                 
@@ -128,6 +130,20 @@ struct SideBarView: View {
                                 appData.path.append(appData.selectedCluster!.name) //Se pasa el String para que lo muestre el NavigationStack utilizando el .navigationDestination de tipo String
                                 
                             }
+                            
+                            // Handle the deletion if the user do a swipe on the list
+                            for index in indexSetToDelete {
+                                let clusterToDelete = clusters[index]
+                                if appData.selectedCluster?.persistentModelID == clusterToDelete.persistentModelID {
+                                    appData.selectedCluster = nil
+                                }
+                                modelContext.delete(clusterToDelete)
+                            }
+                            
+                            indexSetToDelete = IndexSet() //indexSet vacio
+                            
+                            
+                            
                         }
                         Button("Cancel", role:.cancel) {
                             // Dismiss. do nothing.
@@ -136,7 +152,20 @@ struct SideBarView: View {
                     }  message: {
                         Text("Are you sure to delete this cluster/node?")
                     }
+#if os(iOS)
+                Spacer()
+                Button(action: {
+                    appData.showAboutView = true
+                },label: {Image(systemName: "info.circle")})
+                .sheet(isPresented: $appData.showAboutView){ AboutView() }
+                .padding(EdgeInsets(top: 0.0,leading: 0.0,bottom: 0.0,trailing: 20.0))
+#endif
             }
+#if os(macOS)
+            .padding(EdgeInsets(top: 0.0,leading: 0.0,bottom: 5.0,trailing: 0.0))
+#endif
+            
+        }
     }
 }
 

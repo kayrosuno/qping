@@ -12,9 +12,11 @@ struct AboutView: View {
     
     var body: some View {
         Text("")
-        Text("About View")
-        Text("Alejandro Garcia 2024. GPLv3")
-        Text("github/kayrosuno")
+        Text("\(Program)")
+        Text("version: \(Version)")
+        Text("")
+        Text("Alejandro Garcia - 2024")
+        //Text("github/kayrosuno")
         Text("")
         Text("""
                  qping is a ping utility for the QUIC protocol available in go and Swift.
@@ -28,15 +30,13 @@ struct AboutView: View {
                  macOS
                  
                  
-                 
-                 
-                 
-                 
+                 To **learn more**, *please* feel free to visit [Github page](https://github.com/kayrosuno/qping) for details.
                  
                  
                  """
         ).padding(20)
-        Button("OK"){  appData.showAboutView = false}.padding(20)
+       
+        Button("OK"){  appData.showAboutView = false}.padding(20).tint(.accentColor)
     }
 }
 
