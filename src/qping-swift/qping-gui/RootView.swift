@@ -17,7 +17,7 @@ struct RootView: View {
             SideBarView()
         } detail: {
             NavigationStack(path: $appData.path) {
-                ClusterView(cluster: appData.selectedCluster)
+                ClusterView()
 //                Text("***")
               
             }
@@ -51,6 +51,7 @@ struct RootView: View {
             }
         }
         .navigationTitle("QPing")
+   
         
         //        NavigationStack (path: $appData.path) {
         //            //  Lo que se ponga abajo solo se muestra en MAC y en iPAD.  en Iphone NO! , en iOS aparece el sidebar
