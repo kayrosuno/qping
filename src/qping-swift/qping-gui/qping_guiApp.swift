@@ -49,7 +49,7 @@ private var info: CTTelephonyNetworkInfo!
         //Ventana Settings
         Settings() {
             SettingsView()
-        }
+        }  .environment(appData)
 #endif
     }
     

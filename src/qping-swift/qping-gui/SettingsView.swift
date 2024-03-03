@@ -8,8 +8,22 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    @EnvironmentObject  var appData: AppData
+    
+    let protocols = ["QUIC+UDP", "Only UDP"]
+    
     var body: some View {
-        Text("Settings View")
+        Group{
+           //Toggle("QUIC/UDP", isOn: $appData.QUIC_UDP)
+            Picker("Protocol:", selection: $appData.selectionProtocol) {
+                ForEach(protocols, id: \.self ) { item  in
+                    Text(item)
+                }
+            }
+            .pickerStyle(.segmented)
+            Text("Use QUIC protocol over UDP. Active by default.")
+        }
     }
 }
 

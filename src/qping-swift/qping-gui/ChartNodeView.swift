@@ -10,8 +10,8 @@ import Charts
 
 
 struct ChartNodeView: View {
+   
     @EnvironmentObject  var appData: AppData
-    var name: String
     
     var body: some View {
         
@@ -70,5 +70,5 @@ struct ChartNodeView: View {
 
 #Preview {
     //@EnvironmentObject  var appData: AppData
-    ChartNodeView(name: "Nodo 1")
+    ChartNodeView()
 }
