@@ -16,8 +16,7 @@ struct DetailClusterView: View {
     let step = 100
     let range = 100...1000
   
-    @State var nodes = ["node 1","node 2","node 3"]
-    @State var nodeSelected = "node 1"
+   
     
 #if os(iOS)
     let espaciado = 0.0
@@ -30,27 +29,13 @@ struct DetailClusterView: View {
     var body: some View {
         if let selectedCluster = appData.selectedCluster {
             HStack{
-                Text("Port: \(selectedCluster.port)")
-                //.multilineTextAlignment(.leading)
-                //.padding(EdgeInsets(top: 5.0,leading: 5.0,bottom: 5.0,trailing: 5.0))
-                .frame(maxWidth: 93, alignment: .leading)
                 
-                Picker("Node:", selection:  $nodeSelected) {
-                    ForEach(nodes, id: \.self) { colour in
-                        Text(colour)
-                    }.onAppear(perform: {
-                        nodes = [selectedCluster.node1IP,selectedCluster.node2IP,selectedCluster.node3IP]
-                        nodeSelected = selectedCluster.node1IP
-                    })
-                }
-                .frame(idealWidth: 180, maxWidth:200 , alignment: .center)
-                
-//#if os(macOS)
-//                .padding(EdgeInsets(top: 0.0,leading: espaciado+2,bottom: 0.0,trailing: espaciado))
-//#endif
-//                
+                //#if os(macOS)
+                //                .padding(EdgeInsets(top: 0.0,leading: espaciado+2,bottom: 0.0,trailing: espaciado))
+                //#endif
+                //
                 //.frame(maxWidth: .infinity)
-                 
+                
                 //Text("Step:")
                 Picker("Step:", selection: $appData.sendInterval) {
                     Text("100 ms").tag(100.0)
@@ -65,28 +50,93 @@ struct DetailClusterView: View {
                     }
                 }
 #if os(iOS)
-                .frame(idealWidth: 90, maxWidth:100 , alignment: .trailing)
-#endif
-#if os(macOS)
-                .frame(idealWidth: 120, maxWidth:180 , alignment: .center)
-                .padding(EdgeInsets(top: 0.0,leading: espaciado+15,bottom: 0.0,trailing: 0.0))
-#endif
-#if os(macOS)
-                Spacer()
+                .frame(idealWidth: 90, maxWidth:100 , alignment: .leading)
 #endif
                 
-         }
+#if os(macOS)
+                .frame(idealWidth: 120, maxWidth:180 , alignment: .leading)
+                //.padding(EdgeInsets(top: 0.0,leading: espaciado,bottom: 0.0,trailing: 0.0))
+#endif
+                
+                //#if os(macOS)
+                Spacer()
+                //#endif
+                
+                
+                // .frame(width: .infinity, alignment: .leading)
+                
+                
+                //ProgressView().progressViewStyle(.linear)
+                
+                Button(action: {   //Trash
+                    if let cluster = appData.clusterRunning {
+                        // cluster.qpingOutputNode=[QPingData(string: "", timeReceived: uptime(), delay: 0.0)]
+                        cluster.resetCounter()
+                    }
+                    appData.actualRTT = 0.0 // Para resfrescar los datos.
+                }  , label: {HStack{
+                    Text("Clear")
+                    Image(systemName: "trash")}
+               // .foregroundColor(Color.green)
+                })
+                //.padding(EdgeInsets(top: 0.0,leading: 20.0,bottom: 0.0,trailing: 20.0))
+                //.frame(maxWidth: 150)
+                //Spacer()
+#if os(iOS)
+            .padding(EdgeInsets(top: 0.0,leading: espaciado+15,bottom: 0.0,trailing: 0))
+#endif
+                
+                Button(action: {  //STOP CLUSTER QPing **************************
+                    appData.runPing=false
+                    // 1. Parar
+                    if let cluster = appData.clusterRunning {
+                        cluster.stopQPing()
+                        
+                    }
+                }  , label: {HStack{
+                    Text("Stop")
+                    Image(systemName: "stop.fill")}
+                .foregroundColor(Color.red)
+                })
+#if os(iOS)
+            .padding(EdgeInsets(top: 0.0,leading: espaciado+15,bottom: 0.0,trailing: espaciado+15))
+#endif
+                
+                //.background(Color.red)
+                //.padding(EdgeInsets(top: 0.0,leading: 20.0,bottom: 0.0,trailing: 0.0))
+                Button(action: {  // RUN CLUSTER QPing *************************
+                    appData.runPing = true
+                    
+                    //Para cluster anterior
+                    if let cluster = appData.clusterRunning {
+                        cluster.stopQPing()
+                    }
+                    
+                    //Crear nuevo cluster
+                    appData.clusterRunning = ClusterK8S(clusterData: selectedCluster, appData: appData)
+                    
+                    //                    Task {
+                    do
+                    {
+                        //Ejecutar QPing
+                        try appData.clusterRunning!.runQPing()
+                    }
+                    catch
+                    {
+                        appData.runPing = false
+                    }
+                    //}
+                }  , label: {HStack{
+                    Text("Start")
+                    Image(systemName: "play.fill")}
+                .foregroundColor(Color.green)
+                })
+                //.padding(EdgeInsets(top: 0.0,leading: 20.0,bottom: 0.0,trailing: 0.0))
+            }
 #if os(macOS)
             .padding(EdgeInsets(top: 0.0,leading: espaciado,bottom: 0.0,trailing: espaciado))
-            #endif
-           // .frame(width: .infinity, alignment: .leading)
-            
-            
-            //ProgressView().progressViewStyle(.linear)
-            
-  
+#endif
         }
-        
         TabView {
             QPingView()
             //.badge(2)  // <- globos con el nº :-)
@@ -96,7 +146,7 @@ struct DetailClusterView: View {
             ChartNodeView()
             //.badge(2)  // <- globos con el nº :-)
                 .tabItem {
-                    Label("graph", systemImage: "xserve")
+                    Label("graph", systemImage: "chart.xyaxis.line")
                 }
             //                ChartNodeView(name: "Node 2")
             //                    .tabItem {
@@ -107,6 +157,10 @@ struct DetailClusterView: View {
             //                        Label("Node 3", systemImage: "xserve")
             //                    }
         }
+//        .overlay(
+//                RoundedRectangle(cornerRadius: 9)
+//                    .stroke(Color.accentColor, lineWidth: 2)
+//            )
     }
 }
 
