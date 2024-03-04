@@ -13,7 +13,15 @@ struct ClusterView: View {
      
     let step = 100
     let range = 100...1000
- 
+    
+#if os(iOS)
+    let espaciado = 0.0
+#endif
+    
+#if os(macOS)
+    let espaciado = 5.0
+#endif
+    
     var body: some View {
         
         if let selectedCluster = appData.selectedCluster {
@@ -26,8 +34,22 @@ struct ClusterView: View {
                 //.padding()
                 
                 Spacer()
-                
-            }.background(Color("backgroundCluster")).cornerRadius(5)//.shadow(color: Color.gray, radius: 3)
+                if  appData.runPing
+                {
+                    ProgressView()
+#if os(iOS)
+                        .progressViewStyle(.circular)
+#else
+                        .progressViewStyle(.linear)
+                        .frame(maxHeight: 10)
+                            
+#endif
+                                          
+                        .transition(.opacity)
+                        .padding(EdgeInsets(top: 0.0,leading: espaciado,bottom: 0.0,trailing: espaciado))
+                }
+                Spacer()
+            }.background(Color("backgroundCluster")).cornerRadius(5).shadow(color: Color.gray, radius: 3)
             
             if appData.runPing && (appData.clusterRunning!.id != selectedCluster.id) {
                 Spacer()

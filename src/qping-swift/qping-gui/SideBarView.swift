@@ -114,7 +114,12 @@ struct SideBarView: View {
                 }) {
                     Label("Add cluster", systemImage: "plus.circle")
                 }.buttonStyle(.plain)
+#if os(iOS)
                     .padding(EdgeInsets(top: 0.0,leading: 25.0,bottom: 0.0,trailing: 0.0))
+#else
+                    .padding(EdgeInsets(top: 0.0,leading: 0.0,bottom: 0.0,trailing: 0.0))
+                    .frame(alignment: .center)
+#endif
                     .sheet(isPresented:  $showSheetClusterEditor){ ClusterEditorView()}
                     .alert("WARNING", isPresented: $showingAlertDelete) {
                         Button("Delete", role: .destructive) {

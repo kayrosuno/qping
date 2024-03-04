@@ -67,9 +67,9 @@ struct ClusterEditorView: View {
                     // Edit the incoming cluster
                     cluster_name = cluster.name
                     port_qping = cluster.port
-                    node1_ip = cluster.node1IP
-                    node2_ip = cluster.node2IP
-                    node3_ip = cluster.node3IP
+                    node1_ip = cluster.nodes[0]
+                    node2_ip = cluster.nodes[1]
+                    node3_ip = cluster.nodes[2]
                 }
             }
         }
@@ -80,18 +80,18 @@ struct ClusterEditorView: View {
     
     func save() {
         if let cluster = appData.editCluster {
-            // Edit the animal.
+            // Edit the cluster
             cluster.name = cluster_name
             cluster.port = port_qping
-            cluster.node1IP = node1_ip
-            cluster.node2IP = node2_ip
-            cluster.node3IP = node3_ip
+            cluster.nodes[0] = node1_ip
+            cluster.nodes[1] = node2_ip
+            cluster.nodes[2] = node3_ip
             
             //update!!
             
         } else {
             //Add a new cluster
-            let newCluster = ClusterK8SData(id: UUID(), name: cluster_name, port: port_qping, node1IP: node1_ip, node2IP: node2_ip, node3IP: node3_ip)
+            let newCluster = ClusterK8SData(id: UUID(), name: cluster_name, port: port_qping, nodes: [node1_ip,node2_ip,node3_ip])
             modelContext.insert(newCluster)
         }
     }

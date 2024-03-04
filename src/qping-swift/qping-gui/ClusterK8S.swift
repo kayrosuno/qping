@@ -99,7 +99,7 @@ class ClusterK8S: Identifiable, Hashable{
     /// Loop para espera de comando start y para ejecucion de qping en loop
     func runQPing()  throws
     {
-        if clusterData.node1IP == ""
+        if clusterData.nodes[clusterData.nodeSelected] == ""
         {  qpingOutputNode.append(QPingData(string: "Error: No node address found.\n", timeReceived: uptime(), delay: 0.0)) ; return }
         
         if clusterData.port == ""
@@ -109,9 +109,13 @@ class ClusterK8S: Identifiable, Hashable{
         // Client QPing
         // ----------------------------------------------------------------------
         //
-        qpingClient = QPingClient (remoteAddr: clusterData.node1IP+":"+clusterData.port ,
+        
+        qpingOutputNode.append(QPingData(string: "Connection to: \(clusterData.nodes[clusterData.nodeSelected])", timeReceived: uptime(), delay: 0.0)) 
+    
+        qpingClient = QPingClient (remoteAddr: clusterData.nodes[clusterData.nodeSelected]+":"+clusterData.port ,
                                    sendCommentsTo: {(cadena: String) -> Void in
             //appData.clusterRunning[cluster.id]?.qpingDataNodeArray[0].append(cadena)
+            
             
             if self.qpingOutputNode.count > Max_Lines_QPing
             {
@@ -122,37 +126,36 @@ class ClusterK8S: Identifiable, Hashable{
         } ,
                                    sendDataTo: {(timeReceived: Double, delay: Double) ->Void in
             
-            if delay <    self.minRTT
+            if fabs(delay) >    self.maxRTT
             {
-                self.minRTT = delay
-            }
-            if delay >    self.maxRTT
-            {
-                self.maxRTT = delay
+                self.maxRTT = fabs(delay)
             }
             
-            if     self.minRTT == 0 {
-                self.minRTT = delay
-            }
-            
-            if delay <    self.minRTT
+            if fabs(delay) <    self.minRTT
             {
-                self.minRTT = delay
+                self.minRTT = fabs(delay)
             }
-            if delay >    self.maxRTT
-            {
-                self.maxRTT = delay
-            }
+          
             
-            self.actualRTT = delay
-            self.appData!.actualRTT = delay //para refrescar el observaable appdata y que refresque la interfaz de SwiftUI
-            self.medRTT = (   self.medRTT +    self.actualRTT)/2
+            self.actualRTT = fabs(delay)
+            self.appData!.actualRTT = fabs(delay) //para refrescar el observaable appdata y que refresque la interfaz de SwiftUI
             
             //Añadir dato al array , se corrige el tiempo desde el inicio para trasladarlo a un rango 0..n
             
             self.qpingData.append( QPingData(string: "",timeReceived: timeReceived - self.startTime, delay: fabs(delay)))
+            
+            let total = self.qpingData.count
+            var suma = 0.0
+            for e in self.qpingData
+            {
+                suma = suma + e.delay
+            }
+            self.medRTT = suma / Double(total)
+            
+            
         })
         
+       
         //Void in print("Time: \(a), Delay: \(b)") })
         qpingClient!.setDelay(delay: self.appData!.sendInterval)
         

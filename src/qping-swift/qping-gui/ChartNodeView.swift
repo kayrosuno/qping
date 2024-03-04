@@ -13,39 +13,108 @@ struct ChartNodeView: View {
    
     @EnvironmentObject  var appData: AppData
     
+#if os(iOS)
+    let espaciado = 0.0
+#endif
+    
+#if os(macOS)
+    let espaciado = 5.0
+#endif
+    
     var body: some View {
         
         if let selectedCluster = appData.selectedCluster {
             if let clusterRunning = appData.clusterRunning {
                 if clusterRunning.id == selectedCluster.id {
                     VStack{
+#if os(iOS)
+                Divider()
+                    .overlay(Color.gray)
+#endif
                         HStack{
-                            Text("RTT:\(appData.actualRTT.fractionDigitsRounded(to: 0)) us")
+                            Text("RTT: \((appData.actualRTT/1000).fractionDigitsRounded(to: 2)) ms")
                             Spacer()
+                            Button(action: {   //Trash
+                                if let cluster = appData.clusterRunning {
+                                    // cluster.qpingOutputNode=[QPingData(string: "", timeReceived: uptime(), delay: 0.0)]
+                                    cluster.resetCounter()
+                                }
+                                appData.actualRTT = 0.0 // Para resfrescar los datos.
+                            }  , label: {HStack{
+                                Text("Clear")
+                                Image(systemName: "trash")}
+                           // .foregroundColor(Color.green)
+                            })
+                            //.padding(EdgeInsets(top: 0.0,leading: 20.0,bottom: 0.0,trailing: 20.0))
+                            //.frame(maxWidth: 150)
+                            //Spacer()
+            #if os(iOS)
+                        //.padding(EdgeInsets(top: 0.0,leading: espaciado+15,bottom: 0.0,trailing: 0))
+                            .frame(maxWidth: 93, alignment: .trailing)
+                            .padding(EdgeInsets(top: 7.0,leading: 0.0,bottom: 5.0,trailing: 0))
+            #else
+                        
+                            .padding(EdgeInsets(top: 0.0,leading: 0.0,bottom: 0.0,trailing: espaciado))
+                            .frame(/*maxWidth: 93,*/ alignment: .trailing)
+        //#if os(iOS)
+            #endif
                         }
                         Chart {
                             
                             ForEach(clusterRunning.qpingData, id: \.timeReceived) { item in
                                 LineMark(
                                     x: .value("Date", item.timeReceived),
-                                    y: .value("Delay", item.delay),
-                                    series: .value("Node 1", "A")
+                                    y: .value("Delay", item.delay/1000) ///1000).fractionDigitsRounded(to: 1))
+                                 //   series: .value("Node","A")
                                 )
                                 .foregroundStyle(.green)
                             }
-                            //   RuleMark(  //TODO: POner la media
-                            //                    y: .value("Threshold", 10)
-                            //                )
+                               RuleMark(  //Media
+                                y: .value("med RTT", clusterRunning.medRTT/1000)
+                                )
+                               .annotation(position: .bottom,
+                                                              alignment: .bottomLeading) {
+                                   Text("med RTT \((clusterRunning.medRTT/1000).fractionDigitsRounded(to: 1)) ms").font(.system(size: 12))
+                                                  }
                         }
+                       
                         
                     }
                 }
                 else
                 {
                     VStack{
+#if os(iOS)
+                Divider()
+                    .overlay(Color.gray)
+#endif
                         HStack{
                             Text("RTT: 0us").padding(EdgeInsets(top: 5.0,leading: 5.0,bottom: 5.0,trailing: 5.0))
                             Spacer()
+                            Button(action: {   //Trash
+                                if let cluster = appData.clusterRunning {
+                                    // cluster.qpingOutputNode=[QPingData(string: "", timeReceived: uptime(), delay: 0.0)]
+                                    cluster.resetCounter()
+                                }
+                                appData.actualRTT = 0.0 // Para resfrescar los datos.
+                            }  , label: {HStack{
+                                Text("Clear")
+                                Image(systemName: "trash")}
+                           // .foregroundColor(Color.green)
+                            })
+                            //.padding(EdgeInsets(top: 0.0,leading: 20.0,bottom: 0.0,trailing: 20.0))
+                            //.frame(maxWidth: 150)
+                            //Spacer()
+            #if os(iOS)
+                        //.padding(EdgeInsets(top: 0.0,leading: espaciado+15,bottom: 0.0,trailing: 0))
+                            .frame(maxWidth: 93, alignment: .trailing)
+                            .padding(EdgeInsets(top: 5.0,leading: 0.0,bottom: 5.0,trailing: 0))
+            #else
+                        
+                            .padding(EdgeInsets(top: 0.0,leading: 0.0,bottom: 0.0,trailing: espaciado))
+                            .frame(/*maxWidth: 93,*/ alignment: .trailing)
+        //#if os(iOS)
+            #endif
                         }
                         Chart {}
                     }
@@ -56,10 +125,39 @@ struct ChartNodeView: View {
             {
                 //Inicio. Sin nada
                 VStack{
+#if os(iOS)
+                Divider()
+                    .overlay(Color.gray)
+#endif
                     HStack{
                         Text("RTT: 0us").padding(EdgeInsets(top: 5.0,leading: 5.0,bottom: 5.0,trailing: 5.0))
                         Spacer()
+                        Button(action: {   //Trash
+                            if let cluster = appData.clusterRunning {
+                                // cluster.qpingOutputNode=[QPingData(string: "", timeReceived: uptime(), delay: 0.0)]
+                                cluster.resetCounter()
+                            }
+                            appData.actualRTT = 0.0 // Para resfrescar los datos.
+                        }  , label: {HStack{
+                            Text("Clear")
+                            Image(systemName: "trash")}
+                       // .foregroundColor(Color.green)
+                        })
+                        //.padding(EdgeInsets(top: 0.0,leading: 20.0,bottom: 0.0,trailing: 20.0))
+                        //.frame(maxWidth: 150)
+                        //Spacer()
+#if os(iOS)
+                        //.padding(EdgeInsets(top: 0.0,leading: espaciado+15,bottom: 0.0,trailing: 0))
+                        .frame(maxWidth: 93, alignment: .trailing)
+                        .padding(EdgeInsets(top: 5.0,leading: 0.0,bottom: 5.0,trailing: 0))
+#else
+                        
+                        .padding(EdgeInsets(top: 0.0,leading: 0.0,bottom: 0.0,trailing: espaciado))
+                        .frame(/*maxWidth: 93,*/ alignment: .trailing)
+#endif
                     }
+                    
+                    
                     Chart {}
                 }
             }

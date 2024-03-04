@@ -28,6 +28,7 @@ class AppData: Identifiable, ObservableObject {
     var sendInterval = 1000.0 //ms, default 1000ms=1seg
     var sidebarbackground: (any View)?
     var selectionProtocol = "QUIC+UDP"
+   // var nodeSelected = ""
     
     //Para visualizar, datos en clusterk8s
     var actualRTT = 0.0  //Min RTT del cluster
