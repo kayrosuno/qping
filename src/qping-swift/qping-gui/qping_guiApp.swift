@@ -24,20 +24,13 @@ private var info: CTTelephonyNetworkInfo!
             RootView()
                 .modelContainer(for: [
                     ClusterK8SData.self
-//                    ,
-//                    Latency.self,
-//                    LatencyPoint.self
                 ])
                 .environment(appData)
                 .preferredColorScheme(.dark)
                 .onAppear()
-            {
-//#if os(iOS)
-//                //TODO createObserver()
-//                #endif
-                
-            }
-                
+#if os(macOS)
+                .frame(minWidth: 1280, minHeight: 800)
+#endif
         }
         
         //Otro grupo de ventanas

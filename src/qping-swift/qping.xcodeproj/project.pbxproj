@@ -110,6 +110,7 @@
 		A9D1DB182B0198A300EA545C /* ServerConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerConnection.swift; sourceTree = "<group>"; };
 		A9D1DB192B0198A300EA545C /* Utilidades.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilidades.swift; sourceTree = "<group>"; };
 		A9D1DB1A2B0198A300EA545C /* QServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QServer.swift; sourceTree = "<group>"; };
+		A9F6DD252B9A6CC9007D19A1 /* qping-5g-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "qping-5g-Info.plist"; sourceTree = "<group>"; };
 		A9FA7D362B69BA770094925D /* ChartNodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartNodeView.swift; sourceTree = "<group>"; };
 		A9FA7D382B69BDA40094925D /* ClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterView.swift; sourceTree = "<group>"; };
 		B9DCD9A52B8541470089CF6D /* ClusterK8SData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClusterK8SData.swift; sourceTree = "<group>"; };
@@ -218,6 +219,7 @@
 		A9D1DB032B0197EC00EA545C = {
 			isa = PBXGroup;
 			children = (
+				A9F6DD252B9A6CC9007D19A1 /* qping-5g-Info.plist */,
 				A9D1DB0E2B0197EC00EA545C /* qping */,
 				A9C81CC62B66D67000452687 /* qping-gui */,
 				A9D1DB0D2B0197EC00EA545C /* Products */,
@@ -412,6 +414,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "qping-5g-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -454,6 +457,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "qping-5g-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
