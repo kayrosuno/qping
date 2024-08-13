@@ -45,6 +45,10 @@ Developed version with Swift language using Apple library Network and NWProtocol
 Developed version with go language. This version use quicgo library. This version run over Linux servers.
  
 
+###  Kubernetes test and deployment
+Kubernetes deployment locatd in qping-kubernetes
+
+
 ## CA Certificate
 You must change the CA certificate and use your own. You can follow this link to read whow to do it: https://developer.apple.com/documentation/network/creating_an_identity_for_local_network_tls
 
