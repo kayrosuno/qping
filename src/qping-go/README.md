@@ -17,7 +17,7 @@ El modulo de go es: kayros.uno/qping
 `docker image build -t italtelspain/qping:0.1.0   -t italtelspain/qping:latest  .
 `
 
-`docker image build -t kayrosuno/qping:0.1.1   -t kayrosuno/qping:latest  .
+`docker image build -t kayrosuno/qping:0.2   -t kayrosuno/qping:latest  .
 `
 
 Se utiliza el fichero Dockerfile, que establece dos fases, una para compilar go con la imagen golang y otra para la distribución basada en la imagen de ubuntu
@@ -30,7 +30,7 @@ Hay diferentes ficheros Dockerfile con distintas arquitecturas
 
 `docker image push italtelspain/qping:0.1.0`
 
-`docker image push kayrosuno/qping:0.1.0`
+`docker image push kayrosuno/qping:0.2`
 
 
 

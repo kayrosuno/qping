@@ -3,7 +3,7 @@
 
 
 # Build the application from source
-FROM golang:1.21.5 AS build-stage
+FROM golang:latest AS build-stage
 
 WORKDIR /app
 
@@ -27,7 +27,7 @@ FROM ubuntu:latest AS build-release-stage
 RUN apt-get update && apt-get install -y net-tools
 
 ARG USERNAME=iacobus
-ARG USER_UID=1000
+ARG USER_UID=2000
 ARG USER_GID=$USER_UID
 
 # Create the user
@@ -51,9 +51,9 @@ USER $USERNAME
 
 
 # Label docker image
-LABEL version="1.1"
+LABEL version="0.2"
 LABEL maintaner="Alejandro Garcia"
-LABEL release-date="01-01-2024"
+LABEL release-date="13-08-2024"
 #LABEL promoted="true"
 
 
@@ -62,7 +62,7 @@ WORKDIR /app
 
 COPY --from=build-stage /app/qping /app/qping
 
-EXPOSE 25450/udp
+EXPOSE 25450:25451/udp
 
 #Ejecuta qping en modo server, default port 25450 UDP (QUIC)
 ENTRYPOINT ["/app/qping","server"]

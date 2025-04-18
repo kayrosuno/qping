@@ -23,7 +23,7 @@ import (
 )
 
 // Start a server that echos all data for each stream opened by the client
-func QPingServer(args []string) error {
+func qserver(args []string) error {
 
 	var port = sPortDefault
 	var addr = "localhost:"
@@ -152,6 +152,8 @@ func newPingConnection(conn quic.Connection) {
 	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr, TimeFormat: time.RFC3339})
 
 	log.Info().Msg(fmt.Sprintf("Nueva conexión <-- %s", conn.RemoteAddr().String()))
+
+	//TODO: conseguir la dirección IP o DNS del servidor redis asociado
 
 	//Connecty to redis server
 	clientRedis := redis.NewClient(&redis.Options{
