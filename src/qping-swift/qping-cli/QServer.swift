@@ -20,7 +20,7 @@ class QServer{
     private var listener: NWListener?       ///Listener de escucha
     private let networkQueue: DispatchQueue ///networking queue
     var state: NWListener.State {get{return listener!.state}}     ///Estado del listener de escucha
-    private let CONNECTION_TIMEOUT = 1000 * 60 * 10   /// Time out de la conexion. 10 min
+
     
     
     ///Number of  connection
@@ -55,21 +55,22 @@ class QServer{
         //CA
         var identity: SecIdentity?
         let getquery = [kSecClass: kSecClassCertificate,
-            kSecAttrLabel: "Apple Development: MANUEL ALEJANDRO GARCIA DOMINGUEZ (A3F723B3BA)",
+            //kSecAttrLabel: "Apple Development: MANUEL ALEJANDRO GARCIA DOMINGUEZ (A3F723B3BA)",
+                    kSecAttrLabel:    "QPING",   //<<<< CERTIFICADO GUARDADO EN LLAVERO
             kSecReturnRef: true] as NSDictionary
 
         var item: CFTypeRef?
         let status = SecItemCopyMatching(getquery as CFDictionary, &item)
         if status != errSecSuccess  {
             // handle error …
-            print("\(TimeNow()) Error, certificado no encontrado")
+            print("\(TimeNow()) Error 66, certificado no encontrado")
         }
         let certificate = item as! SecCertificate
 
         let identityStatus = SecIdentityCreateWithCertificate(nil, certificate, &identity)
         if identityStatus != errSecSuccess  {
             // handle error …
-            print("\(TimeNow()) Error, certificado no creado")
+            print("\(TimeNow()) Error 73, certificado no creado")
          }
    
         if let secIdentity = sec_identity_create(identity!) {

@@ -26,6 +26,7 @@ var loop = true             /// Variable Bucle
 var estado = NWConnection.State.cancelled  ///Estado de xxxxxxxx-
 var id = 1                  /// Iteracion
 var delaySend = 1000.0      /// Time delayed to wait and send for a query in ms
+let CONNECTION_TIMEOUT = 1000 * 60 * 10   /// Time out de la conexion. 10 min
 
 /// Struct for RTT QUIC. Estructura de mensaje de comunicacion entre cliente y servidor.
 struct RTTQUIC: Codable  {
