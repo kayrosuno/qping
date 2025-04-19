@@ -48,12 +48,6 @@ func qserver(args []string) error {
 		addr += sPortDefault
 	}
 
-	//Crea el listener
-	// listener, err := quic.ListenAddr(addr, GenerateTLSConfig(), nil)
-	// if err != nil {
-	// 	log.Error().Msg(fmt.Sprintf("Error %s", err.Error()))
-	// 	return err
-	// }
 
 	var iPort, err = strconv.Atoi(port)
 	if err != nil {

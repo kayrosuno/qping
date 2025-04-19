@@ -12,14 +12,12 @@
 		A91ACC922DB2D76500351555 /* ServerConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC8C2DB2D76500351555 /* ServerConnection.swift */; };
 		A91ACC932DB2D76500351555 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC862DB2D76500351555 /* main.swift */; };
 		A91ACC942DB2D76500351555 /* QError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC882DB2D76500351555 /* QError.swift */; };
-		A91ACC952DB2D76500351555 /* QPingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC892DB2D76500351555 /* QPingClient.swift */; };
 		A91ACC962DB2D76500351555 /* QClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC872DB2D76500351555 /* QClient.swift */; };
 		A91ACC982DB2D76500351555 /* QServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC8B2DB2D76500351555 /* QServer.swift */; };
 		A91ACC992DB2D76500351555 /* Utilidades.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC8D2DB2D76500351555 /* Utilidades.swift */; };
 		A91ACC9A2DB2D76500351555 /* ServerConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC8C2DB2D76500351555 /* ServerConnection.swift */; };
 		A91ACC9B2DB2D76500351555 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC862DB2D76500351555 /* main.swift */; };
 		A91ACC9C2DB2D76500351555 /* QError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC882DB2D76500351555 /* QError.swift */; };
-		A91ACC9D2DB2D76500351555 /* QPingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC892DB2D76500351555 /* QPingClient.swift */; };
 		A91ACC9E2DB2D76500351555 /* QClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC872DB2D76500351555 /* QClient.swift */; };
 		A92B3A3C2B822A1F00590B4E /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B3A3B2B822A1F00590B4E /* AppData.swift */; };
 		A92B3A3E2B822A8C00590B4E /* ClusterK8S.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B3A3D2B822A8C00590B4E /* ClusterK8S.swift */; };
@@ -74,7 +72,6 @@
 		A91ACC862DB2D76500351555 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A91ACC872DB2D76500351555 /* QClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QClient.swift; sourceTree = "<group>"; };
 		A91ACC882DB2D76500351555 /* QError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QError.swift; sourceTree = "<group>"; };
-		A91ACC892DB2D76500351555 /* QPingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPingClient.swift; sourceTree = "<group>"; };
 		A91ACC8B2DB2D76500351555 /* QServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QServer.swift; sourceTree = "<group>"; };
 		A91ACC8C2DB2D76500351555 /* ServerConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnection.swift; sourceTree = "<group>"; };
 		A91ACC8D2DB2D76500351555 /* Utilidades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilidades.swift; sourceTree = "<group>"; };
@@ -142,7 +139,6 @@
 				A91ACC862DB2D76500351555 /* main.swift */,
 				A91ACC872DB2D76500351555 /* QClient.swift */,
 				A91ACC882DB2D76500351555 /* QError.swift */,
-				A91ACC892DB2D76500351555 /* QPingClient.swift */,
 				A91ACC8B2DB2D76500351555 /* QServer.swift */,
 				A91ACC8C2DB2D76500351555 /* ServerConnection.swift */,
 				A91ACC8D2DB2D76500351555 /* Utilidades.swift */,
@@ -370,7 +366,6 @@
 				A91ACC922DB2D76500351555 /* ServerConnection.swift in Sources */,
 				A91ACC932DB2D76500351555 /* main.swift in Sources */,
 				A91ACC942DB2D76500351555 /* QError.swift in Sources */,
-				A91ACC952DB2D76500351555 /* QPingClient.swift in Sources */,
 				A91ACC962DB2D76500351555 /* QClient.swift in Sources */,
 				A94D542D2B7594E0003ADA94 /* Keyboard.swift in Sources */,
 				A9FA7D392B69BDA40094925D /* ClusterView.swift in Sources */,
@@ -394,7 +389,6 @@
 				A91ACC9A2DB2D76500351555 /* ServerConnection.swift in Sources */,
 				A91ACC9B2DB2D76500351555 /* main.swift in Sources */,
 				A91ACC9C2DB2D76500351555 /* QError.swift in Sources */,
-				A91ACC9D2DB2D76500351555 /* QPingClient.swift in Sources */,
 				A91ACC9E2DB2D76500351555 /* QClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
