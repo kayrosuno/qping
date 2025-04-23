@@ -1,6 +1,6 @@
 //
 //  main.swift
-//  qs1
+//  
 //
 //  Created by Alejandro Garcia on 15/5/23.
 //
@@ -39,11 +39,11 @@ class QServer{
     }
     
     /// Start listen. Don't block,
-    func ListenAddr(handleStateChanged:  @escaping (NWListener.State) -> (), handleNewConnection:  @escaping (NWConnection) -> ()) throws {
+    func start(handleStateChanged:  @escaping (NWListener.State) -> (), handleNewConnection:  @escaping (NWConnection) -> ()) throws {
         //Parámetros de QUIC
         let quicOptions = NWProtocolQUIC.Options(alpn: ["kayros.uno"])
         quicOptions.direction = .bidirectional
-        quicOptions.idleTimeout = CONNECTION_TIMEOUT
+        quicOptions.idleTimeout = QPing.CONNECTION_TIMEOUT
         let securityProtocolOptions: sec_protocol_options_t = quicOptions.securityProtocolOptions
         sec_protocol_options_set_verify_block(securityProtocolOptions,
                                               { (_: sec_protocol_metadata_t,
@@ -100,7 +100,7 @@ class QServer{
     }
 
     ///Close server, and Stop all connection
-    func close() {
+    func stop() {
         self.listener!.stateUpdateHandler = nil
         self.listener!.newConnectionHandler = nil
         self.listener!.cancel()

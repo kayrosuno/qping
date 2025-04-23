@@ -8,35 +8,27 @@
 import Foundation
 import Network
 
-
-/// Conexion al server. Lee los datos enviados por los clientes.
+/// Conexion al server. Lee los datos enviado por qping en modo cliente. (QClient)
 @available(macOS 10.14, *)
 class ServerConnection {
   
-    /// NWConnection encapsulada
-    let nwConnection: NWConnection
-    
-    /// id interno de conexión
-    let id: Int
-    
-    let qServer: QServer
-    
-    /// RTT struct
-    var rtt: RTTQUIC! = RTTQUIC()
- 
-    let decoder = JSONDecoder() /// JSONDecoder
-    let encoder = JSONEncoder() /// JSONEncoder
+    private let qserver: QServer            /// QServer asociado esta cone
+    let id: Int                             /// id interno de conexión
+    private let nwConnection: NWConnection  /// NWConnection encapsulada
+    private var rtt: RTT_QUIC_DATA! = RTT_QUIC_DATA()   /// RTT struct
+    private let decoder = JSONDecoder() /// JSONDecoder
+    private let encoder = JSONEncoder() /// JSONEncoder
     
     ///Init desde NWListener
     init(qServer: QServer, id: Int, nwConnection: NWConnection) {
         self.nwConnection = nwConnection
         self.id = id
-        self.qServer = qServer
+        self.qserver = qServer
     }
 
     //var didStopCallback: ((Error?) -> Void)? = nil
 
-    ///Iniciar conexión
+    ///Iniciar aceptacion de conexiones
     func AcceptStream() {
         
         //handle de cambio de estado
@@ -44,7 +36,7 @@ class ServerConnection {
         
         //Establecer handle de recepción
         nwConnection.receive(minimumIncompleteLength: 1,
-                           maximumLength: MTU,
+                             maximumLength: QPing.MTU,
                            completion: handleReceiveData)
        
         //Iniciar cola de recepción
@@ -58,21 +50,13 @@ class ServerConnection {
     private func connectionStateChanged(to state: NWConnection.State) {
         switch state {
         case .waiting(let error):
-            //connectionFailed(error: error)
-            if error != nil {
-                print("connection \(id) waiting "+error.localizedDescription)
-            } else {
-                print("connection \(id) waiting")
-            }
-//            qServer.connectionsByID.removeValue(forKey: id)
-        
+            print("connection \(id) waiting "+error.localizedDescription)
+//          qServer.connectionsByID.removeValue(forKey: id)
         case .ready:
             print("connection \(id) ready")
-        
         case .failed(let error):
             connectionFailed(error: error)
-//            qServer.connectionsByID.removeValue(forKey: id)
-            
+//          qServer.connectionsByID.removeValue(forKey: id)
         default:
             break
         }
@@ -91,7 +75,7 @@ class ServerConnection {
                let date_received = Date()
                
                decoder.dateDecodingStrategy = .millisecondsSince1970
-               var rtt_result = try decoder.decode(RTTQUIC.self, from: data)
+               var rtt_result = try decoder.decode(RTT_QUIC_DATA.self, from: data)
                
                rtt_result.Time_server = Int (date_received.timeIntervalSince1970 * 1000 * 1000)
                rtt_result.LenPayloadReaded = data.count
@@ -137,7 +121,7 @@ class ServerConnection {
         //Registrar de nuevo el handler
         //Establecer handle de recepción
         nwConnection.receive(minimumIncompleteLength: 1,
-                           maximumLength: MTU,
+                             maximumLength: QPing.MTU,
                            completion: handleReceiveData)
     }
 
@@ -175,6 +159,6 @@ class ServerConnection {
         nwConnection.stateUpdateHandler = nil
         nwConnection.forceCancel()
         
-        qserver!.connectionsByID[id] = nil
+        self.qserver.connectionsByID[id] = nil
     }
 }

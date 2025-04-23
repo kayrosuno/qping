@@ -52,7 +52,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "client 127.0.0.1:9000"
+            argument = "server 9000"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

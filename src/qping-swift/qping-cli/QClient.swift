@@ -1,6 +1,6 @@
 //
 //  QClient.swift
-//  qs1
+//  
 //
 //  Created by Alejandro Garcia on 16/5/23.
 //
@@ -11,25 +11,26 @@ import Network
 /// Clase QClient encapsula las funcionalidades de un cliente utilizando el protocolo QUIC con UDP y con TLS
 @available(macOS 12, *)
 @available(iOS 15, *)
-class QClient {
+struct QClient {
 
-    private let port: NWEndpoint.Port   /// port de escucha
-    private let host: NWEndpoint.Host   /// host remoto
-    var rtt: RTTQUIC! = RTTQUIC()       /// RTT struct
-    let encoder = JSONEncoder()         /// Encoder JSON
-    let decoder = JSONDecoder()         /// Decoder JSON
-    private let networkQueue: DispatchQueue /// Networking queue
-    private let nwConnection: NWConnection  /// Network connection
-    let CONNECTION_TIMEOUT = 1000 * 60 * 10 /// Time out de la conexion. 10min
+    /// remote host
+    private let host: NWEndpoint.Host
+    /// remote port
+    private let port: NWEndpoint.Port
+    /// Networking queue for receive events
+    private let networkQueue: DispatchQueue
+    /// Network connection using QUIC
+    private let nwConnection: NWConnection
+   
 
-    ///Inittializing
+    ///Initialize the network connection, creacte DispatchQueue and nwConnection
     init(
         host: String,
         port: UInt16,
-        handleConnectionStateChanged: @escaping (NWConnection.State) -> Void,
-        handleReceiveData: @escaping (
+        handleClientConnectionStateChanged: @escaping (NWConnection.State) -> Void,
+        handleClientReceiveData: @escaping (
             Data?, NWConnection.ContentContext?, Bool?, NWError?
-        ) -> Void
+        )  -> Void
     ) {
 
         self.host = NWEndpoint.Host(host)
@@ -41,7 +42,7 @@ class QClient {
         //Parámetros de QUIC
         let quicOptions = NWProtocolQUIC.Options(alpn: ["kayros.uno"])
         quicOptions.direction = .bidirectional
-        quicOptions.idleTimeout = CONNECTION_TIMEOUT
+        quicOptions.idleTimeout = QPing.CONNECTION_TIMEOUT
         let securityProtocolOptions: sec_protocol_options_t = quicOptions
             .securityProtocolOptions
         sec_protocol_options_set_verify_block(
@@ -66,44 +67,44 @@ class QClient {
         )
 
         //handle de cambio de estado
-        nwConnection.stateUpdateHandler = handleConnectionStateChanged
+        nwConnection.stateUpdateHandler = handleClientConnectionStateChanged
 
         //Establecer la funcion de recepción
         nwConnection.receive(
             minimumIncompleteLength: 1,
-            maximumLength: MTU,
-            completion: handleReceiveData
+            maximumLength: QPing.MTU,
+            completion: handleClientReceiveData
         )
     }
 
-    ///Iniciar conexion
-    func connect() async {
+    ///Start connection of the internal nwConnection
+    func startConnection()  {
         //Iniciar conexion
         nwConnection.start(queue: networkQueue)
     }
 
-    ///Return state connection
-    func getState() -> NWConnection.State {
+    /// Stop internal nwConnection
+    func stopConnection() {
+        self.nwConnection.stateUpdateHandler = nil
+        self.nwConnection.cancel()
+    }
+    
+    ///Return state of the internal nwConnection
+    func getConnectionState() -> NWConnection.State {
         return nwConnection.state
     }
 
-    ///Enviar datos
+    ///Send data using internal nwConnection
     func send(data: Data, completion: @escaping @Sendable (NWError?) -> Void)
-        async
     {
+        //TODO: Check state
         nwConnection.send(
             content: data,
             completion: .contentProcessed(completion)
         )
     }
 
-    /// Parar la conexion
-    func stopConnection() {
-        self.nwConnection.stateUpdateHandler = nil
-        self.nwConnection.cancel()
-    }
-
-    /// Registrar handler de recepción de datos
+    /// Register  handler for data handler reception
     func registerReceiveHandler(
         minimumIncompleteLength: Int,
         maximumLength: Int,
