@@ -48,7 +48,6 @@ func qserver(args []string) error {
 		addr += sPortDefault
 	}
 
-
 	var iPort, err = strconv.Atoi(port)
 	if err != nil {
 		log.Error().Msg("incorrect argument port " + err.Error())
@@ -145,7 +144,7 @@ func newPingConnection(conn quic.Connection) {
 
 	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr, TimeFormat: time.RFC3339})
 
-	log.Info().Msg(fmt.Sprintf("Nueva conexión <-- %s", conn.RemoteAddr().String()))
+	log.Info().Msg(fmt.Sprintf("New connection <-- client from %s", conn.RemoteAddr().String()))
 
 	//TODO: conseguir la dirección IP o DNS del servidor redis asociado
 

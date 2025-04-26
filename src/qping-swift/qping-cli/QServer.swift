@@ -14,21 +14,38 @@ import Network
 @available(iOS 15, *)
 class QServer{
 
-    let port: NWEndpoint.Port               /// port de escucha
-    var nextID: Int = 0                     /// Contador de conexiones
-    var connectionsByID: [Int: ServerConnection] = [:]  ///Tupla de seguimiento de conexiones activas
-    private var listener: NWListener?       ///Listener de escucha
-    private let networkQueue: DispatchQueue ///networking queue
-    var state: NWListener.State {get{return listener!.state}}     ///Estado del listener de escucha
+    /// port de escucha
+    let port: NWEndpoint.Port
+   
+    ///Set de seguimiento de conexiones activas
+    private var clientsConnections: Dictionary<UUID,ClientConnection> = [:]
+    
+    ///Listener de escucha
+    private var listener: NWListener?
+    
+    ///networking queue
+    private let networkQueue: DispatchQueue
+    
+    ///Estado del listener de escucha
+    var state: NWListener.State {get{return listener!.state}}
 
-    
-    
     ///Number of  connection
-    func NumConnection() -> Int  {
-        return connectionsByID.count
+    func clientsConnectionsNumber() -> Int  {
+        return clientsConnections.count
+    }
+    
+    ///Remove a clientConnection
+    func removeClientConnection(id: UUID)
+    {
+        clientsConnections.removeValue(forKey: id)
+    }
+    
+    ///Remove a clientConnection
+    func addClientConnection(id: UUID, connection: ClientConnection)
+    {
+        clientsConnections[id] = connection
     }
  
-    
     /// init
     init(port: UInt16) {
          //Listening port
@@ -80,11 +97,9 @@ class QServer{
                     quicOptions.securityProtocolOptions, secIdentity)
         }
         
-  
         // QUIC Parameters
         let quicParameter = NWParameters(quic: quicOptions)
   
-        
         //Inicializa el listener con los parametros de options y el port
         listener = try! NWListener(using: quicParameter, on: self.port)
       
@@ -94,12 +109,12 @@ class QServer{
     }
     
     ///Conexión parada. Cambio de estado.
-    private  func connectionStopped(_ connection: ServerConnection) {
-            connectionsByID.removeValue(forKey: connection.id)
+    private  func connectionStopped(_ connection: ClientConnection) {
+        clientsConnections.removeValue(forKey: connection.id)
             print("\(TimeNow()) server did close connection \(connection.id)")
     }
 
-    ///Close server, and Stop all connection
+    ///Stop qping server, and Stop all connection,
     func stop() {
         self.listener!.stateUpdateHandler = nil
         self.listener!.newConnectionHandler = nil

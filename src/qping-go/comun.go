@@ -18,16 +18,16 @@ const iPortDefault int = 25450 //Puerto por defecto de escucha
 // const message = "Mensaje de prueba" //Mensaje de prueba por defecto
 // var wg sync.WaitGroup               //grupo de sincronización de threads
 var Program = "qping"   //Nombre del programa
-var Version = "0.2"     //Version actual
+var Version = "0.3.0"   //Version actual
 const maxMessage = 2024 //Longitud en bytes maximo del mensaje
 
 // Struct for RTT QUIC
 type RTTQUIC struct {
-	Id               int    // id del mensaje
+	Id               int64  // id del mensaje.
 	Time_client      int64  // local time at client
-	Time_server      int64  `json:"Time_server,omitempty"` // local time at server
+	Time_server      int64  // local time at server    `json:"Time_server,omitempty"`
 	LenPayload       int    // len payload data
-	LenPayloadReaded int    `json:"LenPayloadReaded,omitempty"` // len data readed on server side for payload (for MTU discovery?)
+	LenPayloadReaded int    // len data readed on server side for payload (for MTU discovery?) `json:"LenPayloadReaded,omitempty"`
 	Data             []byte // data of payload
 }
 

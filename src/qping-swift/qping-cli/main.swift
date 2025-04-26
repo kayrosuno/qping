@@ -10,32 +10,44 @@ import Network
 
 
 /// Struct for RTT QUIC. Estructura de mensaje de comunicacion entre cliente y servidor.
-struct RTT_QUIC_DATA: Codable  {
-    var Id:                Int = 0      // id del mensaje
-    var Time_client:       Int = 0      // local time at client microseconds
-    var Time_server:       Int = 0      // local time at server microseconds
-    var LenPayload:        Int = 0      // len payload data
-    var LenPayloadReaded:  Int = 0      // len data readed on server side for payload (for MTU discovery?)
-    var Data:              Data?        // data of payload
+struct RTTQUIC: Codable  {
+    /// id del mensaje
+    var Id:                Int64 = 0
+    
+    /// local time at client microseconds
+    var Time_client:       Int = 0
+    
+    /// local time at server microseconds
+    var Time_server:       Int = 0
+    
+    /// len payload data
+    var LenPayload:        Int = 0
+    
+    /// len data readed on server side for payload (for MTU discovery?)
+    var LenPayloadReaded:  Int = 0
+    
+    /// data of payload
+    var Data:              Data?
 }
 
 ///Enum errores
-enum QError: Error
-{
-    case invalidAddress (error: String)
-    case invalidPort (error: String)
-    case generic (error: String)
+enum QError: Error {
+    case invalidAddress(error: String)
+    case invalidPort(error: String)
+    case generic(error: String)
 }
 
 /// QPiong struct containing global parameters and variables.
 struct QPing {
-    
+
     /// Default port used for qping. 25450. Adapated to kubernetes cluster.
     static let portDefault = "25450"
     ///Program name
-    static let Program = "qping"        /// Nombre del programa
+    static let Program = "qping"
+    /// Nombre del programa
     //Version
-    static let Version = "0.3.0"        /// Version actual
+    static let Version = "0.3.0"
+    /// Version actual
     /// Longitud en bytes maximo del mensaje
     static let maxMessage = 2024
     /// The UDP maximum package size is 64K 65536
@@ -55,22 +67,18 @@ struct QPing {
     static var qserver: QServer?
     /// Estado de nwConnection. //TODO: de client or server???
     static var estado = NWConnection.State.cancelled
-    /// Global iteration number
-    static var iteration = 1
     /// Time delayed to wait and send for a query in ms
-    static let DELAY_LOOP_SERVER_ns: UInt64  = 1000000000 * 10
-    /// Time out de la conexion. 10 min
-    static let CONNECTION_TIMEOUT = 1000 * 60 * 10
+    static let DELAY_LOOP_SERVER_ns: UInt64 = 1000000000 * 10
+    /// Time out de la conexion. 1min
+    static let CONNECTION_TIMEOUT = 1000 * 60 * 1
     /// 1SEG in nano
-    static let DELAY_1SEG_ns: UInt64  = 1000000000
+    static let DELAY_1SEG_ns: UInt64 = 1000000000
     /// client loop for  conditional exit
     static var clientLoop = true
     ///JSON Encoder
     static let encoder = JSONEncoder()
     ///JSON Decoder
     static let decoder = JSONDecoder()
-    /// rtt struct used to send to the server
-    //static var rtt  = RTT_QUIC_DATA()
 
 }
 
@@ -92,27 +100,28 @@ do {
             try await serverLoop(serverport: String(QPing.portDefault))
         }
 
-    case "client":  //Client mode
-        if CommandLine.arguments.count > 2 {
-            try await clientLoop(addr: CommandLine.arguments[2])
-        } else {
-            uso()
-        }
-
     case "help", "-h":  //Help
         help()
 
     default:
-        uso()
+        if CommandLine.arguments.count > 1 {
+            try await clientLoop(addr: CommandLine.arguments[1])
+        } else {
+            uso()
+        }
+
     }
 } catch QError.invalidAddress(let error) {
     print("**ERROR** >> \(error). Please enter a valid address.\n\n")
+    uso()
     exit(-1)
 } catch QError.invalidPort(let error) {
     print("**ERROR** >> \(error). Please enter a valid port number.\n\n")
+    uso()
     exit(-1)
 } catch {
     print("Unexpected error: \(error).\n\n")
+    uso()
     exit(-1)
 }
 
@@ -137,8 +146,8 @@ func serverLoop(serverport: String) async throws {
     }
         
     try qserver.start(
-        handleStateChanged: serverStateChanged,
-        handleNewConnection: newConnectionInServer
+        handleStateChanged: handleServerStateChanged,
+        handleNewConnection: handleNewConnectionInServer
     )
 
     while true {  //Server espera hasta la finalización, esto hay que hacerlo en bucle porque swift no bloquea las llamadas y no se gestiona con async, utiliza threads y handles con los cambios de estado o lectura de datos. Otra alternativa más tipo go??
@@ -151,20 +160,20 @@ func serverLoop(serverport: String) async throws {
             
             //TODO: Chequear estado del listener
             print(
-                "\(TimeNow()) Server status: \(qserver.state) ; online clients: \(qserver.NumConnection())"
+                "\(TimeNow()) Server status: \(qserver.state) ; online clients: \(qserver.clientsConnectionsNumber())"
             )
 
         case .cancelled:
             //Server cancelled, exit
             print(
-                "\(TimeNow()) Server status: \(qserver.state) ; online clients: \(qserver.NumConnection())"
+                "\(TimeNow()) Server status: \(qserver.state) ; online clients: \(qserver.clientsConnectionsNumber())"
             )
             exit(0)
 
         case .failed:
             //Server cancelled, exit
             print(
-                "\(TimeNow()) Server status: \(qserver.state) ; online clients: \(qserver.NumConnection())"
+                "\(TimeNow()) Server status: \(qserver.state) ; online clients: \(qserver.clientsConnectionsNumber())"
             )
             exit(-1)
 
@@ -211,6 +220,9 @@ func clientLoop(addr: String) async throws {
     //Connect
     qclient.startConnection()
 
+    //id
+    var iteration:Int64 = 0
+    
     //Bucle
     while QPing.clientLoop {
         //Check network state
@@ -232,8 +244,8 @@ func clientLoop(addr: String) async throws {
         case .ready:
 
             //Fill rtt
-            let rtt_data = RTT_QUIC_DATA(
-                Id: QPing.iteration,
+            let rtt_data = RTTQUIC(
+                Id: iteration,
                 Time_client: Int(
                     Date().timeIntervalSince1970 * 1000 * 1000
                 ),
@@ -251,7 +263,7 @@ func clientLoop(addr: String) async throws {
                 completion: clientSendCompleted
             )
 
-            QPing.iteration += 1
+            iteration += 1
 
         case .failed(_):
             printQ("\(TimeNow()) connection failed")
@@ -262,17 +274,18 @@ func clientLoop(addr: String) async throws {
         }
 
         //Espera delaySend ms
-        try await Task.sleep(
-            for: .milliseconds(QPing.DELAY_LOOP_SERVER_ns),
-            tolerance: .seconds(0.1)
-        )
+        try await Task.sleep(nanoseconds: QPing.DELAY_1SEG_ns)
+//
+//            for: .milliseconds(QPing.DELAY_LOOP_SERVER_ns),
+//            tolerance: .seconds(0.1)
+//        )
 
     }
 
 }
 
 /// SERVER: Handle for server state changed
-func serverStateChanged(to newState: NWListener.State) {
+func handleServerStateChanged(to newState: NWListener.State) {
     switch newState {
     case .ready:
         print(
@@ -303,7 +316,7 @@ func serverStateChanged(to newState: NWListener.State) {
 }
 
 ///SERVER: Handle for new connection
-func newConnectionInServer(_ nwConnection: NWConnection) {
+func handleNewConnectionInServer(_ nwConnection: NWConnection) {
 
     guard let qserver = QPing.qserver else {
         //throw QError.generic(error: "Internal error creating qping server") //TODO: Especificar error. Throw?
@@ -311,19 +324,19 @@ func newConnectionInServer(_ nwConnection: NWConnection) {
         exit(-1)
     }
     
-    let connection = ServerConnection(
+    let connection = ClientConnection(
         qServer: qserver,
-        id: qserver.nextID,
+        id: UUID(),
         nwConnection: nwConnection
     )
-    qserver.nextID += 1
-    qserver.connectionsByID[connection.id] = connection
+    
+    qserver.addClientConnection(id: connection.id , connection: connection)
     connection.AcceptStream()  //Acepta la conexión
 }
 
 /// Uso
 func uso() {
-    print("Use: qping client <ipaddress:port>")
+    print("Use: qping <ipaddress:port>")
     print("Use: qping server <port>")
     print("Use: qping help | -h")
 }
@@ -335,7 +348,7 @@ func help() {
         "qping is a test program written in go and swift to verify the functionality and RTT delay of the QUIC Protocol"
     )
     print("")
-    print("Use: qping client <ipaddress:port>")
+    print("Use: qping <ipaddress:port>")
     print(
         "qping as a ping QUIC client. It requeries a qping Server to ping for, the client use the replies from the server to measure RTT time"
     )
@@ -410,8 +423,9 @@ func clientHandleConnectionStateChanged(to state: NWConnection.State) {
     switch state {
     case .waiting(_):
         //connectionFailed(error: error)
-        printQ("* connection waiting state")
+        printQ("* Client connection state changed to WAITING state")
     case .failed(let error):
+        printQ("* Client connection state changed to FAILED state")
         clientConnectionFailed(error: error)
 
     default:
@@ -438,7 +452,7 @@ func clientHandleConnectionStateChanged(to state: NWConnection.State) {
         do {
             QPing.decoder.dateDecodingStrategy = .millisecondsSince1970
             let rtt_result = try QPing.decoder.decode(
-                RTT_QUIC_DATA.self,
+                RTTQUIC.self,
                 from: data
             )
 

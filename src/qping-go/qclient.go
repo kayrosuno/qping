@@ -61,17 +61,21 @@ func QClient(args []string) {
 	//Cerrar diferido
 	defer stream.Close()
 
-	//Bucle de envío continuo
+	//UUID
+	//var uuid = uuid.New().String()
+	//Bucle de envío continuo del cliente
 	for i := 0; true; i++ {
 
 		//Crear el mensaje
 		var rttMensaje RTTQUIC
-		rttMensaje.Id = int(i)
+		rttMensaje.Id = int64(i)
 		rttMensaje.Data = []byte(message)
 		rttMensaje.LenPayload = len(message)
 
 		var time_init = time.Now().UnixMicro()
 		rttMensaje.Time_client = time_init
+		rttMensaje.Time_server = 0
+		rttMensaje.LenPayloadReaded = 0
 
 		data, err := json.Marshal(rttMensaje)
 		//var time_marshall = time.Now().UnixMicro() - time_init
@@ -130,13 +134,13 @@ func QClient(args []string) {
 		log.Info().
 			//Int64("t_marshall", time_marshall).
 
-			Int("id", rttServer.Id).
-			Int64("rtt", time_rtt).
+			Int64("id", rttServer.Id).
+			Int64("rtt usec", time_rtt).
 			//Int64("t_server", rttServer.Time_server-rttMensaje.Time_client).
 			//cInt64("t_send", time_send).
 			//Msg(fmt.Sprintf(" RT='%d'usec", time_rtt))
 
-			Msg("qping complete in usec") //fmt.Sprintf("<- '%s' mesg: '%s'", args[0], data))
+			Msg("") //fmt.Sprintf("<- '%s' mesg: '%s'", args[0], data))
 
 		//Esperar 1 seg TODO: eliminar
 		time.Sleep(1 * time.Second)

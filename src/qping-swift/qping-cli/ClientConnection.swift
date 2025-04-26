@@ -1,0 +1,169 @@
+//
+//  ClientConnection.swift
+//  qserver
+//
+//  Created by Alejandro Garcia on 17/5/23.
+//
+
+import Foundation
+import Network
+
+/// Conexion al server. Lee los datos enviado por qping en modo cliente. (QClient)
+@available(macOS 10.14, *)
+class ClientConnection {
+  
+    /// QServer padre asociado esta conexión
+    private let qserver: QServer
+    /// id interno de conexión
+    let id: UUID
+    /// NWConnection encapsulada
+    private let nwConnection: NWConnection
+    /// RTT struct
+    private var rtt: RTTQUIC! = RTTQUIC()
+    /// JSONDecoder
+    private let decoder = JSONDecoder()
+    /// JSONEncoder
+    private let encoder = JSONEncoder()
+    
+    ///Init desde NWListener
+    init(qServer: QServer, id: UUID, nwConnection: NWConnection) {
+        self.nwConnection = nwConnection
+        self.id = id
+        self.qserver = qServer
+        print("DEBUG: client connection created \(id)")
+    }
+
+    //var didStopCallback: ((Error?) -> Void)? = nil
+
+    ///Iniciar aceptacion de conexiones
+    func AcceptStream() {
+        
+        //handle de cambio de estado
+        nwConnection.stateUpdateHandler = self.handleClientConnectionStateChanged(to:)
+        
+        //Establecer handle de recepción
+        nwConnection.receive(minimumIncompleteLength: 1,
+                             maximumLength: QPing.MTU,
+                           completion: handleClientConnectionReceiveData)
+       
+        //Iniciar cola de recepción
+        nwConnection.start(queue: .main)
+    }
+    
+
+    //TODO: sanity check de conexiones, no se eliminan de la tupla de conexiones
+    
+    ///Cambio estado conexion
+    private func handleClientConnectionStateChanged(to state: NWConnection.State) {
+        switch state {
+        case .waiting(let error):
+            print("client connection \(id) waiting "+error.localizedDescription)
+//          qServer.connectionsByID.removeValue(forKey: id)
+        case .ready:
+            print("client connection \(id) ready")
+        case .failed(let error):
+            handleClientConnectionFailed(error: error)
+//          qServer.connectionsByID.removeValue(forKey: id)
+        default:
+            break
+        }
+    }
+
+
+    ///Handle for Receive Data
+    ///(_ content: Data?, _ contentContext: NWConnection.ContentContext?, _ isComplete: Bool, _ error: NWError?)
+    func handleClientConnectionReceiveData(_ content: Data?, _ contentContext: NWConnection.ContentContext?, _ isComplete: Bool?, _ error: NWError?) {
+      
+        //Procesar datos recibidos de la conexión
+        if let data = content, !data.isEmpty {
+           do
+           {
+               let date_received = Date()
+               
+               decoder.dateDecodingStrategy = .millisecondsSince1970
+               var rtt_result = try decoder.decode(RTTQUIC.self, from: data)
+               
+               rtt_result.Time_server = Int (date_received.timeIntervalSince1970 * 1000 * 1000)
+               rtt_result.LenPayloadReaded = data.count
+               //let data_string =  String(data: data, encoding: .utf8) ?? "null"
+               //print("\(TimeNow()) connection \(id) <<<< "+data_string)
+               
+               // Send reply
+               encoder.dateEncodingStrategy = .millisecondsSince1970
+               let reply_data = try encoder.encode(rtt_result)
+               self.send(data: reply_data)
+              
+               //print("\(TimeNow()) id=\(rtt.Id) "+String(data: json_data, encoding: .utf8)!)
+               //
+               //            let message = String(data: data, encoding: .utf8)
+               //            print("\(TimeNow()) <<< connection \(self.id) [\(self.nwConnection.endpoint)] string: \(message ?? "-")")
+               //            //self.send(data: data)
+               //
+               
+               //Broadcast to all others client
+               //qServer.broadcast(clientId: id, content: data)
+               
+           } catch {
+               print("handleClientConnectionReceiveData Unexpected error: \(error).")
+           }
+        }
+        
+        //Conexión completada/finalizada
+        if let complete = isComplete, complete==true {
+            //self.connectionEnded()
+            print("\(TimeNow()) client connection \(self.id) completed")
+            return;
+        }
+        
+        //Error en la conexion
+        if let error = error {
+            self.handleClientConnectionFailed(error: error)
+            return; //Salimos
+        }
+        
+      
+        
+        //Registrar de nuevo el handler
+        //Establecer handle de recepción
+        nwConnection.receive(minimumIncompleteLength: 1,
+                             maximumLength: QPing.MTU,
+                           completion: handleClientConnectionReceiveData)
+    }
+
+    
+    ///Send data
+    func send(data: Data) {
+        self.nwConnection.send(content: data, completion: .contentProcessed( { error in
+            if let error = error {
+                self.handleClientConnectionFailed(error: error)
+                return
+            }
+            //print("connection \(self.id) did send, data: \(data as NSData)")
+        }))
+    }
+
+//    ///Stop connection
+//    func close() {
+//        print("\(TimeNow()) connection \(id) will stop")
+//    }
+
+    ///Callback conexion fallida
+    private func handleClientConnectionFailed(error: Error) {
+        print("\(TimeNow()) client connection \(id) did fail, error: \(error)")
+        closeClientConnection(error: error)
+    }
+
+    ///Callback conexion finalizada
+    private func handleClientConnectionEnded() {
+        print("\(TimeNow()) client connection \(id) did end")
+        closeClientConnection(error: nil)
+    }
+    
+    ///Parar conexion y eliminar de la lista de conexiones cliente del qping server
+    private func closeClientConnection(error: Error?) {
+        nwConnection.stateUpdateHandler = nil
+        nwConnection.forceCancel()
+        
+        self.qserver.removeClientConnection(id: self.id)
+    }
+}

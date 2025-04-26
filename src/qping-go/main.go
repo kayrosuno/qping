@@ -51,7 +51,7 @@ var serverCmd = &cobra.Command{
 
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		QPingServer(args)
+		qserver(args)
 	},
 }
 
@@ -69,7 +69,7 @@ with a time mark to measure on the client the RTT `,
 			return err
 		}
 
-		// Chech UDP addreess for QUIC
+		// Check UDP addreess for QUIC
 		_, err := net.ResolveUDPAddr("udp", args[0])
 		if err != nil {
 			return err

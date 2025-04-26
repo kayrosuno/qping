@@ -22,7 +22,6 @@ struct QClient {
     /// Network connection using QUIC
     private let nwConnection: NWConnection
    
-
     ///Initialize the network connection, creacte DispatchQueue and nwConnection
     init(
         host: String,
