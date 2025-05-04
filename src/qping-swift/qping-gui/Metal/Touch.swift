@@ -9,7 +9,7 @@ import Foundation
 
 
 
-class Touch {
+actor Touch {
     private static var MOUSE_BUTTON_COUNT = 12
     private static var mouseButtonList = [Bool].init(repeating: false, count: MOUSE_BUTTON_COUNT)
     

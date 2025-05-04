@@ -18,7 +18,7 @@ enum MouseCodes: Int {
     case center = 2
 }
 
-class Mouse {
+actor Mouse {
     private static var MOUSE_BUTTON_COUNT = 12
     private static var mouseButtonList = [Bool].init(repeating: false, count: MOUSE_BUTTON_COUNT)
     
@@ -91,7 +91,7 @@ class Mouse {
     }
     
     //Returns the mouse position in screen-view coordinates [-1, 1]
-    public static func GetMouseViewportPosition(view: MTKViewCustom)->SIMD2<Float>{
+    @MainActor public static func GetMouseViewportPosition(view: MTKViewCustom)->SIMD2<Float>{
         let x = (overallMousePosition.x - Float(view.bounds.width) * 0.5) / (Float(view.bounds.width) * 0.5)
         let y = (overallMousePosition.y - Float(view.bounds.height) * 0.5) / (Float(view.bounds.height) * 0.5)
         return SIMD2(x, y)

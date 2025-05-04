@@ -7,8 +7,7 @@
 
 
 import Foundation
-
-
+import Network
 
 /// Devuelve un time en uSec, el tiempo del sistema en uSec. Utilizar para comparar tiempo en usec.
 /// El time es la cantidad de tiempo que el sistema esta awake.
@@ -34,4 +33,10 @@ func TimeNow() -> String
     return df.string(from: today)
 }
 
-
+///GENERAL:  print DEBUG if log level is set in QPing to QPingLogLevel.Debug
+@Sendable func printDEBUG(_ cadena: String) {
+   
+    if QPing.log_level == QPingLogLevel.Debug {
+        print(cadena)
+    }
+}

@@ -9,79 +9,6 @@ import Foundation
 import Network
 
 
-/// Struct for RTT QUIC. Estructura de mensaje de comunicacion entre cliente y servidor.
-struct RTTQUIC: Codable  {
-    /// id del mensaje
-    var Id:                Int64 = 0
-    
-    /// local time at client microseconds
-    var Time_client:       Int = 0
-    
-    /// local time at server microseconds
-    var Time_server:       Int = 0
-    
-    /// len payload data
-    var LenPayload:        Int = 0
-    
-    /// len data readed on server side for payload (for MTU discovery?)
-    var LenPayloadReaded:  Int = 0
-    
-    /// data of payload
-    var Data:              Data?
-}
-
-///Enum errores
-enum QError: Error {
-    case invalidAddress(error: String)
-    case invalidPort(error: String)
-    case generic(error: String)
-}
-
-/// QPiong struct containing global parameters and variables.
-struct QPing {
-
-    /// Default port used for qping. 25450. Adapated to kubernetes cluster.
-    static let portDefault = "25450"
-    ///Program name
-    static let Program = "qping"
-    /// Nombre del programa
-    //Version
-    static let Version = "0.3.0"
-    /// Version actual
-    /// Longitud en bytes maximo del mensaje
-    static let maxMessage = 2024
-    /// The UDP maximum package size is 64K 65536
-    static let MTU = 65536
-    /// Max num of lines to show in GUI interface (really are characters)
-    static let Max_Lines_GUI_QPing = 150
-    //var handleClosure: (String) -> Void?  /// Closure for mensage reception, to pass to GUI
-    //var handleDataClosure: (Double, Double) -> Void? /// Closure for data reception, to pass to GUI
-    //var remoteAddr: String /// Remote address to connect
-    /// Default message
-    static let mensaje = "qping client mensaje"
-    /// Mensaje standar
-    static let mensaje_data = "mensaje".data(using: .utf8)
-    /// QClient instance
-    static var qclient: QClient?
-    /// QServer instance
-    static var qserver: QServer?
-    /// Estado de nwConnection. //TODO: de client or server???
-    static var estado = NWConnection.State.cancelled
-    /// Time delayed to wait and send for a query in ms
-    static let DELAY_LOOP_SERVER_ns: UInt64 = 1000000000 * 10
-    /// Time out de la conexion. 1min
-    static let CONNECTION_TIMEOUT = 1000 * 60 * 1
-    /// 1SEG in nano
-    static let DELAY_1SEG_ns: UInt64 = 1000000000
-    /// client loop for  conditional exit
-    static var clientLoop = true
-    ///JSON Encoder
-    static let encoder = JSONEncoder()
-    ///JSON Decoder
-    static let decoder = JSONDecoder()
-
-}
-
 // Esto es Swift!!  Podemos comenzar desde el principio a escribir el programa!!
 // Main
 do {
@@ -145,13 +72,13 @@ func serverLoop(serverport: String) async throws {
         throw QError.generic(error: "Internal error creating qping server") //TODO: Especificar error. Throw?
     }
         
-    try qserver.start(
+    try await qserver.start(
         handleStateChanged: handleServerStateChanged,
         handleNewConnection: handleNewConnectionInServer
     )
 
     while true {  //Server espera hasta la finalización, esto hay que hacerlo en bucle porque swift no bloquea las llamadas y no se gestiona con async, utiliza threads y handles con los cambios de estado o lectura de datos. Otra alternativa más tipo go??
-        switch qserver.state {
+        switch await qserver.state {
         case .ready:
             // RunLoop.current.run(until: .now + 30)  //segundos
             //Espera delaySend ms
@@ -159,20 +86,20 @@ func serverLoop(serverport: String) async throws {
             try await Task.sleep(nanoseconds: QPing.DELAY_LOOP_SERVER_ns)
             
             //TODO: Chequear estado del listener
-            print(
+            await print(
                 "\(TimeNow()) Server status: \(qserver.state) ; online clients: \(qserver.clientsConnectionsNumber())"
             )
 
         case .cancelled:
             //Server cancelled, exit
-            print(
+            await print(
                 "\(TimeNow()) Server status: \(qserver.state) ; online clients: \(qserver.clientsConnectionsNumber())"
             )
             exit(0)
 
         case .failed:
             //Server cancelled, exit
-            print(
+            await print(
                 "\(TimeNow()) Server status: \(qserver.state) ; online clients: \(qserver.clientsConnectionsNumber())"
             )
             exit(-1)
@@ -190,7 +117,7 @@ func serverLoop(serverport: String) async throws {
 @MainActor
 func clientLoop(addr: String) async throws {
 
-    printQ("qping client loop")
+    print("qping client loop")
 
     //Split addr en hostname and port
     let addr_split = addr.split(separator: ":")
@@ -209,8 +136,8 @@ func clientLoop(addr: String) async throws {
     QPing.qclient = QClient(
         host: hostname,
         port: port,
-        handleClientConnectionStateChanged: clientHandleConnectionStateChanged,
-        handleClientReceiveData: clientHandleReceiveData
+        handleClientConnectionStateChanged: clientCLIHandleConnectionStateChanged,
+        handleClientReceiveData: clientCLIHandleReceiveData
     )
     //TODO: <<<>>> gestionar estado
     guard let qclient = QPing.qclient else {
@@ -221,7 +148,7 @@ func clientLoop(addr: String) async throws {
     qclient.startConnection()
 
     //id
-    var iteration:Int64 = 0
+    var iteration:Int64 = 1
     
     //Bucle
     while QPing.clientLoop {
@@ -229,17 +156,17 @@ func clientLoop(addr: String) async throws {
         switch qclient.getConnectionState()
         {
         case .cancelled:
-            printQ("\(TimeNow()) cancelled connection")
+            print("\(TimeNow()) cancelled connection")
             break
 
         case .setup:
-            printQ("\(TimeNow()) setup connection")
+            print("\(TimeNow()) setup connection")
 
         case .waiting(_):
-            printQ("\(TimeNow()) waiting connection, reconnecting")
+            print("\(TimeNow()) waiting connection, reconnecting")
 
         case .preparing:
-            printQ("\(TimeNow()) preparing connection")
+            print("\(TimeNow()) preparing connection")
 
         case .ready:
 
@@ -260,26 +187,21 @@ func clientLoop(addr: String) async throws {
             //Send data to qping server
             qclient.send(
                 data: json_data,
-                completion: clientSendCompleted
+                completion: clientCLISendCompleted
             )
 
             iteration += 1
 
         case .failed(_):
-            printQ("\(TimeNow()) connection failed")
+            print("\(TimeNow()) connection failed")
             break
 
         @unknown default:
-            printQ("\(TimeNow()) connection failed, unknow state")
+            print("\(TimeNow()) connection failed, unknow state")
         }
 
         //Espera delaySend ms
         try await Task.sleep(nanoseconds: QPing.DELAY_1SEG_ns)
-//
-//            for: .milliseconds(QPing.DELAY_LOOP_SERVER_ns),
-//            tolerance: .seconds(0.1)
-//        )
-
     }
 
 }
@@ -329,8 +251,10 @@ func handleNewConnectionInServer(_ nwConnection: NWConnection) {
         id: UUID(),
         nwConnection: nwConnection
     )
+    Task{ //Para acceder a un conexto distinto.
+        await qserver.addClientConnection(id: connection.id , connection: connection)
+    }
     
-    qserver.addClientConnection(id: connection.id , connection: connection)
     connection.AcceptStream()  //Acepta la conexión
 }
 
@@ -389,157 +313,3 @@ func help() {
     }
 #endif
     
-///GENERAL:  function to print by console or send to handled to GUI
-@Sendable func printQ(_ cadena: String) {
-    print(cadena)
-
-    //Closure
-    //GUI? handleClosure(cadena)
-
-    //Closure
-    //fhandleDataClosure(cadena)
-}
-
-/// CLIENTE: Obtener el estado del envío. SE USA???? TODO
-//func getClientState() -> NWConnection.State {
-//    if qclient != nil {
-//        estado = qclient!.getState()
-//    } else {
-//        return NWConnection.State.cancelled
-//        // failed(<#T##NWError#>())
-//    }
-//
-//    return estado
-//}
-
-///// Stop
-//func stop() {
-//    qclient!.stopConnection()
-//
-//}
-
-///CLIENTE: Handle estado conexion
-func clientHandleConnectionStateChanged(to state: NWConnection.State) {
-    switch state {
-    case .waiting(_):
-        //connectionFailed(error: error)
-        printQ("* Client connection state changed to WAITING state")
-    case .failed(let error):
-        printQ("* Client connection state changed to FAILED state")
-        clientConnectionFailed(error: error)
-
-    default:
-        break
-    }
-}
-
-///CLIENTE: Handle receive Data
-@Sendable func clientHandleReceiveData(
-    _ content: Data?,
-    _ contentContext: NWConnection.ContentContext?,
-    _ isComplete: Bool?,
-    _ error: NWError?
-) {
-
-    //Procesar datos recibidos de la conexión
-    if let data = content, !data.isEmpty {
-        //TEST let message = String(data: data, encoding: .utf8)
-        // TEST print("<< \(message ?? "-")")  /*data: \(data as NSData)*/
-        // Swift.print("#",terminator: "")
-        //fflush(__stdoutp)
-        //self.send(data: data)
-
-        do {
-            QPing.decoder.dateDecodingStrategy = .millisecondsSince1970
-            let rtt_result = try QPing.decoder.decode(
-                RTTQUIC.self,
-                from: data
-            )
-
-            //rtt_result.Time_server = date_received
-            //rtt_result.LenPayloadReaded = data.count
-            //let data_string =  String(data: data, encoding: .utf8) ?? "null"
-            //let rtt_time = Double(round( rtt_result.Time_server!.timeIntervalSince(rtt_result.Time_client!)*1000 )/1000)
-
-            let rtt_time = rtt_result.Time_server - rtt_result.Time_client
-
-            //let rtt_time = Double( rtt_result.Time_server!.timeIntervalSince(rtt_result.Time_client!))
-
-            // let time_send = rtt_result.Time_client
-            // let time_received = rtt_result.Time_server
-
-            /* Time_send=\(time_send) Time_receive=\(time_received) */
-            let now = TimeNow()
-            printQ("\(now) id=\(rtt_result.Id)  RTT=\(rtt_time)us")
-            //GUI?? SendData(timeReceive: uptime(), rtt: Double(rtt_time))
-
-        } catch {
-            printQ("Unexpected error: \(error).")
-        }
-    }
-
-    //Conexión completada/finalizada
-    if let complete = isComplete, complete == true {
-        clientConnectionEnded(error: error)
-        return
-    }
-
-    //Error en la conexion
-    if let error = error {
-        clientConnectionFailed(error: error)
-        return
-    }
-
-    //Registrar de nuevo el handler
-    //Establecer handle de recepción
-    QPing.qclient!.registerReceiveHandler(
-        minimumIncompleteLength: 1,
-        maximumLength: QPing.MTU,
-        completion: clientHandleReceiveData
-    )
-
-}
-
-/// CLIENT: Connection failed callback
-@Sendable func clientConnectionFailed(error: Error) {
-
-    printQ("connection failed: " + error.localizedDescription)
-
-    //Para loop
-    QPing.clientLoop = false
-}
-
-/// CLIENT: Connection ended callback
-@Sendable func clientConnectionEnded(error: Error?) {
-    if error != nil {
-        printQ("connection ended: " + error!.localizedDescription)
-    } else {
-        printQ("connection ended")
-    }
-
-    //Para loop
-    QPing.clientLoop = false
-}
-
-/// CLIENT: Send  callback.
-@Sendable func clientSendCompleted(error: Error?) {
-    if error != nil {
-        printQ("Send error: " + error!.localizedDescription)
-        
-        //Para loop
-        QPing.clientLoop = false
-    }
-}
-
-//
-///// function to print by console or send to handled
-//@Sendable func SendData(timeReceive: Double, rtt: Double) {
-//
-//    //Closure
-//    //handleClosure(cadena+"\n")
-//
-//    //Closure
-//    if handleDataClosure != nil {
-//        handleDataClosure(timeReceive, rtt)
-//    }
-//}

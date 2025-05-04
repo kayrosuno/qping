@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct AboutView: View {
-    @EnvironmentObject  var appData: AppData
+    @EnvironmentObject  var appData: QPingAppData
     
     var body: some View {
         Text("")
-        Text("\(Program)")
-        Text("version: \(Version)")
+        Text("\(QPing.Program)")
+        Text("version: \(QPing.Version)")
         Text("")
         Text("Alejandro Garcia - 2024")
         //Text("github/kayrosuno")

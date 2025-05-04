@@ -206,6 +206,7 @@ class RendererTriangle: NSObject, MTKViewDelegate
     
     //MARK: draw triangle 1
     //Mark Draw triangle1
+    @MainActor
     func draw_triangle1(in view: MTKView)
     {
         
@@ -251,6 +252,7 @@ class RendererTriangle: NSObject, MTKViewDelegate
     
     //MARK: draw triangle 2
     //Draw triangle2
+    @MainActor
     func draw_triangle2(in view: MTKView)
     {
         
@@ -293,6 +295,7 @@ class RendererTriangle: NSObject, MTKViewDelegate
     
     //MARK: draw triangle 3
     //Draw triangle3
+    @MainActor
     func draw_triangle3(in view: MTKView)
     {
         //1. Drawable
@@ -357,6 +360,7 @@ class RendererTriangle: NSObject, MTKViewDelegate
     
     //MARK: draw cubo
     //Draw cubo
+    @MainActor
     func draw_cubo(in view: MTKView)
     {
         //1. Drawable

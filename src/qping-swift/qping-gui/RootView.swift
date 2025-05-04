@@ -8,77 +8,134 @@
 import SwiftUI
 
 struct RootView: View {
+
+    @EnvironmentObject var qpingAppData: QPingAppData
+
     
-    @EnvironmentObject  var appData: AppData
+//#if os(iOS)
+//    let espaciado = 0.0
+//#endif
+//    
+//#if os(macOS)
+//    let espaciado = 5.0
+//#endif
+ 
     
     var body: some View {
-        
+
         NavigationSplitView {
             SideBarView()
         } detail: {
-            NavigationStack(path: $appData.path) {
+            NavigationStack(path: $qpingAppData.path) {
                 ClusterView()
-//                Text("***")
-              
             }
-//            .navigationDestination(for: UUID.self) { selection in
-//                //ClusterView(cluster: appData.selectedCluster)
-//                Text("AQUI DETALLE CLUSTERVIEW \(selection)")
-//            }
-                        .navigationDestination(for: String.self) { selection in
-                            VStack(alignment: .center, spacing: 20){
-                                Text("\(selection) deleted")
-                                Text("")
-                                Button("OK"){ appData.selectedCluster = nil}
-                            }
-                            .navigationBarBackButtonHidden()
-                        }
-            //            .navigationDestination(for: Int.self) { selection in
-            //                        Text("AQUI DETALLE CLUSTERVIEW ID \(selection)")
-            //            }
+            .navigationDestination(for: String.self) { selection in
+                VStack(alignment: .center, spacing: 20) {
+                    Text("\(selection) deleted")
+                    Text("")
+                    Button("OK") { qpingAppData.selectedCluster = nil }
+                }
+                .navigationBarBackButtonHidden()
+            }
         }
-        //.environmentObject(appData)
         #if os(macOS)
-        .sheet(isPresented: $appData.showAboutView){ AboutView() }
+            .sheet(isPresented: $qpingAppData.showAboutView) { AboutView() }
         #endif
-        
-        .toolbar{
-            ToolbarItem()  //Info
-            {
-                Button(action: {
-                    appData.showAboutView = true
-                },label: {Image(systemName: "info.circle")})
+
+        .toolbar {
+            ToolbarItem{
+                //ProgressBar
+                if qpingAppData.runPing {
+                    ProgressView()
+                        #if os(iOS)
+                            .progressViewStyle(.circular)
+                        #else
+                            .progressViewStyle(.linear)
+                            .frame(maxHeight: 5)
+
+                        #endif
+
+                        .transition(.opacity)
+//                        .padding(
+//                            EdgeInsets(
+//                                top: 0.0,
+//                                leading: espaciado,
+//                                bottom: 0.0,
+//                                trailing: espaciado
+//                            )
+//                        )
+                }
+                //Spacer()
             }
+          
+            ToolbarItem{
+                Button(action: {  // RUN CLUSTER QPing *************************
+                    qpingAppData.runPing = true
+                    
+                    //Para cluster anterior
+                    if qpingAppData.clusterRunning != nil {
+                        // Parar cluster si estaba corriendo?
+                        stopQClientGUI()
+                    }
+                    
+                    guard let selectedCluster = qpingAppData.selectedCluster else {
+                        //Ningun cluster seleccionado.
+                        //TODO: popup warning
+                        return
+                    }
+                    //Crear nuevo cluster
+                    qpingAppData.clusterRunning = ClusterK8S(clusterData: selectedCluster, appData: qpingAppData)
+                    
+                    do
+                    {
+                        //Ejecutar QPing
+                        try  runQClientGUI( appData: qpingAppData )
+                    }
+                    catch
+                    {
+                        qpingAppData.runPing = false
+                    }
+                }  , label: {HStack{
+                    Text("Start")
+                    Image(systemName: "play.fill")}
+                .foregroundColor(Color.green)
+                })
+            }
+            ToolbarItem {
+                Button(action: {  //STOP CLUSTER QPing **************************
+                    qpingAppData.runPing=false
+                    // 1. Parar
+                    if qpingAppData.clusterRunning != nil {
+                        stopQClientGUI()
+                    }
+                    //qpingAppData.clusterRunning = nil
+                    
+                }  , label: {HStack{
+                    Text("Stop")
+                    Image(systemName: "stop.fill")}
+                .foregroundColor(Color.red)
+                })
+           
+            }
+            ToolbarItem {
+                Button(
+                    action: {
+                        qpingAppData.showAboutView = true
+                    },
+                    label: { Image(systemName: "info.circle") }
+                )
+            }
+           
         }
-        .navigationTitle("QPing")
-   
-        
-        //        NavigationStack (path: $appData.path) {
-        //            //  Lo que se ponga abajo solo se muestra en MAC y en iPAD.  en Iphone NO! , en iOS aparece el sidebar
-        //            Text("select cluster/node")
-        //                .navigationDestination(for: String.self) { textValue in
-        //                    DetailView(text: textValue, path: $appData.path)
-        //                }
-        //                .navigationDestination(for: Int.self) { numberValue in
-        //                    Text("Detail with \(numberValue)")
-        //                }
-        //                .navigationDestination(for: TipoVistaActiva.self) { tipo in
-        //                    switch (tipo)
-        //                    {
-        //                    case TipoVistaActiva.cluster:
-        //                        ClusterView()//.onAppear(){appData.path.removeLast()}
-        //
-        //                    case TipoVistaActiva.latency:
-        //                        LatencyView()//.onAppear(){appData.path.removeLast()}
-        //
-        //
-        //                    default:
-        //                        Text("Otro")
-        //                    }
-        //                }
-        //                .navigationTitle("QPing")
-        //        }
-        
+        .navigationTitle(
+            //qpingAppData.selectedCluster?.name ??
+            QPing.Program + " "
+                + QPing.Version
+        )
+        // IOS __>    .navigationBarHidden(true)
+        .onAppear {
+            QPing.qpingAppData = qpingAppData  //Set appData for GUI update
+        }
     }
 }
 

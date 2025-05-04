@@ -12,23 +12,19 @@ import Network
 ///Clase QServer. Escucha por conexiones QUIC.
 @available(macOS 12, *)
 @available(iOS 15, *)
-class QServer{
+actor QServer{
 
     /// port de escucha
     let port: NWEndpoint.Port
-   
     ///Set de seguimiento de conexiones activas
-    private var clientsConnections: Dictionary<UUID,ClientConnection> = [:]
-    
+    var clientsConnections: Dictionary<UUID,ClientConnection> = [:]
     ///Listener de escucha
     private var listener: NWListener?
-    
     ///networking queue
     private let networkQueue: DispatchQueue
-    
     ///Estado del listener de escucha
     var state: NWListener.State {get{return listener!.state}}
-
+    
     ///Number of  connection
     func clientsConnectionsNumber() -> Int  {
         return clientsConnections.count
@@ -37,7 +33,7 @@ class QServer{
     ///Remove a clientConnection
     func removeClientConnection(id: UUID)
     {
-        clientsConnections.removeValue(forKey: id)
+             clientsConnections.removeValue(forKey: id)
     }
     
     ///Remove a clientConnection
@@ -56,7 +52,7 @@ class QServer{
     }
     
     /// Start listen. Don't block,
-    func start(handleStateChanged:  @escaping (NWListener.State) -> (), handleNewConnection:  @escaping (NWConnection) -> ()) throws {
+    func start(handleStateChanged:  @Sendable @escaping (NWListener.State) -> (), handleNewConnection:  @Sendable @escaping (NWConnection) -> ()) throws {
         //Parámetros de QUIC
         let quicOptions = NWProtocolQUIC.Options(alpn: ["kayros.uno"])
         quicOptions.direction = .bidirectional
@@ -83,7 +79,9 @@ class QServer{
             print("\(TimeNow()) Error 66, certificado no encontrado")
         }
         let certificate = item as! SecCertificate
-
+       
+#if os(macOS)
+    
         let identityStatus = SecIdentityCreateWithCertificate(nil, certificate, &identity)
         if identityStatus != errSecSuccess  {
             // handle error …
@@ -96,7 +94,7 @@ class QServer{
                 sec_protocol_options_set_local_identity(
                     quicOptions.securityProtocolOptions, secIdentity)
         }
-        
+#endif
         // QUIC Parameters
         let quicParameter = NWParameters(quic: quicOptions)
   
@@ -110,8 +108,8 @@ class QServer{
     
     ///Conexión parada. Cambio de estado.
     private  func connectionStopped(_ connection: ClientConnection) {
-        clientsConnections.removeValue(forKey: connection.id)
-            print("\(TimeNow()) server did close connection \(connection.id)")
+         clientsConnections.removeValue(forKey: connection.id)
+         print("\(TimeNow()) server did close connection \(connection.id)")
     }
 
     ///Stop qping server, and Stop all connection,
@@ -119,9 +117,5 @@ class QServer{
         self.listener!.stateUpdateHandler = nil
         self.listener!.newConnectionHandler = nil
         self.listener!.cancel()
-        
     }
-    
-    
-   
 }

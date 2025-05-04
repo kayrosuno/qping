@@ -10,16 +10,15 @@
 		A91ACC902DB2D76500351555 /* QServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC8B2DB2D76500351555 /* QServer.swift */; };
 		A91ACC912DB2D76500351555 /* Utilidades.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC8D2DB2D76500351555 /* Utilidades.swift */; };
 		A91ACC922DB2D76500351555 /* ClientConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC8C2DB2D76500351555 /* ClientConnection.swift */; };
-		A91ACC932DB2D76500351555 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC862DB2D76500351555 /* main.swift */; };
 		A91ACC962DB2D76500351555 /* QClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC872DB2D76500351555 /* QClient.swift */; };
 		A91ACC982DB2D76500351555 /* QServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC8B2DB2D76500351555 /* QServer.swift */; };
 		A91ACC992DB2D76500351555 /* Utilidades.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC8D2DB2D76500351555 /* Utilidades.swift */; };
 		A91ACC9A2DB2D76500351555 /* ClientConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC8C2DB2D76500351555 /* ClientConnection.swift */; };
 		A91ACC9B2DB2D76500351555 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC862DB2D76500351555 /* main.swift */; };
 		A91ACC9E2DB2D76500351555 /* QClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91ACC872DB2D76500351555 /* QClient.swift */; };
-		A92B3A3C2B822A1F00590B4E /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B3A3B2B822A1F00590B4E /* AppData.swift */; };
+		A92B3A3C2B822A1F00590B4E /* QPingAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B3A3B2B822A1F00590B4E /* QPingAppData.swift */; };
 		A92B3A3E2B822A8C00590B4E /* ClusterK8S.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B3A3D2B822A8C00590B4E /* ClusterK8S.swift */; };
-		A92B3A402B822AC500590B4E /* QPingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B3A3F2B822AC500590B4E /* QPingData.swift */; };
+		A92B3A402B822AC500590B4E /* RTTData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B3A3F2B822AC500590B4E /* RTTData.swift */; };
 		A92FC0932B67044A006AD2C5 /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FC0922B67044A006AD2C5 /* SideBarView.swift */; };
 		A92FC0972B670485006AD2C5 /* ClusterEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FC0962B670485006AD2C5 /* ClusterEditorView.swift */; };
 		A94D541E2B7593CE003ADA94 /* definitions.metal in Sources */ = {isa = PBXBuildFile; fileRef = A94D54182B7593CE003ADA94 /* definitions.metal */; };
@@ -40,7 +39,7 @@
 		A94D54392B759E02003ADA94 /* Touch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D54382B759E02003ADA94 /* Touch.swift */; };
 		A970A23D2B7061E400A8D954 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A970A23C2B7061E400A8D954 /* Utils.swift */; };
 		A970A2402B719FB500A8D954 /* QPingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A970A23F2B719FB500A8D954 /* QPingView.swift */; };
-		A9C81CC82B66D67000452687 /* qping_guiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C81CC72B66D67000452687 /* qping_guiApp.swift */; };
+		A9C81CC82B66D67000452687 /* QPingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C81CC72B66D67000452687 /* QPingApp.swift */; };
 		A9C81CCC2B66D67100452687 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9C81CCB2B66D67100452687 /* Assets.xcassets */; };
 		A9C81CD02B66D67100452687 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9C81CCF2B66D67100452687 /* Preview Assets.xcassets */; };
 		A9C81CD72B66E38A00452687 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C81CD62B66E38A00452687 /* AboutView.swift */; };
@@ -48,6 +47,18 @@
 		A9C81CDB2B66E3AF00452687 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C81CDA2B66E3AF00452687 /* SettingsView.swift */; };
 		A9C81CDD2B66E47800452687 /* ContentView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C81CDC2B66E47800452687 /* ContentView2.swift */; };
 		A9CD71112B929C4D00C0F1B7 /* DetailClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CD71102B929C4D00C0F1B7 /* DetailClusterView.swift */; };
+		A9E85A4A2DC400E700273B22 /* QClientGUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E85A492DC400E700273B22 /* QClientGUI.swift */; };
+		A9E85A4B2DC7B86500273B22 /* QPingAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B3A3B2B822A1F00590B4E /* QPingAppData.swift */; };
+		A9E85A4C2DC7B9FE00273B22 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A970A23C2B7061E400A8D954 /* Utils.swift */; };
+		A9E85A4D2DC7BAAC00273B22 /* ClusterK8S.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B3A3D2B822A8C00590B4E /* ClusterK8S.swift */; };
+		A9E85A4E2DC7BAB100273B22 /* ClusterK8SData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DCD9A52B8541470089CF6D /* ClusterK8SData.swift */; };
+		A9E85A4F2DC7BD4700273B22 /* RTTData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B3A3F2B822AC500590B4E /* RTTData.swift */; };
+		A9EC73632DBED75F00A52D99 /* RTTQUIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EC73622DBED75F00A52D99 /* RTTQUIC.swift */; };
+		A9EC73642DBED75F00A52D99 /* RTTQUIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EC73622DBED75F00A52D99 /* RTTQUIC.swift */; };
+		A9EC73662DBED78400A52D99 /* QError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EC73652DBED78400A52D99 /* QError.swift */; };
+		A9EC73672DBED78400A52D99 /* QError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EC73652DBED78400A52D99 /* QError.swift */; };
+		A9EC73692DBED79300A52D99 /* QPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EC73682DBED79300A52D99 /* QPing.swift */; };
+		A9EC736A2DBED79300A52D99 /* QPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EC73682DBED79300A52D99 /* QPing.swift */; };
 		A9FA7D372B69BA780094925D /* ChartNodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FA7D362B69BA770094925D /* ChartNodeView.swift */; };
 		A9FA7D392B69BDA40094925D /* ClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FA7D382B69BDA40094925D /* ClusterView.swift */; };
 		B9DCD9A62B8541470089CF6D /* ClusterK8SData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DCD9A52B8541470089CF6D /* ClusterK8SData.swift */; };
@@ -72,9 +83,9 @@
 		A91ACC8B2DB2D76500351555 /* QServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QServer.swift; sourceTree = "<group>"; };
 		A91ACC8C2DB2D76500351555 /* ClientConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientConnection.swift; sourceTree = "<group>"; };
 		A91ACC8D2DB2D76500351555 /* Utilidades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilidades.swift; sourceTree = "<group>"; };
-		A92B3A3B2B822A1F00590B4E /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
+		A92B3A3B2B822A1F00590B4E /* QPingAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPingAppData.swift; sourceTree = "<group>"; };
 		A92B3A3D2B822A8C00590B4E /* ClusterK8S.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterK8S.swift; sourceTree = "<group>"; };
-		A92B3A3F2B822AC500590B4E /* QPingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPingData.swift; sourceTree = "<group>"; };
+		A92B3A3F2B822AC500590B4E /* RTTData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTTData.swift; sourceTree = "<group>"; };
 		A92FC0922B67044A006AD2C5 /* SideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
 		A92FC0962B670485006AD2C5 /* ClusterEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterEditorView.swift; sourceTree = "<group>"; };
 		A94D54182B7593CE003ADA94 /* definitions.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = definitions.metal; sourceTree = "<group>"; };
@@ -95,8 +106,8 @@
 		A94D54382B759E02003ADA94 /* Touch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Touch.swift; sourceTree = "<group>"; };
 		A970A23C2B7061E400A8D954 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A970A23F2B719FB500A8D954 /* QPingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPingView.swift; sourceTree = "<group>"; };
-		A9C81CC52B66D67000452687 /* qping-5g.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "qping-5g.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A9C81CC72B66D67000452687 /* qping_guiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qping_guiApp.swift; sourceTree = "<group>"; };
+		A9C81CC52B66D67000452687 /* qpingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = qpingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9C81CC72B66D67000452687 /* QPingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPingApp.swift; sourceTree = "<group>"; };
 		A9C81CCB2B66D67100452687 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9C81CCD2B66D67100452687 /* qping_gui.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = qping_gui.entitlements; sourceTree = "<group>"; };
 		A9C81CCF2B66D67100452687 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -106,6 +117,10 @@
 		A9C81CDC2B66E47800452687 /* ContentView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView2.swift; sourceTree = "<group>"; };
 		A9CD71102B929C4D00C0F1B7 /* DetailClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailClusterView.swift; sourceTree = "<group>"; };
 		A9D1DB0C2B0197EC00EA545C /* qping */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = qping; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9E85A492DC400E700273B22 /* QClientGUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QClientGUI.swift; sourceTree = "<group>"; };
+		A9EC73622DBED75F00A52D99 /* RTTQUIC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTTQUIC.swift; sourceTree = "<group>"; };
+		A9EC73652DBED78400A52D99 /* QError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QError.swift; sourceTree = "<group>"; };
+		A9EC73682DBED79300A52D99 /* QPing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPing.swift; sourceTree = "<group>"; };
 		A9F6DD252B9A6CC9007D19A1 /* qping-5g-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "qping-5g-Info.plist"; sourceTree = "<group>"; };
 		A9FA7D362B69BA770094925D /* ChartNodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartNodeView.swift; sourceTree = "<group>"; };
 		A9FA7D382B69BDA40094925D /* ClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterView.swift; sourceTree = "<group>"; };
@@ -133,7 +148,11 @@
 		A91ACC8E2DB2D76500351555 /* qping-cli */ = {
 			isa = PBXGroup;
 			children = (
+				A9EC73622DBED75F00A52D99 /* RTTQUIC.swift */,
+				A9EC73682DBED79300A52D99 /* QPing.swift */,
+				A9EC73652DBED78400A52D99 /* QError.swift */,
 				A91ACC862DB2D76500351555 /* main.swift */,
+				A92B3A3B2B822A1F00590B4E /* QPingAppData.swift */,
 				A91ACC872DB2D76500351555 /* QClient.swift */,
 				A91ACC8B2DB2D76500351555 /* QServer.swift */,
 				A91ACC8C2DB2D76500351555 /* ClientConnection.swift */,
@@ -197,11 +216,12 @@
 		A9C81CD42B66E2CA00452687 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				A970A23C2B7061E400A8D954 /* Utils.swift */,
 				B9DCD9A52B8541470089CF6D /* ClusterK8SData.swift */,
-				A9C81CC72B66D67000452687 /* qping_guiApp.swift */,
-				A92B3A3B2B822A1F00590B4E /* AppData.swift */,
+				A9C81CC72B66D67000452687 /* QPingApp.swift */,
 				A92B3A3D2B822A8C00590B4E /* ClusterK8S.swift */,
-				A92B3A3F2B822AC500590B4E /* QPingData.swift */,
+				A9E85A492DC400E700273B22 /* QClientGUI.swift */,
+				A92B3A3F2B822AC500590B4E /* RTTData.swift */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -209,7 +229,6 @@
 		A9C81CD52B66E2D000452687 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A970A23C2B7061E400A8D954 /* Utils.swift */,
 				A9C81CD62B66E38A00452687 /* AboutView.swift */,
 				A9C81CD82B66E39A00452687 /* RootView.swift */,
 				A9C81CDA2B66E3AF00452687 /* SettingsView.swift */,
@@ -239,7 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				A9D1DB0C2B0197EC00EA545C /* qping */,
-				A9C81CC52B66D67000452687 /* qping-5g.app */,
+				A9C81CC52B66D67000452687 /* qpingApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -247,9 +266,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A9C81CC42B66D67000452687 /* qping-5g */ = {
+		A9C81CC42B66D67000452687 /* qpingApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A9C81CD32B66D67100452687 /* Build configuration list for PBXNativeTarget "qping-5g" */;
+			buildConfigurationList = A9C81CD32B66D67100452687 /* Build configuration list for PBXNativeTarget "qpingApp" */;
 			buildPhases = (
 				A9C81CC12B66D67000452687 /* Sources */,
 				A9C81CC22B66D67000452687 /* Frameworks */,
@@ -259,9 +278,9 @@
 			);
 			dependencies = (
 			);
-			name = "qping-5g";
+			name = qpingApp;
 			productName = "qping-gui";
-			productReference = A9C81CC52B66D67000452687 /* qping-5g.app */;
+			productReference = A9C81CC52B66D67000452687 /* qpingApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A9D1DB0B2B0197EC00EA545C /* qping */ = {
@@ -313,7 +332,7 @@
 			projectRoot = "";
 			targets = (
 				A9D1DB0B2B0197EC00EA545C /* qping */,
-				A9C81CC42B66D67000452687 /* qping-5g */,
+				A9C81CC42B66D67000452687 /* qpingApp */,
 			);
 		};
 /* End PBXProject section */
@@ -340,34 +359,37 @@
 				A9FA7D372B69BA780094925D /* ChartNodeView.swift in Sources */,
 				A9C81CDB2B66E3AF00452687 /* SettingsView.swift in Sources */,
 				A970A23D2B7061E400A8D954 /* Utils.swift in Sources */,
+				A9E85A4A2DC400E700273B22 /* QClientGUI.swift in Sources */,
 				A970A2402B719FB500A8D954 /* QPingView.swift in Sources */,
 				A94D541E2B7593CE003ADA94 /* definitions.metal in Sources */,
 				A94D54202B7593CE003ADA94 /* shadersMesh.metal in Sources */,
 				A92FC0932B67044A006AD2C5 /* SideBarView.swift in Sources */,
 				A94D54212B7593CE003ADA94 /* shadersTriangle.metal in Sources */,
+				A9EC73632DBED75F00A52D99 /* RTTQUIC.swift in Sources */,
 				A94D54312B7594E0003ADA94 /* MetalViewMac.swift in Sources */,
 				A9C81CD92B66E39A00452687 /* RootView.swift in Sources */,
 				A92FC0972B670485006AD2C5 /* ClusterEditorView.swift in Sources */,
-				A92B3A402B822AC500590B4E /* QPingData.swift in Sources */,
+				A9EC73662DBED78400A52D99 /* QError.swift in Sources */,
+				A92B3A402B822AC500590B4E /* RTTData.swift in Sources */,
 				B9DCD9A62B8541470089CF6D /* ClusterK8SData.swift in Sources */,
 				A94D54322B7594E0003ADA94 /* Mouse.swift in Sources */,
 				A94D54352B7594E0003ADA94 /* UtilidadesMetal.swift in Sources */,
 				A9C81CDD2B66E47800452687 /* ContentView2.swift in Sources */,
 				A94D542F2B7594E0003ADA94 /* MatrixFunctions.swift in Sources */,
+				A9EC736A2DBED79300A52D99 /* QPing.swift in Sources */,
 				A94D541F2B7593CE003ADA94 /* shadersCubo.metal in Sources */,
 				A94D54222B7593CE003ADA94 /* test.metal in Sources */,
 				A94D54342B7594E0003ADA94 /* RendererMesh1.swift in Sources */,
 				A91ACC902DB2D76500351555 /* QServer.swift in Sources */,
 				A91ACC912DB2D76500351555 /* Utilidades.swift in Sources */,
 				A91ACC922DB2D76500351555 /* ClientConnection.swift in Sources */,
-				A91ACC932DB2D76500351555 /* main.swift in Sources */,
 				A91ACC962DB2D76500351555 /* QClient.swift in Sources */,
 				A94D542D2B7594E0003ADA94 /* Keyboard.swift in Sources */,
 				A9FA7D392B69BDA40094925D /* ClusterView.swift in Sources */,
 				A94D54392B759E02003ADA94 /* Touch.swift in Sources */,
 				A9C81CD72B66E38A00452687 /* AboutView.swift in Sources */,
-				A9C81CC82B66D67000452687 /* qping_guiApp.swift in Sources */,
-				A92B3A3C2B822A1F00590B4E /* AppData.swift in Sources */,
+				A9C81CC82B66D67000452687 /* QPingApp.swift in Sources */,
+				A92B3A3C2B822A1F00590B4E /* QPingAppData.swift in Sources */,
 				A92B3A3E2B822A8C00590B4E /* ClusterK8S.swift in Sources */,
 				A94D54372B7596A0003ADA94 /* RendererTriangle.swift in Sources */,
 				A9CD71112B929C4D00C0F1B7 /* DetailClusterView.swift in Sources */,
@@ -379,9 +401,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9EC73642DBED75F00A52D99 /* RTTQUIC.swift in Sources */,
+				A9E85A4B2DC7B86500273B22 /* QPingAppData.swift in Sources */,
+				A9EC73672DBED78400A52D99 /* QError.swift in Sources */,
+				A9E85A4D2DC7BAAC00273B22 /* ClusterK8S.swift in Sources */,
 				A91ACC982DB2D76500351555 /* QServer.swift in Sources */,
+				A9E85A4F2DC7BD4700273B22 /* RTTData.swift in Sources */,
+				A9E85A4E2DC7BAB100273B22 /* ClusterK8SData.swift in Sources */,
 				A91ACC992DB2D76500351555 /* Utilidades.swift in Sources */,
+				A9E85A4C2DC7B9FE00273B22 /* Utils.swift in Sources */,
 				A91ACC9A2DB2D76500351555 /* ClientConnection.swift in Sources */,
+				A9EC73692DBED79300A52D99 /* QPing.swift in Sources */,
 				A91ACC9B2DB2D76500351555 /* main.swift in Sources */,
 				A91ACC9E2DB2D76500351555 /* QClient.swift in Sources */,
 			);
@@ -395,11 +425,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "qping-gui/qping_gui.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0.3.0;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"qping-gui/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -407,6 +438,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "qping-5g-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = qping;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -418,18 +450,18 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "uno.kayros.qping-5g";
+				MARKETING_VERSION = 0.3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = uno.kayros.qping;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -439,11 +471,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "qping-gui/qping_gui.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0.3.0;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"qping-gui/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -451,6 +484,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "qping-5g-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = qping;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -462,18 +496,18 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "uno.kayros.qping-5g";
+				MARKETING_VERSION = 0.3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = uno.kayros.qping;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -608,10 +642,10 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = AK37TK8X2Y;
 				ENABLE_HARDENED_RUNTIME = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = uno.kayros.qping;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -623,17 +657,17 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = AK37TK8X2Y;
 				ENABLE_HARDENED_RUNTIME = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = uno.kayros.qping;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A9C81CD32B66D67100452687 /* Build configuration list for PBXNativeTarget "qping-5g" */ = {
+		A9C81CD32B66D67100452687 /* Build configuration list for PBXNativeTarget "qpingApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A9C81CD12B66D67100452687 /* Debug */,

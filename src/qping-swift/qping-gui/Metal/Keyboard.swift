@@ -1,5 +1,5 @@
 
-class Keyboard {
+actor Keyboard {
     
     private static var KEY_COUNT: Int = 256
     private static var keys = [Bool].init(repeating: false, count: KEY_COUNT)

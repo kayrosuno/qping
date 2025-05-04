@@ -132,6 +132,7 @@ class RendererMesh1: NSObject, MTKViewDelegate
     
   
     //MARK: DRAW MESH
+    @MainActor
     func draw_mesh(in view: MTKView)
     {
         //1. Drawable

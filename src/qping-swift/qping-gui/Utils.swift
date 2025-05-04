@@ -7,6 +7,17 @@ Utility views and functions.
 
 import SwiftUI
 
+//Los tipos de VistaActiva
+enum TipoVistaActiva
+{
+    case cluster    //Vista cluster
+    case root       //Vista root
+    case latency    //Vista latencia
+    case bandwith   //Vista BW
+    case mtu        //Vista MTU
+    
+}
+
 enum TimeRange {
     case last30Days
     case last12Months

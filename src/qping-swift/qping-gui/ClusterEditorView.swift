@@ -1,5 +1,5 @@
 //
-//  View1.swift
+//  ClusterEditorView.swift
 //  qping-gui
 //
 //  Created by Alejandro Garcia on 28/1/24.
@@ -12,7 +12,7 @@ import SwiftUI
 //   View para crear o editar cluster. Se edita si el cluster de edición está en la propiedad appData.editCluster, si es nil se añade
 //
 struct ClusterEditorView: View {
-    @EnvironmentObject  var appData: AppData
+    @EnvironmentObject  var appData: QPingAppData
     @State private var cluster_name = ""
     @State private var port_qping = ""
     @State private var node1_ip = ""
@@ -66,7 +66,7 @@ struct ClusterEditorView: View {
                 if let cluster = appData.editCluster {
                     // Edit the incoming cluster
                     cluster_name = cluster.name
-                    port_qping = cluster.port
+                    port_qping = String(cluster.port)
                     node1_ip = cluster.nodes[0]
                     node2_ip = cluster.nodes[1]
                     node3_ip = cluster.nodes[2]
@@ -79,10 +79,12 @@ struct ClusterEditorView: View {
     }//body
     
     func save() {
+        
+        let sPort = UInt16 (port_qping) ?? UInt16(QPing.portDefault)!
         if let cluster = appData.editCluster {
             // Edit the cluster
             cluster.name = cluster_name
-            cluster.port = port_qping
+            cluster.port = sPort
             cluster.nodes[0] = node1_ip
             cluster.nodes[1] = node2_ip
             cluster.nodes[2] = node3_ip
@@ -91,7 +93,7 @@ struct ClusterEditorView: View {
             
         } else {
             //Add a new cluster
-            let newCluster = ClusterK8SData(id: UUID(), name: cluster_name, port: port_qping, nodes: [node1_ip,node2_ip,node3_ip])
+            let newCluster = ClusterK8SData(id: UUID(), name: cluster_name, port: sPort, nodes: [node1_ip,node2_ip,node3_ip])
             modelContext.insert(newCluster)
         }
     }

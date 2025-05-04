@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @EnvironmentObject  var appData: AppData
+    @EnvironmentObject  var appData: QPingAppData
     
     let protocols = ["QUIC+UDP", "Only UDP"]
     

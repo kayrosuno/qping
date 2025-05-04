@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A9C81CC42B66D67000452687"
-               BuildableName = "qping-5g.app"
-               BlueprintName = "qping-5g"
+               BuildableName = "qpingApp.app"
+               BlueprintName = "qpingApp"
                ReferencedContainer = "container:qping.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A9C81CC42B66D67000452687"
-            BuildableName = "qping-5g.app"
-            BlueprintName = "qping-5g"
+            BuildableName = "qpingApp.app"
+            BlueprintName = "qpingApp"
             ReferencedContainer = "container:qping.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A9C81CC42B66D67000452687"
-            BuildableName = "qping-5g.app"
-            BlueprintName = "qping-5g"
+            BuildableName = "qpingApp.app"
+            BlueprintName = "qpingApp"
             ReferencedContainer = "container:qping.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
