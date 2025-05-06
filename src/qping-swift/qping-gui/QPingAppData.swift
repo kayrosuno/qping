@@ -33,17 +33,20 @@ class QPingAppData: Identifiable, ObservableObject {
     var QUIC_UDP = true
     //var estadoCluster = "Stop"
     //var qpingOutputNode = ""
-    var sendInterval = 1000.0 //ms, default 1000ms=1seg
+    var sendIntervalns = 1000.0 * 1000 * 1000//ns, default 1000ms=1seg
     var sidebarbackground: (any View)?
     var selectionProtocol = "QUIC+UDP"
    // var nodeSelected = ""
     
     //Para visualizar, datos en clusterk8s, el view debe de estar asociado a un objeto observble.
-    var actualRTT = 0.0  //Min RTT del cluster
-//    var minRTT = 0.0  //Min RTT del cluster
-//    var medRTT = 0.0
-//    var maxRTT = 100.0  //Max RTT del cluster
-//    //var muestras = 100.0  //Max RTT del cluster
+    /// Min RTT del cluster
+    var minRTTns = 0.0
+    ///medRTT
+    var medRTTns = 0.0
+    /// Max RTT del cluster
+    var maxRTTns = 0.0
+    /// Last RTT del cluster
+    var actualRTTns = 0.0
     
     /// Time de actualizacon datos del GUI
     var timestamp: String = TimeNow()

@@ -11,16 +11,7 @@ struct RootView: View {
 
     @EnvironmentObject var qpingAppData: QPingAppData
 
-    
-//#if os(iOS)
-//    let espaciado = 0.0
-//#endif
-//    
-//#if os(macOS)
-//    let espaciado = 5.0
-//#endif
- 
-    
+
     var body: some View {
 
         NavigationSplitView {
@@ -50,24 +41,21 @@ struct RootView: View {
                         #if os(iOS)
                             .progressViewStyle(.circular)
                         #else
-                            .progressViewStyle(.linear)
-                            .frame(maxHeight: 5)
+                            .progressViewStyle(.circular)
+                           // .frame(maxHeight: 4)
 
                         #endif
-
-                        .transition(.opacity)
-//                        .padding(
-//                            EdgeInsets(
-//                                top: 0.0,
-//                                leading: espaciado,
-//                                bottom: 0.0,
-//                                trailing: espaciado
-//                            )
-//                        )
+                          //  .transition(.)
                 }
-                //Spacer()
             }
-          
+            ToolbarItem { //Info
+                Button(
+                    action: {
+                        qpingAppData.showAboutView = true
+                    },
+                    label: { Image(systemName: "info.circle") }
+                )
+            }
             ToolbarItem{
                 Button(action: {  // RUN CLUSTER QPing *************************
                     qpingAppData.runPing = true
@@ -117,22 +105,24 @@ struct RootView: View {
                 })
            
             }
-            ToolbarItem {
-                Button(
-                    action: {
-                        qpingAppData.showAboutView = true
-                    },
-                    label: { Image(systemName: "info.circle") }
-                )
+            ToolbarItem{
+                Button(action: {   //Trash
+                    if let cluster = qpingAppData.clusterRunning {
+                        // cluster.qpingOutputNode=[QPingData(string: "", timeReceived: uptime(), delay: 0.0)]
+                        cluster.resetCounter()
+                    }
+                    //cluster.actualRTT = 0.0 // Para resfrescar los datos.
+                }  , label: {HStack{
+                    Text("Clear")
+                    Image(systemName: "trash")}
+                })
             }
-           
+            
         }
+        
         .navigationTitle(
-            //qpingAppData.selectedCluster?.name ??
-            QPing.Program + " "
-                + QPing.Version
+            String(qpingAppData.selectedCluster?.name ?? QPing.Program + " " + QPing.Version)
         )
-        // IOS __>    .navigationBarHidden(true)
         .onAppear {
             QPing.qpingAppData = qpingAppData  //Set appData for GUI update
         }

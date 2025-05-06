@@ -152,7 +152,6 @@
 				A9EC73682DBED79300A52D99 /* QPing.swift */,
 				A9EC73652DBED78400A52D99 /* QError.swift */,
 				A91ACC862DB2D76500351555 /* main.swift */,
-				A92B3A3B2B822A1F00590B4E /* QPingAppData.swift */,
 				A91ACC872DB2D76500351555 /* QClient.swift */,
 				A91ACC8B2DB2D76500351555 /* QServer.swift */,
 				A91ACC8C2DB2D76500351555 /* ClientConnection.swift */,
@@ -218,6 +217,7 @@
 			children = (
 				A970A23C2B7061E400A8D954 /* Utils.swift */,
 				B9DCD9A52B8541470089CF6D /* ClusterK8SData.swift */,
+				A92B3A3B2B822A1F00590B4E /* QPingAppData.swift */,
 				A9C81CC72B66D67000452687 /* QPingApp.swift */,
 				A92B3A3D2B822A8C00590B4E /* ClusterK8S.swift */,
 				A9E85A492DC400E700273B22 /* QClientGUI.swift */,

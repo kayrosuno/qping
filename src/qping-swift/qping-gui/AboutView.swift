@@ -23,11 +23,7 @@ struct AboutView: View {
                  
                  qping support RFC 9000 QUIC: A UDP-Based Multiplexed and Secure Transport
                  
-                 Available implementation in go and swift help to test 5G networks low latency
-                 using QUIC protocols, measure RTT, MTU and Bandwith. go implementations are
-                 suitable for use in machines running Linux or macOS while swift implementation
-                 is helpfull to do the test over iOS devices with 5G connectivity as well as
-                 macOS
+                 Available implementation in go and swift help to test 5G networks low latency using QUIC protocols, measure RTT, MTU and Bandwith. go implementations are suitable for use in machines running Linux or macOS while swift implementation is helpfull to do the test over iOS devices with 5G connectivity as well as macOS
                  
                  
                  To **learn more**, *please* feel free to visit [Github page](https://github.com/kayrosuno/qping) for details.

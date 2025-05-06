@@ -62,11 +62,12 @@ func runQClientGUI(appData: QPingAppData) throws {
     QPing.qclient = qclient
     
     //Delay between sends and reset all states and counters
-    cluster.delayms = appData.sendInterval
+    //cluster.delayms = appData.sendIntervalns
     cluster.resetCounter()
     cluster.estadoCluster = "Running"
     cluster.startTime = uptime()
-
+    QPing.clientLoop = true
+    
     //Run qClient
     Task {
         do {
@@ -126,7 +127,7 @@ func runQClientGUI(appData: QPingAppData) throws {
                 }
 
                 //Espera delaySend ms
-                try await Task.sleep(nanoseconds: QPing.DELAY_1SEG_ns)
+                try await Task.sleep(nanoseconds: UInt64(QPing.qpingAppData?.sendIntervalns ?? Double(QPing.DELAY_1SEG_ns)))
             }
 
         } catch {
@@ -163,8 +164,11 @@ func clientGUIHandleReceiveData(
     _ error: NWError?
 ) {
 
+    guard let qpingAppData = QPing.qpingAppData else {  print("\(TimeNow())clientGUIHandleReceiveData: Error no  qpingAppData"); return }
+    
     guard let cluster = QPing.qpingAppData!.clusterRunning else {  print("\(TimeNow())clientGUIHandleReceiveData: Error no cluster nor qpingAppData"); return }
 
+    
     
     //Procesar datos recibidos de la conexión
     if let data = content, !data.isEmpty {
@@ -183,18 +187,20 @@ func clientGUIHandleReceiveData(
             printDEBUG("\(now) id=\(rtt_result.Id)  RTT=\(rtt_time)us")
             
             //Visualizar el rtt actual
-            QPing.qpingAppData?.actualRTT = rtt_time
+            qpingAppData.actualRTTns = rtt_time
             
             //Visualizar el rtt
-            QPing.qpingAppData!.clusterRunning!.actualRTT = rtt_time
-            if rtt_time > cluster.maxRTT { QPing.qpingAppData?.clusterRunning?.maxRTT = rtt_time }
-            if rtt_time < cluster.minRTT { QPing.qpingAppData?.clusterRunning?.minRTT = rtt_time }
+            qpingAppData.actualRTTns = rtt_time
+            if rtt_time > qpingAppData.maxRTTns { qpingAppData.maxRTTns = rtt_time }
+            if rtt_time < qpingAppData.minRTTns || qpingAppData.minRTTns == 0 { qpingAppData.minRTTns = rtt_time }
            
             //Media rtt
-            QPing.qpingAppData!.clusterRunning!.medRTT = (cluster.medRTT + rtt_time)/2
+            let nuevaCantidadNumeros = Double (cluster.qpingDataChart.count + 1)
+            qpingAppData.medRTTns = qpingAppData.medRTTns == 0 ? rtt_time :
+            ((qpingAppData.medRTTns * Double(cluster.qpingDataChart.count)) + rtt_time) / nuevaCantidadNumeros
             
             //Actualizar datos del chart
-            QPing.qpingAppData!.clusterRunning!.qpingDataChart.append(
+            cluster.qpingDataChart.append(
                  RTTData(
                      string: "",
                      id: rtt_result.Id,
