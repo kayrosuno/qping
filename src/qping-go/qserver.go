@@ -16,8 +16,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/quic-go/quic-go"
-	"github.com/redis/go-redis/v9" //REDIS
+	"github.com/quic-go/quic-go" //REDIS
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )
@@ -146,31 +145,31 @@ func newPingConnection(conn quic.Connection) {
 
 	log.Info().Msg(fmt.Sprintf("New connection <-- client from %s", conn.RemoteAddr().String()))
 
-	//TODO: conseguir la dirección IP o DNS del servidor redis asociado
+	// TODO: conseguir la dirección IP o DNS del servidor redis asociado
 
-	//Connecty to redis server
-	clientRedis := redis.NewClient(&redis.Options{
-		Addr:     "127.0.0.1:6379",
-		Password: "", // no password set
-		DB:       0,  // use default DB
-	})
+	// Connecty to redis server
+	// clientRedis := redis.NewClient(&redis.Options{
+	// 	Addr:     "127.0.0.1:6379",
+	// 	Password: "", // no password set
+	// 	DB:       0,  // use default DB
+	// })
 
-	ctx := context.Background()
+	// ctx := context.Background()
 
-	err := clientRedis.Set(ctx, "Cliente XX", "ping xx ms", 0).Err()
-	if err != nil {
-		//panic(err)
-		log.Error().Msg(fmt.Sprintf("Error redis server: %s", err.Error()))
-	}
+	// err := clientRedis.Set(ctx, "Cliente XX", "ping xx ms", 0).Err()
+	// if err != nil {
+	// 	//panic(err)
+	// 	log.Error().Msg(fmt.Sprintf("Error redis server: %s", err.Error()))
+	// }
 
-	val, err := clientRedis.Get(ctx, "Cliente XX").Result()
-	if err != nil {
-		//panic(err)
-		log.Error().Msg(fmt.Sprintf("Error redis server: %s", err.Error()))
-	} else {
-		//fmt.Println("foo", val)
-		log.Info().Msg(fmt.Sprintf("Valor de prueba cliente XX: %s", val))
-	}
+	// val, err := clientRedis.Get(ctx, "Cliente XX").Result()
+	// if err != nil {
+	// 	//panic(err)
+	// 	log.Error().Msg(fmt.Sprintf("Error redis server: %s", err.Error()))
+	// } else {
+	// 	//fmt.Println("foo", val)
+	// 	log.Info().Msg(fmt.Sprintf("Valor de prueba cliente XX: %s", val))
+	// }
 
 	stream, err := conn.AcceptStream(context.Background())
 	if err != nil {
