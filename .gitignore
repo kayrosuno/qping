@@ -2,4 +2,6 @@
 Build/
 Build/*
 DerivedData/*
+.vscode/
+.idea/
 

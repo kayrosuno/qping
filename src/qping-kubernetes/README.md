@@ -20,21 +20,21 @@
 
 #Configuracion
 
-yaml de configuracion para crear los pods, deplyment, servicios, etc de kubernetes.
+yaml de configuracion para crear los pods, deployment, servicios, etc de kubernetes.
 Utiliza la imagen subida a italtelspain
 
 ### Crear namespace
-'kubectl create namespace italtelspain'
+'kubectl create namespace kayrosuno'
 
 ### Crear deployment
 
-Hacer un deployment en el namespace italtelspain
+Hacer un deployment en el namespace kayrosuno
 
 `
-kubectl apply -f ./qping-server-deployment.yaml -n italtelspain'
+kubectl apply -f ./qping-server-deployment.yaml -n kayrosuno'
 `
-
-Se crea un deployment de pods con 2 containers, el de qping y un sidecar de redis para gestionas las estadisticas.
+Se crea un deployment de pods con 1 container, el de qping 
+Prueba con Redis: Se crea un deployment de pods con 2 containers, el de qping y un sidecar de redis para gestionas las estadisticas.
 
 
 ### Crear servicio
@@ -43,7 +43,7 @@ Podemos generar servicios de distintos modos
 1. Nodeport
 qping-server-svc-nodeport.yaml
 `
-kubectl apply -f ./qping-server-svc-nodeport.yaml -n italtelspain
+kubectl apply -f ./qping-server-svc-nodeport.yaml -n kayrosuno
 `
 
 En este modo se crea un servicio nodeport, en los que todos los nodos con pods qping escuchan en un puerto determinado (30450) y mapean internamente a la ip:puerto de escucha de qping en los pods (25450)
